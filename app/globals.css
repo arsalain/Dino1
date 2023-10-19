@@ -101,7 +101,17 @@
   transform: scaleX(1);
 }
 
+[label^=label-] {
+  @apply absolute left-4 bottom-5 transform transition-transform duration-200 text-gray-500;
+}
 
+/* Specific effect for each input-label pair */
+.input-fullName:not(:placeholder-shown) + .label-fullName,
+.input-phoneno:not(:placeholder-shown) + .label-phoneno,
+.input-email:not(:placeholder-shown) + .label-email,
+.input-password:not(:placeholder-shown) + .label-password {
+  @apply -translate-y-2;
+}
 body {
   font-family: 'Lato', sans-serif;
   color: rgb(var(--foreground-rgb));

@@ -18,6 +18,11 @@ const config: Config = {
       },
     },
   },
+  variants: {
+    extend: {
+      translate: ['group-hover', 'group-focus', 'focus-within'],
+    },
+  },
   plugins: [],
 }
 export default config

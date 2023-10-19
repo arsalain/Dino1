@@ -1,8 +1,9 @@
-import PopularDestinations from '@/Components/Destinations/PopularDestinations'
-import Footer from '@/Components/Footer/Footer'
-import Header from '@/Components/Header/Header'
-import Hero from '@/Components/Hero/Hero'
+import PopularDestinations from '@/Components/Home/Destinations/PopularDestinations'
+import Footer from '@/Components/Navbar/Footer/Footer'
+import Header from '@/Components/Navbar/Header/Header'
+import Hero from '@/Components/Home/Hero/Hero'
 import Image from 'next/image'
+import TestimonialSection from '@/Components/Home/Testimonials/Testimonials'
 
 export default function Home() {
   return (
@@ -39,6 +40,7 @@ export default function Home() {
   </div>
   {/* End container */}
 </section>
+<TestimonialSection />
     <Footer />
       </div>
     </main>

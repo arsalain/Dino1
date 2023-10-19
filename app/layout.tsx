@@ -6,7 +6,7 @@ import type { Metadata } from 'next'
 import { Varela_Round, Roboto, Oswald } from 'next/font/google';
 import { metadata } from './metadata'; 
 import Head from 'next/head';
-
+import 'react-toastify/dist/ReactToastify.css';
 
 const varelaRound = Varela_Round({ weight: '400', subsets: ['latin'] });
 

@@ -22,7 +22,7 @@ const Header = () => {
 
 <div className="">
    <Link href='/' className="">
-      <Image src="/home/bplogo.jpg" className="rounded-full" width={40} height={40} />
+      <Image src="/home/bplogo.jpg" alt='logoimage' className="rounded-full" width={40} height={40} />
    </Link>
 </div>
 <div className="flex flex-col mt-2 pl-2">
@@ -47,10 +47,21 @@ const Header = () => {
               transition={{ duration: 0.4, delay: index * 0.1 + 0.2 }}
               className="hover-effect"
             >
-              <a href="#">{link}</a>
+            {link === 'Treks' || link === 'Destinations' ? (
+      <Link href={`/${link.toLowerCase()}`}>
+        {link}
+      </Link>
+    ) :link === 'Home'  ? (
+      <Link href="/">
+        {link}
+      </Link>
+    ) : (
+      <Link href="#">{link}</Link>
+    )}
             </motion.div>
           ))}
           {/* Sign In / Register Button */}
+          <Link href='/signup' >
           <motion.button
             initial={{ backgroundColor: "#FBBF24", color: "#000" }}
             whileHover={{ backgroundColor: "#000", color: "#FBBF24", scale: 1.05 }}
@@ -59,6 +70,7 @@ const Header = () => {
           >
             Sign In / Register
           </motion.button>
+          </Link>
         </div>
       </div>
     </motion.header>

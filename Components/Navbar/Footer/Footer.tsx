@@ -48,7 +48,7 @@ const Footer = () =>{
 </div>
 <div className=" items-start w-1/2 absolute top-10 left-1/2 transform -translate-x-1/2">
         <motion.h1
-          className="text-2xl sm:text-3xl md:text-4xl font-bold"
+          className="text-3xl sm:text-2xl md:text-3xl font-bold"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
@@ -63,24 +63,22 @@ const Footer = () =>{
         >
           Sign up for more inspiring travel destinations, stories, and special offers from Backpackers United
         </motion.p>
-        <motion.button
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          className="mt-3 sm:mt-4 md:mt-5 bg-yellow-500 hover:bg-yellow-600 py-2 px-6 sm:px-8 md:px-10 rounded-full"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.4, type: "spring", stiffness: 300 }}
-        >
+                   <motion.button
+               initial={{ backgroundColor: "#FBBF24", color: "#000" }}
+               whileHover={{ backgroundColor: "#000", color: "#FBBF24", scale: 1.05 }}
+               transition={{ duration: 0.3 }}
+            className="border border-yellow-500 py-2 mt-5 px-6 rounded-full ml-2 text-black shadow-lg"
+          >
           SIGN UP
         </motion.button>
         </div>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-2 md:gap-2">
-      <div className="flex-grow-4 flex flex-col float-left pl-1 pt-[-1rem] items-center">
+      <div className="flex flex-row gap-20">
+      <div className="flex-grow-4 flex flex-col float-left pl-7 pt-[-1rem] w-[300px] items-center">
 <div className="flex flex-row" >
 <div className="mt-3">
    <Link href='/' className="">
-      <Image src="/home/bplogo.jpg" className="rounded-full" width={40} height={40} />
+      <Image src="/home/bplogo.jpg" alt="logo image" className="rounded-full" width={40} height={40} />
    </Link>
 </div>
 <div className="flex flex-col mt-2 pl-2">
@@ -115,8 +113,9 @@ const Footer = () =>{
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: index * 0.1 + 0.5 }}
+            
           >
-            <h2 className="font-bold mb-4">{section.title}</h2>
+            <h2 className="font-bold mb-4 mt-3">{section.title}</h2>
             <ul className="flex flex-col">
               {section.links.map((link) => (
                 <li key={link.text} className="hover-effect">
@@ -126,8 +125,15 @@ const Footer = () =>{
             </ul>
           </motion.div>
         ))}
+        <div className="flex flex-col">
+        <h2 className="font-bold mb-4 mt-3">CONTACT US</h2>
+        <div className="text-sm font-bold">Contact Number</div>
+        <div className="text-lg text-yellow-500">+91 8641968158</div>
+        <h2 className="font-bold text-sm mt-6">need live support</h2>
+        <div className="text-lg text-yellow-500">info@backpackersunited.in</div>
+        </div>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 mt-6 md:mt-10">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 mt-6 md:mt-10 mx-12">
         <div>FOLLOW US</div>
         <div className="text-right">2023 Backpackers United Copyright Information</div>
       </div>
