@@ -1,9 +1,9 @@
 'use client'
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { motion, useAnimation } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar} from '@fortawesome/free-solid-svg-icons';
-// import 'font-awesome/css/font-awesome.min.css'; 
+import { faQuoteLeft, faQuoteRight} from '@fortawesome/free-solid-svg-icons';
 
 const testimonials = [
     {
@@ -78,15 +78,17 @@ const testimonials = [
       },
 
 ];
+
 const TestimonialSection = () => {
   const containerRef = useRef(null);
   const controls = useAnimation();
+  const [pauseScroll, setPauseScroll] = useState(false);
 
   useEffect(() => {
     const scrollContainer = containerRef.current;
-    let scrollTimer = null;
-
     const scrollTestimonials = () => {
+      if (pauseScroll) return;
+
       if (scrollContainer.scrollTop >= scrollContainer.scrollHeight - scrollContainer.clientHeight) {
         controls.start({
           opacity: 0,
@@ -99,57 +101,63 @@ const TestimonialSection = () => {
           });
         });
       } else {
-        scrollContainer.scrollTop += 2;  // Slower scroll
+        scrollContainer.scrollTop += 2;
       }
     };
 
-    scrollTimer = setInterval(scrollTestimonials, 50);  // Slower interval
+    const scrollTimer = setInterval(scrollTestimonials, 50);
 
     return () => {
       clearInterval(scrollTimer);
     };
-  }, [controls]);
-
-  const cardVariants = {
-      hover: {
-        y: -10,
-        boxShadow: "0px 10px 20px 4px rgba(0, 0, 0, 0.2)",
-        transition: { duration: 0.3 }
-      },
-      tap: { scale: 0.95 },
-    };
-
+  }, [controls, pauseScroll]);
 
   return (
-      <section className="text-white bg-black p-8 flex flex-col items-center">
-        <h2 className="text-3xl font-semibold mb-4 text-center">What Our Customers Say</h2>
-        <div ref={containerRef} className="flex flex-wrap justify-center overflow-hidden rounded-lg shadow-lg h-[400px] bg-white" >
-          {testimonials.map((testimonial, index) => (
-            <motion.div
-              key={index}
-              className="card relative bg-black rounded-lg shadow-lg p-4 m-2 flex-none w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 h-auto"
-              variants={cardVariants}
-              whileHover="hover"
-              whileTap="tap"
-              initial={{ opacity: 0, y: -50 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1 }}
-            >
-              <div className="flex items-center mb-4">
-                <div className="w-10 h-10 bg-cover rounded-full" style={{ backgroundImage: "url('https://i.picsum.photos/id/237/200/300.jpg')" }}></div>
-                <h3 className="text-xl font-semibold ml-4">{testimonial.name}</h3>
-              </div>
-              <p className="text-base mb-4">{testimonial.content}</p>
-              <div className="text-yellow-400 flex">
-                {Array.from({ length: testimonial.rating } , (_, index)=> <FontAwesomeIcon icon={faStar} key={index}  />)}
-              </div>
-              <div className="mt-4">
-                <img src="/Users/apple/backpackers-united/public/g-reviews.jpg" alt="Google Review" className="w-6 h-6" />
-              </div>
-            </motion.div>
-          ))}
-        </div>
-      </section>
+  
+    <motion.section 
+      initial={{ backgroundColor: 'white' }}
+      animate={{ backgroundColor: 'black' }}
+      transition={{ duration: 1 }}
+      className="text-white md:p-16 px-8 py-10 flex flex-col items-center relative"
+    >
+      <div className='absolute md:top-10 md:left-10 top-3 left-3 text-xl md:text-4xl text-yellow-500'><FontAwesomeIcon icon={faQuoteLeft} /></div>
+      <div className='absolute md:bottom-8 md:right-10 bottom-3 right-3 text-xl md:text-4xl text-yellow-500'><FontAwesomeIcon icon={faQuoteRight} /></div>
+      <motion.h2 
+        initial={{ opacity: 0, y: -50 }} 
+        animate={{ opacity: 1, y: 0 }} 
+        transition={{ duration: 1 }}
+        className="text-2xl md:text-4xl font-semibold mb-4 text-center"
+      >
+        What Our Customers Say
+      </motion.h2>
+      <div 
+        ref={containerRef} 
+        className="relative flex flex-wrap justify-center overflow-hidden rounded-lg shadow-lg md:h-[600px] h-[400px] bg-black"
+        style={{ overflowY: 'scroll' }}
+        onMouseEnter={() => setPauseScroll(true)}
+        onMouseLeave={() => setPauseScroll(false)}
+      >
+        {testimonials.map((testimonial, index) => (
+          <motion.div
+            key={index}
+            className="relative bg-white rounded-lg shadow-lg p-4 m-2 flex-none w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 h-auto text-black"  // Changed to white background and black text
+            initial={{ opacity: 1, y: 0 }}
+          >
+            <div className="flex items-center mb-4">
+              <div className="w-10 h-10 bg-cover rounded-full" style={{ backgroundImage: "url('https://i.picsum.photos/id/237/200/300.jpg')" }}></div>
+              <h3 className="text-xl font-semibold ml-4">{testimonial.name}</h3>
+            </div>
+            <p className="text-base mb-4">{testimonial.content}</p>
+            <div className="text-yellow-400 flex">
+              {Array.from({ length: testimonial.rating }, (_, index) => (
+                <FontAwesomeIcon icon={faStar} key={index} />
+              ))}
+            </div>
+          </motion.div>
+        ))}
+      </div>
+    </motion.section>
   );
-}
-export default TestimonialSection
+};
+
+export default TestimonialSection;

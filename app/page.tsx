@@ -41,7 +41,7 @@ export default function Home() {
   {/* End container */}
 </section>
 <TestimonialSection />
-    <Footer />
+    {/* <Footer /> */}
       </div>
     </main>
   )
