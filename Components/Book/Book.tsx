@@ -3,8 +3,8 @@ import React,{useState,useEffect} from 'react'
 import {IoIosArrowDropleft} from 'react-icons/io'
 import {MdOutlineKeyboardArrowRight} from 'react-icons/md'
 import {FaRupeeSign} from 'react-icons/fa'
-const Booking = ({ onClose }) => {
-    const ticketPrice = 5999.00 ;
+const Booking = ({ onClose, Batch, reserveamount, foramount, withoutamount }) => {
+    const ticketPrice = foramount ;
     const firstTicketPrice = 2100.00;
     const [isTabOneActive, setIsTabOneActive] = useState(true);
     const [ticketCount, setTicketCount] = useState(1);
@@ -57,7 +57,6 @@ const Booking = ({ onClose }) => {
         name: '',
         email: '',
         number: '',
-        source: ''
       });
       const [amount, setAmount] = useState(
         isCheckboxTicked ? getTotal().toFixed(2) :getTotalFirst().toFixed(2) 
@@ -211,9 +210,7 @@ const Booking = ({ onClose }) => {
         <label className="block text-sm  mb-2 text-center font-bold ">Select Dates</label>
                              <select className="w-full p-2 border rounded" name="date"  value={inputValue.date}
                             onChange={handleChange}  required>
-                                     <option value="" disabled hidden>
-          How did you hear about us
-        </option>
+          
           <option value="Facebook">Facebook</option>
           <option value="Instagram">Instagram</option>
           <option value="Google">Google</option>
@@ -246,21 +243,6 @@ const Booking = ({ onClose }) => {
         <label className="block text-sm font-bold mb-2">Email Address</label>
         <input type="email" className="w-full p-2 border rounded" placeholder="Email Address" name="email" value={inputValue.email}
                             onChange={handleChange}  required/>
-      </div>
-      <div className="mb-4 border border-gray-400 p-2 rounded-lg" >
-        <label className="block text-sm font-bold mb-2">Source</label>
-        <select className="w-full p-2 border rounded" name="source"  value={inputValue.source}
-                            onChange={handleChange}  required>
-                                     <option value="" disabled hidden>
-          How did you hear about us
-        </option>
-          <option value="Facebook">Facebook</option>
-          <option value="Instagram">Instagram</option>
-          <option value="Google">Google</option>
-          <option value="Whatsapp">Whatsapp</option>
-          <option value="Other">Other</option>
-          {/* Add more sources as required */}
-        </select>
       </div>
       <button type='submit' className="w-full bg-yellow-500 text-white p-3 rounded mt-2" >Next</button>
       </form>

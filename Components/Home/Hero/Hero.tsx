@@ -13,7 +13,6 @@ const Hero = () => {
   const onSearch = (searchTerm) =>{
     setSearchInput(searchTerm)
   }
-console.log(products,"prod")
   // const search = products.find(item => item.name == searchInput );
   const search = Array.isArray(products) ? products.find(item => item.name === searchInput) : null;
   useEffect(() => {
@@ -52,8 +51,8 @@ console.log(products,"prod")
       transition={{ duration: 1 }}
       className="h-screen flex items-center justify-center relative"
     >
-   <div className=" h-screen w-full ">
-  <Image src="/home/Hero_image.jpg" alt="Description" layout="fill" objectFit="cover" className="absolute" />
+   <div className=" h-screen w-full absolute">
+  <Image src="/home/Hero_image.jpg" alt="Description" layout="fill" objectFit="cover"  />
 </div>
       <div className="flex flex-col  items-start  md:w-1/2 absolute top-1/3 left-5 md:top-[40%] md:left-[10%]">
         <motion.h1
@@ -100,7 +99,7 @@ console.log(products,"prod")
             className="border border-yellow-500  w-[80px] h-[40px] md:w-[90px] rounded-lg ml-2 text-black shadow-lg"
           >
         {search ? (
-          <Link href={`/product/${search.id}`}>
+          <Link href={`/product/${search._id}`}>
             
             Explore
     

@@ -14,6 +14,7 @@ import { destinations2 } from "./data"; // Make sure the path is correct
 const PopularDestinations = () => {
   return (
     <>
+    {/* <div className="mx-10" > */}
       <Swiper
         spaceBetween={30}
         slidesPerView={4}
@@ -34,7 +35,7 @@ const PopularDestinations = () => {
         // }}
         breakpoints={{
           500: {
-            slidesPerView: 2,
+            slidesPerView: 1,
             spaceBetween: 20,
           },
           768: {
@@ -51,28 +52,29 @@ const PopularDestinations = () => {
       >
         {destinations2.map((item) => (
           <SwiperSlide key={item.id}>
-    <div className="block rounded-lg shadow-lg overflow-hidden relative group hover:bg-opacity-100 transition-all ease-out duration-300">
+    <div className="block rounded-lg shadow-lg overflow-hidden  group hover:bg-opacity-100 transition-all ease-out duration-300">
+      <div className="w-auto h-[250px] md:w-[350px] md:h-[350px] relative ">
               <Image
-                width={300}
-                height={300}
                 src={item.img}
                 alt={item.city}
+                layout="fill" objectFit="cover" 
                 className="transition-transform ease-out duration-600 transform hover:scale-110"
               />
+              </div>
               <div className="flex flex-col justify-between text-center p-7 bg-black bg-opacity-50 transition-opacity duration-2000 absolute inset-0">
-                <div className="text-white text-base mb-2 opacity-0 group-hover:opacity-100 transition-opacity ease-out duration-500">{item.hoverText}</div>
+                <div className="text-white text-base mb-2 opacity-0 group-hover:opacity-100 transition-opacity ease-out duration-500"></div>
                 <div className="transition-all ease-out duration-500 transform group-hover:-translate-y-10">
                   <h4 className="text-2xl md:text-xl leading-snug text-white mb-4">
                     {item.city}
                   </h4>
                   <Link href="#">
-                    <button className="w-full py-3 bg-white text-black rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                    <button className="w-full py-3 bg-yellow-500 text-black rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                       Discover
                     </button>
                   </Link>
                 </div>
               </div>
-              <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-transparent opacity-60 group-hover:opacity-100 transition-all ease-out duration-300"></div>
+              <div className="absolute inset-0 bg-gradient-to-b  via-transparent to-transparent opacity-60 group-hover:opacity-100 transition-all ease-out duration-300"></div>
             </div>
  
 
@@ -90,6 +92,7 @@ const PopularDestinations = () => {
 <div className=" bg-black-200  " id="swiper-scrollbar"></div>
 
       </div>
+      {/* </div> */}
     </>
   );
 };

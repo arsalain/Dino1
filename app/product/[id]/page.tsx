@@ -6,30 +6,11 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faIndianRupeeSign} from '@fortawesome/free-solid-svg-icons';
-import { faCircle} from '@fortawesome/free-solid-svg-icons';
+import { faIndianRupeeSign,faCircle, faMountainSun, faPersonHiking, faHotel, faMapLocationDot} from '@fortawesome/free-solid-svg-icons';
+// import {  } from '@fortawesome/free-solid-svg-icons';
 import Booking from '@/Components/Book/Book'
 import { FC } from "react";
 
-// export const getStaticProps = async (context) =>{
-//   const id = context.params.id;
-//   const response = await fetch(`http://localhost:4000/trek/get/${id}`);
-//   const data = await response.json();
-
-//   return {
-//     props: { trek:data }
-//   }
-// } 
-// export const getServerSideProps = async (context) => {
-//   const id = context.params.id;
-  
-//   const response = await fetch(`http://localhost:4000/trek/get/${id}`);
-//   const data = await response.json();
-
-//   return {
-//     props: { trek: data }
-//   }
-// }
 interface PageProps {
   params: {
       id: string;
@@ -68,57 +49,6 @@ const page = FC<PageProps> = ({ params })=> {
       }
     };
   
-    const items = [
-      {
-        question: 'What do I need to hire a car?',
-        answer: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.'
-      },
-      {
-        question: 'How old do I have to be to rent a car?',
-        answer: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.'
-      },
-      {
-        question: 'Can I book a hire car for someone else?',
-        answer: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.'
-      }
-    ];
-    const includedItems = [
-      "Lectures by a National Geographic Expert",
-      "Photography tips and techniques from a National Geographic Photography Expert",
-      "Welcome and farewell receptions",
-      "Meals as indicated in itinerary (B=Breakfast; L=Lunch; D=Dinner)",
-      "Sip & Sail Cocktail Hour on select nights with complimentary wine, beer, spirits and soft drinks",
-      "Unlimited fine wine, beer, and soft drinks with lunch and dinner",
-      "Unlimited sparkling wine and fresh juice with breakfast",
-      "Airport transfers",
-      "Gratuities for guides, drivers and ship staff, and restaurant staff at included meals",
-      "Tapas, snacks and refreshments served daily",
-      "Professional on-site Cruise Manager",
-      "Accommodation as indicated in itinerary",
-      "Activities as indicated in itinerary",
-      "Entrance fees to sites as indicated in itinerary",
-      "Ground transportation as indicated in itinerary",
-      "Complimentary WiFi",
-      "Filtered water and non-alcoholic beverages at meals",
-      "Filtered water on all group transfers and activities",
-    ];
-    const points = [
-      "ID: Soft-copy of Aadhar or government ID",
-      "Backpack: Trek-friendly",
-      "Clothes: Layered, extra socks",
-      "Rain Gear: Poncho/Raincoat",
-      "Toiletries: Basics",
-      "Snacks: Juice packs, energy bars",
-      "Medication: Personal",
-      "Camera: Optional",
-      "Power Bank: Portable"
-    ];
-    const notIncludedItems = [
-      "Airfare to and from destination",
-      "Select alcoholic beverages",
-      "Trip cancellation insurance or any other travel insurance",
-      "Visas",
-    ];
     const toggleOpen = (day) => {
       if (openDay === day) {
         setOpenDay(null);
@@ -141,38 +71,45 @@ const page = FC<PageProps> = ({ params })=> {
            <div className='absolute left-0 bottom-0 w-full' >
 
            <h1 className='text-5xl text-white font-bold pl-10 pb-5'>{data.name}</h1>
-            <div className="flex items-center py-8 pl-10 w-full bg-black mx-auto">
+            <div className="flex items-center py-4 pl-10 w-full bg-black mx-auto">
           
           <div className="text-white w-[15rem]">
             <div className="font-bold text-xl">{data.day}</div>
-            <div className="flex flex-row  items-center">{data.for} <FontAwesomeIcon icon={faIndianRupeeSign} className='text-sm w-4 h-4 ' /> 2999</div>
-            <div className="underline">View All Dates & Prices</div>
+            <div className="flex flex-row  items-center">{data.for} <FontAwesomeIcon icon={faIndianRupeeSign} className='text-sm w-4 h-4 ' /> {data.fromamount}</div>
+           <Link href="#date"> <div className="underline">View All Dates & Prices</div></Link>
           </div>
-          <div className="flex gap-10 p-4  text-white rounded-lg">
-            <div className="flex flex-col items-center w-[10rem]">
-              <i className="fas fa-train"></i> {/* Replace with your icon */}
+          <div className="flex gap-10 p-1  text-white rounded-lg">
+            <div className="flex flex-row items-center w-[10rem]">
+            <FontAwesomeIcon icon={faMountainSun} className='w-8 h-8' /> 
+            <div className='flex flex-col pl-4' >
               <span>{data.trektype}</span>
               <span>{data.trektypename}</span>
+              </div>
             </div>
-            <div className="flex flex-col items-center w-[10rem]">
-              <i className="fas fa-signal"></i> {/* Replace with your icon */}
+            <div className="flex flex-row items-center w-[10rem]">
+            <FontAwesomeIcon icon={faPersonHiking} className='w-8 h-8' /> 
+            <div className='flex flex-col pl-4' >
               <span>{data.level}</span>
               <span>{data.levelname}</span>
+              </div>
             </div>
-            <div className="flex flex-col items-center w-[10rem]">
-              <i className="fas fa-star"></i> {/* Replace with your icon */}
+            <div className="flex flex-row items-center w-[10rem]">
+            <FontAwesomeIcon icon={faHotel}  className='w-8 h-8' /> 
+            <div className='flex flex-col pl-4' >
               <span>{data.service}</span>
-              <span>{data.service}</span>
+              <span>{data.servicename}</span>
+              </div>
             </div>
-            <div className="flex flex-col items-center w-[6rem]">
-              <i className="fas fa-star"></i> {/* Replace with your icon */}
+            <div className="flex flex-row items-center w-[6rem]">
+            <FontAwesomeIcon icon={faMapLocationDot}  className='w-8 h-8' /> 
+            <div className='flex flex-col pl-4' >{/* Replace with your icon */}
               <span>{data.state}</span>
               <span>{data.statename}</span>
+              </div>
             </div>
           </div>
-          <div className="mt-4 ">
+          <div className="flex justify-center items-center ml-20">
           <button className="bg-yellow-500 text-black px-6 py-2 rounded-md"   onClick={() => setShowPopup(true)}> BOOK NOW</button>
-          <div className=" mt-2">Or call 1-888-966-8687</div>
         </div>
         </div>
       </div>
@@ -246,38 +183,34 @@ const page = FC<PageProps> = ({ params })=> {
            
       <h2 className="text-2xl font-bold mb-6">EXPERTS ON THIS TRIP</h2>
       <p className=" text-gray-600 mb-10">
-        A National Geographic Expert and a National Geographic Photography Expert will accompany
-        each departure to share insights and a rare behind-the-scenes perspective.
-        Listed here are the experts that will be joining departures of this trip.
+      {data.expertpara}
       </p>
       <div className="flex  space-x-20">
         {/* Expert 1 */}
         <div className="text-center">
           <div className="w-40 h-40 relative rounded-full overflow-hidden mb-4">
             <Image
-             src="/product/mproduct.jpg"
-              alt="Gianluca Colla"
+             src={`http://localhost:4000/uploads/${data.lead1pimg}`} 
+              alt={data.lead1pimgalt}
               layout="fill"
               objectFit="cover"
             />
           </div>
-          <h3 className="font-semibold text-lg">Gianluca Colla</h3>
-          <p className="text-gray-500">Photographer</p>
-          <a href="#" className="text-yellow-500 hover:underline">View Dates & Bio</a>
+          <h3 className="font-semibold text-lg">{data.lead1name}</h3>
+          <p className="text-gray-500">{data.lead1oc}</p>
         </div>
         {/* Expert 2 */}
         <div className="text-center">
           <div className="w-40 h-40 relative rounded-full overflow-hidden mb-4">
             <Image
-          src="/product/mproduct.jpg"
-              alt="Teresa Fisher"
+          src={`http://localhost:4000/uploads/${data.lead2pimg}`} 
+              alt={data.lead2pimgalt}
               layout="fill"
               objectFit="cover"
             />
           </div>
-          <h3 className="font-semibold text-lg">Teresa Fisher</h3>
-          <p className="text-gray-500">Author</p>
-          <a href="#" className="text-yellow-500 hover:underline">View Dates & Bio</a>
+          <h3 className="font-semibold text-lg">{data.lead2name}</h3>
+          <p className="text-gray-500">{data.lead2oc}</p>
         </div>
       </div>
     </div>
@@ -314,7 +247,7 @@ const page = FC<PageProps> = ({ params })=> {
               { days.image && <div className="flex-none w-full md:w-1/3 p-4">
                <Image
                   src={`http://localhost:4000/uploads/${days.image}`}
-                  alt="Jaipur"
+                  alt= {days.imagealt}
                   width={400}
                   height={200}
                   className="rounded-lg"
@@ -334,41 +267,42 @@ const page = FC<PageProps> = ({ params })=> {
                 <div className=" mx-auto bg-white p-10 pt-0 ">
       <h1 className="text-3xl font-bold mb-6">WHAT TO EXPECT</h1>
       <p className="text-gray-600 mb-6">
-        This trip has an activity rating of light/moderate and suits a range of interests and abilities.
-        Travelers should be physically fit and comfortable walking or standing for extended periods,
-        navigating uneven or slippery terrain, and climbing stairs without handrails. Choose from a
-        variety of excursions, from short walking tours to options for extended hiking and biking.
-        This cruise is operated in collaboration with AmaWaterways.
+        {data.expectpara}
       </p>
-      <h2 className="text-xl font-semibold mb-4">Accommodations</h2>
+      <h2 className="text-xl font-semibold mb-4">{data.expecthead1}</h2>
       <p className="text-gray-600 mb-6">
-        This is an expedition aboard a world-class river ship featuring fine dining and exceptional amenities.
+      {data.expecthead1para}
       </p>
-      <h2 className="text-xl font-semibold mb-4">Expedition Team</h2>
+      <h2 className="text-xl font-semibold mb-4">{data.expecthead2}</h2>
       <p className="text-gray-600 ">
-        A National Geographic expert and a National Geographic Photography Expert will accompany the entire trip,
-        and local experts will join us along the way.
+      {data.expecthead2para}
       </p>
     </div>
                 </section>
                 <section id='date'>
+              
                 <div className="bg-white p-10 pt-0">
                 <div className="bg-white mx-auto py-8 border-t-2 border-b-2 border-gray-300 ">
       <h2 className="text-xl font-semibold mb-4 ">DATES & PRICES</h2>
       <div className="border-b border-gray-300 mb-4 p-2">
         <h3>Batches</h3>
       </div>
-      <div className="flex justify-between items-center border-b border-gray-300 mb-4 p-2">
+      {data && data.batch && data.batch.map((batch, idx) => (
+      <div className="flex justify-between items-center border-b border-gray-300 bg-gray-200  mb-4 p-4">
         <div>
-          <p className="text-lg">Dec 7-14, 2023</p>
+          <p className="text-lg font-bold">{batch.date}</p>
         </div>
         <div>
-          <p>5999 Per Person</p>
+          <div className='flex flex-row'>  <FontAwesomeIcon icon={faIndianRupeeSign} className='text-sm w-4 h-4 pt-1 ' /> {batch.amount} /- Per Person</div>
         </div>
         <div className="cursor-pointer">
-        <button >Book Now</button>
+        <button className='bg-gray-500 py-2 px-10 rounded-lg text-white' >Send Enquiry</button>
+        </div>
+        <div className="cursor-pointer">
+        <button className='bg-yellow-500 py-2 px-10 rounded-lg' >Reserve Now</button>
         </div>
       </div>
+))}
       <div className="text-sm text-gray-500">
         <p>All trip prices are per person based on double occupancy, are subject to change without notice and do not include airfare. All prices and fares are quoted in U.S. dollars.</p>
       </div>
@@ -380,8 +314,8 @@ const page = FC<PageProps> = ({ params })=> {
       <div className="w-1/2 pr-4">
         <h2 className="mb-4 text-lg font-bold">WHAT'S INCLUDED</h2>
         <div>
-          {includedItems.map((item, idx) => (
-            <div key={idx} className="mb-2 list-decimal flex flex-row "><FontAwesomeIcon icon={faCircle} className='w-[5px] h-[5px] pr-2 pt-[9px] ' />{item}</div>
+           {data && data.included && data.included.map((included, idx) => (
+            <div key={idx} className="mb-2 list-decimal flex flex-row "><FontAwesomeIcon icon={faCircle} className='w-[5px] h-[5px] pr-2 pt-[9px] ' />{included}</div>
           ))}
         </div>
       </div>
@@ -389,8 +323,8 @@ const page = FC<PageProps> = ({ params })=> {
       <div className="w-1/2 pl-4">
         <h2 className="mb-4 text-lg font-bold">WHAT'S NOT INCLUDED</h2>
         <div>
-          {notIncludedItems.map((item, idx) => (
-            <div key={idx} className="mb-2 list-decimal flex flex-row "><FontAwesomeIcon icon={faCircle} className='w-[5px] h-[5px] pr-2 pt-[9px] ' />{item}</div>
+        {data && data.notincluded && data.notincluded.map((notincluded, idx) => (
+            <div key={idx} className="mb-2 list-decimal flex flex-row "><FontAwesomeIcon icon={faCircle} className='w-[5px] h-[5px] pr-2 pt-[9px] ' />{notincluded}</div>
           ))}
         </div>
       </div>
@@ -403,9 +337,9 @@ const page = FC<PageProps> = ({ params })=> {
  <div className="mt-10">
       <h2 className="text-2xl font-bold mb-4">Things to Carry</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-4">
-        {points.map((point, index) => (
-          <div key={index} className="flex flex-row">
-            <FontAwesomeIcon icon={faCircle} className='w-[5px] h-[5px] pr-2 pt-[9px] text-yellow-400' />{point}
+      {data && data.things && data.things.map((things, idx) => (
+          <div key={idx} className="flex flex-row">
+            <FontAwesomeIcon icon={faCircle} className='w-[5px] h-[5px] pr-2 pt-[9px] text-yellow-400' />{things}
           </div>
         ))}
       </div>
@@ -417,15 +351,15 @@ const page = FC<PageProps> = ({ params })=> {
   <div className='p-10 pt-0 bg-white '>
  <div className='pt-10 border-t-2 border-gray-300'>
  <h2 className="text-2xl font-semibold mb-6 ">FAQs</h2>
-      {items.map((item, index) => (
+ {data && data.faq && data.faq.map((faq, index) => (
              <div key={index} className="mb-4 p-4 border rounded-lg shadow-md">
              <div className="flex justify-start items-center cursor-pointer" onClick={() => toggleItem(index)}>
                <div className="w-10 h-10 bg-black rounded-full flex items-center justify-center text-white font-bold text-xl mr-4">
                  {openItem === index ? '−' : '+'}
                </div>
-               <span className="font-medium text-lg">{item.question}</span>
+               <span className="font-medium text-lg">{faq.question}</span>
              </div>
-             {openItem === index && <p className="mt-2 ml-14 text-gray-600">{item.answer}</p>}
+             {openItem === index && <p className="mt-2 ml-14 text-gray-600">{faq.answer}</p>}
            </div>
       ))}
     </div>
@@ -438,59 +372,27 @@ const page = FC<PageProps> = ({ params })=> {
       <h2 className="text-2xl font-semibold mb-6 pt-10">RELATED TRIPS</h2>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
         {/* Trip 1 */}
+        {data && data.related && data.related.map((related, index) => (
         <div className="border rounded-lg overflow-hidden">
           <Image
-            src="/product/mproduct.jpg"
-            alt="Danube Christmas Markets River Cruise"
-            width={400}
-            height={300}
+            src={`http://localhost:4000/uploads/${related.rimage}`}
+            alt={related.rimagealt}
+            style={{ height: '200px' }}
+            width={400} 
+            height={300} 
           />
           <div className="p-4 bg-white">
             <div className="mb-4 border-b pb-2">
-              <span className="text-lg font-semibold">2 DAYS FROM 3,999</span>
+              <span className="text-lg font-semibold">{related.rday} <FontAwesomeIcon icon={faIndianRupeeSign} className='text-sm w-4 h-4 pt-1 ' />{related.ramount}</span>
             </div>
-            <h3 className="font-semibold text-xl mb-3">Nethravati Trek</h3>
-            <p><strong>Trek Type:</strong> Hill</p>
-            <p><strong>Difficulty Level:</strong> Easy-Moderate</p>
-            <p><strong>Service Level:</strong> Premium</p>
+            <h3 className="font-semibold text-xl mb-3">{related.rname}</h3>
+            <p><strong>{related.rtype}</strong> {related.rtypename}</p>
+            <p><strong>{related.rlevel}</strong> {related.rlevelname}</p>
+            <p><strong>{related.rservice}</strong> {related.rservicename}</p>
           </div>
         </div>
+        ))}
         {/* Trip 2 */}
-        <div className="border rounded-lg overflow-hidden">
-          <Image
-            src="/product/mproduct.jpg"
-            alt="Holland and Belgium in Springtime by River Cruise"
-            width={400}
-            height={300}
-          />
-          <div className="p-4 bg-white">
-            <div className="mb-4 border-b pb-2">
-              <span className="text-lg font-semibold">2 DAYS FROM 3,999</span>
-            </div>
-            <h3 className="font-semibold text-xl mb-3">Kumara Parvatha</h3>
-            <p><strong>Trip Type:</strong> Hill</p>
-            <p><strong>Activity Level:</strong> Moderate-Hard</p>
-            <p><strong>Service Level:</strong> Premium</p>
-          </div>
-        </div>
-        {/* Trip 3 */}
-        <div className="border rounded-lg overflow-hidden">
-          <Image
-            src="/product/mproduct.jpg"
-            alt="Holland and Belgium in Springtime by River Cruise"
-            width={400}
-            height={300}
-          />
-          <div className="p-4 bg-white">
-            <div className="mb-4 border-b pb-2">
-              <span className="text-lg font-semibold">2 DAYS FROM 3,999</span>
-            </div>
-            <h3 className="font-semibold text-xl mb-3">Kumara Parvatha</h3>
-            <p><strong>Trip Type:</strong> Hill</p>
-            <p><strong>Activity Level:</strong> Moderate-Hard</p>
-            <p><strong>Service Level:</strong> Premium</p>
-          </div>
-        </div>
       </div>
     </div>
     </div>
@@ -499,7 +401,7 @@ const page = FC<PageProps> = ({ params })=> {
             </div>
         </div>
     </div>
-    {showPopup && <Booking  onClose={() => setShowPopup(false)} /> }
+    {showPopup && <Booking  onClose={() => setShowPopup(false)} Batch={data.batch} reserveamount={data.reserveamount} foramount={data.fromamount} withoutamount={data.withoutamount} /> }
     </div>
   )
 }

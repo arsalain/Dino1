@@ -43,8 +43,14 @@
 }
 .swiper-button-prev, .swiper-button-next {
   height: 30px !important;
+  margin-top: 40px !important;
   background-color: white !important;
   color: black !important;/* This will reduce the size to 80% of the original */
+}
+@media screen and (max-width: 768px) {
+  .swiper-button-prev, .swiper-button-next {
+    margin-top: 0 !important;
+  }
 }
 .swiper-button-prev::after, .swiper-button-next::after {
   font-size: 12px !important; /* Adjust this size as per your requirements */
