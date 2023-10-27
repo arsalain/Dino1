@@ -6,7 +6,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faIndianRupeeSign,faCircle, faMountainSun, faPersonHiking, faHotel, faMapLocationDot, faAngleDown, faAngleUp} from '@fortawesome/free-solid-svg-icons';
+import { faIndianRupeeSign,faCircle, faMountainSun, faPersonHiking, faHotel, faMapLocationDot, faAngleDown, faAngleUp, faCaretUp, faCaretDown} from '@fortawesome/free-solid-svg-icons';
 // import {  } from '@fortawesome/free-solid-svg-icons';
 import Booking from '@/Components/Book/Book'
 import { FC } from "react";
@@ -201,53 +201,99 @@ const page = FC<PageProps> = ({ params })=> {
                 </div>
             </div>
         </section>
-                <section id="iternary" >
-                <div className="bg-white p-10 ">
-      <div className="border-t-2 border-b-2 border-gray-300 py-8">
-        {/* Section Heading */}
-        <h2 className="text-3xl font-bold mb-6">ITINERARY</h2>
-        {/* Description */}
-        <p className="text-gray-600 mb-10 ">
-       
-       {data.itinerary}
-        </p>
-        {/* Button */}
-        <div className="container mx-auto ">
-        {data && data.days && data.days.map((days, index) => (
-        <div key={index} className="border-b pb-4 mb-4">
-          <div className="flex justify-between items-center cursor-pointer" onClick={() => toggleOpen(index + 1)}>
-            <h3 className="text-xl font-semibold">{days.day} : {days.cityName}</h3>
-            <span>{openDay === index + 1 ? '▲' : '▼'}</span>
-          </div>
-          {openDay === index + 1 && (
-              <div className="flex flex-col md:flex-row">
-              <div className="flex-1 p-4 pl-0">
-                {days && days.description && days.description.map((des, index) => (
-                <p key={index} className="mb-1 flex flex-row">
-                <FontAwesomeIcon icon={faCircle} className='w-[5px] h-[5px] pr-2 pt-[9px] ' />
-                {des}
-                </p>
-                ))}
-                <p className="font-semibold pt-4">Meals : {days.meals}</p>
-              </div>
-              { days.image && <div className="flex-none w-full md:w-1/3 p-4">
-               <Image
-                  src={`http://localhost:4000/uploads/${days.image}`}
-                  alt= {days.imagealt}
-                  width={400}
-                  height={200}
-                  className="rounded-lg"
-                />
-              </div>
-}
+        <section id="itinerary">
+    <div className="bg-white md:p-10 p-4 text-black">
+        <div className="border-b-2 border-gray-300 md:py-8 py-2">
+            <div className="flex justify-between items-center md:hidden"> {/* hidden on medium and above screens */}
+                <h1 className="text-2xl font-bold md:mb-6 mb-2">ITINERARY</h1>
+                <button onClick={() => toggleSection("itinerary")} className='text-xl'>
+                    {openSection === "itinerary" ? <FontAwesomeIcon icon={faAngleUp} /> : <FontAwesomeIcon icon={faAngleDown} />}
+                </button>
             </div>
-          )}
+            {openSection === "itinerary" && (
+                <div className="md:hidden"> {/* hidden on medium and above screens */}
+                    <p className="text-gray-600 mb-10">{data.itinerary}</p>
+                    <div className="container mx-auto">
+                        {data && data.days && data.days.map((days, index) => (
+                            <div key={index} className="border-b pb-4 mb-4">
+                                <div className="flex justify-between items-center cursor-pointer" onClick={() => toggleOpen(index + 1)}>
+                                    <h3 className="text-xl font-semibold">{days.day} : {days.cityName}</h3>
+                                    <span>{openDay === index + 1 ? <FontAwesomeIcon icon={faCaretUp} /> : <FontAwesomeIcon icon={faCaretDown} />}</span>
+                                </div>
+                                {openDay === index + 1 && (
+                                    <div className="mt-4">
+                                        <div className="flex flex-col md:flex-row">
+                                            <div className="flex-1 p-4 pl-0">
+                                                {days && days.description && days.description.map((des, index) => (
+                                                    <p key={index} className="mb-1 flex flex-row">
+                                                        <FontAwesomeIcon icon={faCircle} className='w-[5px] h-[5px] pr-2 pt-[9px]' />
+                                                        {des}
+                                                    </p>
+                                                ))}
+                                                <p className="font-semibold pt-4">Meals : {days.meals}</p>
+                                            </div>
+                                            {days.image &&
+                                                <div className="flex-none w-full md:w-1/3 p-4">
+                                                    <Image
+                                                        src={`http://localhost:4000/uploads/${days.image}`}
+                                                        alt={days.imagealt}
+                                                        width={400}
+                                                        height={200}
+                                                        className="rounded-lg"
+                                                    />
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            )}
+            <div className="hidden md:block"> {/* shown only on medium and above screens */}
+                <h1 className="text-3xl font-bold mb-6">ITINERARY</h1>
+                <p className="text-gray-600 mb-10">{data.itinerary}</p>
+                <div className="container mx-auto">
+                    {data && data.days && data.days.map((days, index) => (
+                        <div key={index} className="border-b pb-4 mb-4">
+                        <div className="flex justify-between items-center cursor-pointer" onClick={() => toggleOpen(index + 1)}>
+                            <h3 className="text-xl font-semibold">{days.day} : {days.cityName}</h3>
+                            <span>{openDay === index + 1 ? <FontAwesomeIcon icon={faCaretUp} className='pr-6'/> : <FontAwesomeIcon icon={faCaretDown} className='pr-6'/>}</span>
+                        </div>
+                        {openDay === index + 1 && (
+                            <div className="mt-4">
+                                <div className="flex flex-col md:flex-row">
+                                    <div className="flex-1 p-4 pl-0">
+                                        {days && days.description && days.description.map((des, index) => (
+                                            <p key={index} className="mb-1 flex flex-row">
+                                                <FontAwesomeIcon icon={faCircle} className='w-[5px] h-[5px] pr-2 pt-[9px]' />
+                                                {des}
+                                            </p>
+                                        ))}
+                                        <p className="font-semibold pt-4">Meals : {days.meals}</p>
+                                    </div>
+                                    {days.image &&
+                                        <div className="flex-none w-full md:w-1/3 p-4">
+                                            <Image
+                                                src={`http://localhost:4000/uploads/${days.image}`}
+                                                alt={days.imagealt}
+                                                width={400}
+                                                height={200}
+                                                className="rounded-lg"
+                                            />
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+)}
+  </div>
+                    ))}
+                </div>
+            </div>
         </div>
-      ))}
     </div>
-      </div> 
-    </div>
-                </section>
+</section>
                 <section id='what' >
                     
                 <div className=" mx-auto bg-white p-10 pt-0 ">
@@ -387,7 +433,7 @@ const page = FC<PageProps> = ({ params })=> {
             </div>
         </div>
     </div>
-    {showPopup && <Booking  onClose={() => setShowPopup(false)} Batch={data.batch} reserveamount={data.reserveamount} foramount={data.fromamount} withoutamount={data.withoutamount} /> }
+    {showPopup && <Booking  onClose={() => setShowPopup(false)} Batch={data.batch} reserveamount={data.reserveamount} foramount={data.fromamount} withoutamount={data.withoutamount} Name={data.name} /> }
     </div>
   )
 }
@@ -408,9 +454,9 @@ const FeatureList = ({ data }) => (
 const ExpertContent = ({ data }) => (
     <>
         <p className="text-gray-600 mb-10">{data.expertpara}</p>
-        <div className="flex space-x-20 flex-col md:flex-row">
+        <div className="flex md:space-x-20 space-y-10 md:space-y-0 flex-col md:flex-row items-center md:items-start">
             {/* Expert 1 */}
-            <div className="text-center">
+            <div className="text-center ">
                 <div className="w-40 h-40 relative rounded-full overflow-hidden mb-4">
                     <Image
                         src={`http://localhost:4000/uploads/${data.lead1pimg}`}

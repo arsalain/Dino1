@@ -3,11 +3,13 @@ import React,{useState,useEffect} from 'react'
 import {IoIosArrowDropleft} from 'react-icons/io'
 import {MdOutlineKeyboardArrowRight} from 'react-icons/md'
 import {FaRupeeSign} from 'react-icons/fa'
-const Booking = ({ onClose, Batch, reserveamount, foramount, withoutamount }) => {
-    const ticketPrice = foramount ;
+const Booking = ({ onClose, Batch, reserveamount, foramount, withoutamount ,Name}) => {
+    const ticketPrice = 1 ;
     const firstTicketPrice = reserveamount;
+    const transportPrice = withoutamount ;
     const [isTabOneActive, setIsTabOneActive] = useState(true);
     const [ticketCount, setTicketCount] = useState(1);
+    const [ticketCount1, setTicketCount1] = useState(0);
     const [isShow, setIsShow] = useState(false);
     const [isCheckboxTicked, setIsCheckboxTicked] = useState(false);
     const [isChecked, setIsChecked] = useState(false);
@@ -16,19 +18,38 @@ const Booking = ({ onClose, Batch, reserveamount, foramount, withoutamount }) =>
     const handleCheckboxChange = (e) => {
       setIsChecked(e.target.checked);
     };
-    const getSubtotal = () => {
-      return ticketPrice * ticketCount;
+
+    const getSubtotal = (ticketPrice, ticketCount, transportPrice, ticketCount1) => {
+      console.log("Inside getSubtotal with", { ticketPrice, ticketCount, transportPrice, ticketCount1 });
+    
+      let subtotal = 0;
+      
+      if (transportPrice !== null && transportPrice !== undefined) {
+        subtotal = ticketPrice * ticketCount + transportPrice * ticketCount1;
+      } else {
+        subtotal = ticketPrice * ticketCount;
+      }
+    
+      console.log("Calculated Subtotal:", subtotal);
+      
+      return subtotal;
     };
-  
+    
     const getGst = () => {
-      return getSubtotal() * 0.05;
+      console.log("Inside getGst");
+      const gstValue = getSubtotal(ticketPrice, ticketCount, transportPrice, ticketCount1) * 0.05;
+      console.log("Calculated GST:", gstValue);
+      return gstValue;
     };
-  
+    
     const getTotal = () => {
-      return getSubtotal() + getGst();
+      console.log("Inside getTotal");
+      const totalValue = getSubtotal(ticketPrice, ticketCount, transportPrice, ticketCount1) + getGst();
+      console.log("Calculated Total:", totalValue);
+      return totalValue;
     };
     const getSubtotalFirst = () => {
-        return firstTicketPrice * ticketCount;
+        return firstTicketPrice  * (ticketCount + ticketCount1);
       };
     
       const getGstFirst = () => {
@@ -46,8 +67,17 @@ const Booking = ({ onClose, Batch, reserveamount, foramount, withoutamount }) =>
       };
     
       const handleDecreaseTicket = () => {
-        if (ticketCount > 1) {
+        if (ticketCount > 0) {
           setTicketCount(prev => prev - 1);
+        }
+      };
+      const handleIncreaseTicket1 = () => {
+        setTicketCount1(prev => prev + 1);
+      };
+    
+      const handleDecreaseTicket1 = () => {
+        if (ticketCount1 > 0) {
+          setTicketCount1(prev => prev - 1);
         }
       };
       const finalPrice = getTotal().toFixed(2) 
@@ -131,11 +161,15 @@ const Booking = ({ onClose, Batch, reserveamount, foramount, withoutamount }) =>
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({
-                date: '13-10-2023',
-                username: 'JohnDoe',  // Replace with actual data
-                phoneNumber: '1234567890',  // Replace with actual data
-                email: 'john@example.com',  // Replace with actual data
+                eventName: Name,
+                selecteddate: inputValue.date,
+                username: inputValue.name,  // Replace with actual data
+                phonenumber: inputValue.number,  // Replace with actual data
+                email: inputValue.email,  // Replace with actual data
                 source: 'Razorpay',
+                gst:  isCheckboxTicked ? getGstFirst().toFixed(2) : getGst().toFixed(2) ,
+                withtransport: ticketCount,
+                withoutransport : ticketCount1,
                 amount:    isCheckboxTicked ? getTotalFirst().toFixed(2) : getTotal().toFixed(2) ,
                 razorpayOrderId: response.razorpay_order_id,
                 razorpayPaymentId: response.razorpay_payment_id
@@ -183,7 +217,7 @@ const Booking = ({ onClose, Batch, reserveamount, foramount, withoutamount }) =>
                                 Who Is Booking ?
                                 </div>
                                 <div className='text-sm text-gray-400 pt-1 text-center'>
-                                Ooty Backpacking Tour
+                                {Name}
                                 </div>
                             </div>
                             <div >
@@ -211,9 +245,9 @@ const Booking = ({ onClose, Batch, reserveamount, foramount, withoutamount }) =>
                              <select className="w-full p-2 border rounded" name="date"  value={inputValue.date}
                             onChange={handleChange}  required>
                                <option value="" >Please select the Date</option>
-          {Batch.map((batch, idx) => (
+          {Batch ? Batch.map((batch, idx) => (
           <option value={batch.date} key={idx}>{batch.date}</option>
-))}
+          )) : null}
             {/*  // <option value="Instagram">Instagram</option>
           // <option value="Google">Google</option>
           // <option value="Whatsapp">Whatsapp</option>
@@ -259,7 +293,7 @@ const Booking = ({ onClose, Batch, reserveamount, foramount, withoutamount }) =>
                                 Create Tickets & Pay
                                 </div>
                                 <div className='text-sm text-gray-400 pt-1 text-center'>
-                                Ooty Backpacking Tour
+                               {Name}
                                 </div>
                             </div>
                             
@@ -315,19 +349,24 @@ const Booking = ({ onClose, Batch, reserveamount, foramount, withoutamount }) =>
                  </div>
 </div>
                     <div className={isShow ? 'hidden' : 'block'}>
-                    <div className=" p-4">
+                    <div className=" p-4 pb-2">
                     <label className="block text-sm mb-2 mt-6 text-gray-400 font-bold">Select Ticket(s)</label>
                     <div className="flex items-center  justify-between space-x-4 rounded-xl p-3 bg-form1 border border-gray-400">
                       <span className='font-bold text-sm'>With transport: ₹ {ticketPrice}</span>
-                      <button onClick={handleDecreaseTicket} className='pl-20'>-</button>
+                      <button onClick={handleDecreaseTicket} className='pl-[100px]'>-</button>
                       <span>{ticketCount}</span>
                       <button onClick={handleIncreaseTicket}>+</button>
                     </div>
                   </div>
-                  <div className='mx-4 mb-4 bg-green-100  w-50 rounded-lg flex flex-row justify-between items-center'>
-                  <button className="p-2 pl-4  justify-start font-bold">Apply Coupon</button>
-                  <div className='pr-4'><MdOutlineKeyboardArrowRight className="text-3xl " ></MdOutlineKeyboardArrowRight> </div>
+                 {withoutamount && <div className=" p-4 pt-0">
+                    <div className="flex items-center  justify-between space-x-4 rounded-xl p-3 bg-form1 border border-gray-400">
+                      <span className='font-bold text-sm'>Without transport: ₹ {transportPrice}</span>
+                      <button onClick={handleDecreaseTicket1} className='pl-20'>-</button>
+                      <span>{ticketCount1}</span>
+                      <button onClick={handleIncreaseTicket1}>+</button>
+                    </div>
                   </div>
+}
                   <div className="flex items-center justify-between  px-6 text-sm">
                   <label>
                       <input type="checkbox" className="mr-2 " onChange={() => setIsCheckboxTicked(!isCheckboxTicked)}/>
