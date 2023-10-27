@@ -6,7 +6,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faIndianRupeeSign,faCircle, faMountainSun, faPersonHiking, faHotel, faMapLocationDot} from '@fortawesome/free-solid-svg-icons';
+import { faIndianRupeeSign,faCircle, faMountainSun, faPersonHiking, faHotel, faMapLocationDot, faAngleDown, faAngleUp} from '@fortawesome/free-solid-svg-icons';
 // import {  } from '@fortawesome/free-solid-svg-icons';
 import Booking from '@/Components/Book/Book'
 import { FC } from "react";
@@ -18,16 +18,19 @@ interface PageProps {
 }
 const page = FC<PageProps> = ({ params })=> {
     const [openDay, setOpenDay] = useState(null);
-    const [openDetails, setOpenDetails] = useState(false);
     const [openItem, setOpenItem] = useState(null);
     const [showPopup, setShowPopup] = useState(false);
     const [data, setData] = useState({});
-    // const router = useRouter();
-    // const id = router.query["id"];
-    // const id = router.isReady ? router.query.id : null;
+    const [openSection, setOpenSection] = useState(null);
+    const toggleSection = (section) => {
+        if (openSection === section) {
+            setOpenSection(null);
+        } else {
+            setOpenSection(section);
+        }
+    }
     const id = params.id
     console.log(id,"id")
-    // const [data, setData] = useState({});
   
     useEffect(() => {
       const fetchData = async () => {
@@ -70,45 +73,49 @@ const page = FC<PageProps> = ({ params })=> {
            
            <div className='absolute left-0 bottom-0 w-full' >
 
-           <h1 className='text-5xl text-white font-bold pl-10 pb-5'>{data.name}</h1>
-            <div className="flex items-center py-4 pl-10 w-full bg-black mx-auto">
-          
-          <div className="text-white w-[15rem]">
-            <div className="font-bold text-xl">{data.day}</div>
-            <div className="flex flex-row  items-center">{data.for} <FontAwesomeIcon icon={faIndianRupeeSign} className='text-sm w-4 h-4 ' /> {data.fromamount}</div>
+           <h1 className='text-3xl md:text-5xl text-white font-bold pl-10 pb-5'>{data.name}</h1>
+            <div className="flex flex-col md:flex-row items-center py-4 md:pl-10 px-4 w-full bg-black mx-auto">
+          {/* <div className='flex flex-row pb-4 md:pb-0'> */}
+          <div className="text-white md:w-[15rem] w-auto mt-6 md:mt-0 ">
+            <div className='flex flex-row md:flex-col' >
+            <div className="font-bold md:text-xl text-lg">{data.day}</div>
+            <div className="flex flex-row  items-center md:text-base text-lg md:pl-0 pl-2">{data.for} <FontAwesomeIcon icon={faIndianRupeeSign} className='text-sm w-4 h-4 ' /> {data.fromamount}</div>
+            </div>
            <Link href="#date"> <div className="underline">View All Dates & Prices</div></Link>
           </div>
-          <div className="flex gap-10 p-1  text-white rounded-lg">
-            <div className="flex flex-row items-center w-[10rem]">
-            <FontAwesomeIcon icon={faMountainSun} className='w-8 h-8' /> 
+      
+            {/* </div> */}
+          <div className="grid grid-cols-2 md:grid-cols-4  p-1  text-white rounded-lg">
+          <div className="flex flex-row items-center md:w-[13rem] mt-6 md:mt-0">
+            <FontAwesomeIcon icon={faMountainSun} className='md:w-8 md:h-8 w-6 h-6' /> 
             <div className='flex flex-col pl-4' >
               <span>{data.trektype}</span>
               <span>{data.trektypename}</span>
               </div>
             </div>
-            <div className="flex flex-row items-center w-[10rem]">
-            <FontAwesomeIcon icon={faPersonHiking} className='w-8 h-8' /> 
+            <div className="flex flex-row items-center md:w-[13rem] mt-6 md:mt-0">
+            <FontAwesomeIcon icon={faPersonHiking} className='md:w-8 md:h-8 w-6 h-6'/> 
             <div className='flex flex-col pl-4' >
               <span>{data.level}</span>
               <span>{data.levelname}</span>
               </div>
             </div>
-            <div className="flex flex-row items-center w-[10rem]">
-            <FontAwesomeIcon icon={faHotel}  className='w-8 h-8' /> 
+            <div className="flex flex-row items-center md:w-[13rem] mt-6 md:mt-0">
+            <FontAwesomeIcon icon={faHotel} className='md:w-8 md:h-8 w-6 h-6'/> 
             <div className='flex flex-col pl-4' >
               <span>{data.service}</span>
               <span>{data.servicename}</span>
               </div>
             </div>
-            <div className="flex flex-row items-center w-[6rem]">
-            <FontAwesomeIcon icon={faMapLocationDot}  className='w-8 h-8' /> 
+            <div className="flex flex-row items-center md:w-[6rem] mt-6 md:mt-0">
+            <FontAwesomeIcon icon={faMapLocationDot} className='md:w-8 md:h-8 w-6 h-6' /> 
             <div className='flex flex-col pl-4' >{/* Replace with your icon */}
               <span>{data.state}</span>
               <span>{data.statename}</span>
               </div>
             </div>
           </div>
-          <div className="flex justify-center items-center ml-20">
+          <div className="hidden  md:flex justify-center items-center ">
           <button className="bg-yellow-500 text-black px-6 py-2 rounded-md"   onClick={() => setShowPopup(true)}> BOOK NOW</button>
         </div>
         </div>
@@ -117,8 +124,8 @@ const page = FC<PageProps> = ({ params })=> {
    
      
       
-      <div className="flex h-screen sticky top-0 ">
-            <div className="w-1/4 min-h-screen bg-gray-200 p-4  " >
+      <div className="flex md:h-screen md:sticky md:top-0 ">
+            <div className="hidden md:block md:w-1/4 min-h-screen bg-gray-200 p-4  " >
           
                 <Link href="#expedition-overview">
                     <span className="block  hover:font-bold p-2">Expedition Overview</span>
@@ -151,72 +158,51 @@ const page = FC<PageProps> = ({ params })=> {
       <button className="w-full my-4 mt-4  text-xl text-yellow-500 font-bold hover:underline ">Send Enquiry</button>
                 {/* Add other links similarly */}
             </div>
-            <div className="ml-1/4 w-3/4  overflow-y-auto">
-                <section id="expedition-overview" >
-                <div className=" bg-white p-10  text-black">
-                <div className="border-b-2 border-gray-300 py-8">
-                 
-      <h1 className="text-3xl font-bold mb-6">EXPEDITION OVERVIEW</h1>
-      {/* Special Offers Section */}
-      <div className=" shadow-md p-6 rounded-md mb-6 relative border border-gray-400">
-        <h2 className="text-sm font-semibold mb-2">SPECIAL OFFERS</h2>
-        <p>Disney® Visa® Cardmembers Offer: Save on Select Signature Land & River Cruise Departures</p>
-        <button className="mt-2 text-blue-500 hover:underline">SHOW DETAILS <span className="transform rotate-180 inline-block">&#9660;</span></button>
-        {/* Map Image */}
-      </div>
-      {/* List of Features */}
-      {data && data.over && data.over.map((over, index) => (
-        // console.log(over)
-      <div key={index} className='mb-2'>{over}</div>
-      ))}
-      {/* <ul className="space-y-4">
-        <li>Travel for five nights aboard the <i>Palace on Wheels</i>, a train that evokes the splendor of the maharajas and travels to places not easily accessible by road.</li>
-        <li>In the company of a National Geographic Expert, explore fascinating UNESCO World Heritage sites, including Humayun’s Tomb and the Hill Forts of Rajasthan.</li>
-        <li>Experience the exquisite Taj Mahal at both sunrise and sunset, and photograph this iconic wonder under changing light.</li>
-        <li>Get a glimpse into daily life on a walk through Bharatpur village, and enjoy a private performance by a sitar maestro.</li>
-      </ul> */}
-    </div>
-</div>
+            <div className="ml-1/4 md:w-3/4 w-full overflow-y-auto">
+            <section id="expedition-overview">
+                <div className="bg-white md:p-10 p-4 text-black">
+                    <div className="border-b-2 border-gray-300 md:py-8 py-2">
+                        <div className="flex justify-between items-center md:hidden"> {/* hidden on medium and above screens */}
+                            <h1 className="text-2xl font-bold md:mb-6 mb-2">EXPEDITION OVERVIEW</h1>
+                            <button onClick={() => toggleSection("expedition")} className='text-xl'>
+                            {openSection === "expedition"  ? <FontAwesomeIcon icon={faAngleUp} /> : <FontAwesomeIcon icon={faAngleDown} />}
+                            </button>
+                        </div>
+                        {openSection === "expedition"  && (
+                            <div className="md:hidden"> {/* hidden on medium and above screens */}
+                                <SpecialOffers />
+                                <FeatureList data={data} />
+                            </div>
+                        )}
+                        <div className="hidden md:block"> {/* shown only on medium and above screens */}
+                            <h1 className="text-3xl font-bold mb-6">EXPEDITION OVERVIEW</h1>
+                            <SpecialOffers />
+                            <FeatureList data={data} />
+                        </div>
+                    </div>
+                </div>
                 </section>
-                <section id="experts" >
-                <div className="bg-white p-10 pt-0 ">
-           
-      <h2 className="text-2xl font-bold mb-6">EXPERTS ON THIS TRIP</h2>
-      <p className=" text-gray-600 mb-10">
-      {data.expertpara}
-      </p>
-      <div className="flex  space-x-20">
-        {/* Expert 1 */}
-        <div className="text-center">
-          <div className="w-40 h-40 relative rounded-full overflow-hidden mb-4">
-            <Image
-             src={`http://localhost:4000/uploads/${data.lead1pimg}`} 
-              alt={data.lead1pimgalt}
-              layout="fill"
-              objectFit="cover"
-            />
-          </div>
-          <h3 className="font-semibold text-lg">{data.lead1name}</h3>
-          <p className="text-gray-500">{data.lead1oc}</p>
-        </div>
-        {/* Expert 2 */}
-        <div className="text-center">
-          <div className="w-40 h-40 relative rounded-full overflow-hidden mb-4">
-            <Image
-          src={`http://localhost:4000/uploads/${data.lead2pimg}`} 
-              alt={data.lead2pimgalt}
-              layout="fill"
-              objectFit="cover"
-            />
-          </div>
-          <h3 className="font-semibold text-lg">{data.lead2name}</h3>
-          <p className="text-gray-500">{data.lead2oc}</p>
-        </div>
-      </div>
-    </div>
-                </section>
+                <section id="experts">
+            <div className="bg-white md:p-10 p-4 pt-0">
+                <div className="flex justify-between items-center md:hidden"> {/* hidden on medium and above screens */}
+                    <h2 className="text-2xl font-bold md:mb-6 mb-2">EXPERTS ON THIS TRIP</h2>
+                    <button onClick={() => toggleSection("expert")} className='text-xl'>
+                    {openSection === "expert"  ? <FontAwesomeIcon icon={faAngleUp} /> : <FontAwesomeIcon icon={faAngleDown} />}
+                    </button>
+                </div>
+                {openSection === "expert"  && (
+                    <div className="md:hidden"> {/* hidden on medium and above screens */}
+                        <ExpertContent data={data} />
+                    </div>
+                )}
+                <div className="hidden md:block"> {/* shown only on medium and above screens */}
+                    <h2 className="text-2xl font-bold mb-6">EXPERTS ON THIS TRIP</h2>
+                    <ExpertContent data={data} />
+                </div>
+            </div>
+        </section>
                 <section id="iternary" >
-                <div className="bg-white p-10">
+                <div className="bg-white p-10 ">
       <div className="border-t-2 border-b-2 border-gray-300 py-8">
         {/* Section Heading */}
         <h2 className="text-3xl font-bold mb-6">ITINERARY</h2>
@@ -405,5 +391,51 @@ const page = FC<PageProps> = ({ params })=> {
     </div>
   )
 }
-
+const SpecialOffers = () => (
+  <div className="shadow-md p-4 md:p-6 rounded-md mb-6 relative border border-gray-400">
+      <h2 className="text-sm font-semibold mb-2">SPECIAL OFFERS</h2>
+      <p>Experience Unbeatable Prices: Unleash exclusive travel advantages and Enjoy Up to 50% Off On Your Next Weekend Getaway!</p>
+      <button className="mt-2 text-yellow-500 hover:underline">AVAIL NOW</button>
+  </div>
+);
+const FeatureList = ({ data }) => (
+  <>
+      {data && data.over && data.over.map((over, index) => (
+          <div key={index} className='mb-2'>{over}</div>
+      ))}
+  </>
+);
+const ExpertContent = ({ data }) => (
+    <>
+        <p className="text-gray-600 mb-10">{data.expertpara}</p>
+        <div className="flex space-x-20 flex-col md:flex-row">
+            {/* Expert 1 */}
+            <div className="text-center">
+                <div className="w-40 h-40 relative rounded-full overflow-hidden mb-4">
+                    <Image
+                        src={`http://localhost:4000/uploads/${data.lead1pimg}`}
+                        alt={data.lead1pimgalt}
+                        layout="fill"
+                        objectFit="cover"
+                    />
+                </div>
+                <h3 className="font-semibold text-lg">{data.lead1name}</h3>
+                <p className="text-gray-500">{data.lead1oc}</p>
+            </div>
+            {/* Expert 2 */}
+            <div className="text-center">
+                <div className="w-40 h-40 relative rounded-full overflow-hidden mb-4">
+                    <Image
+                        src={`http://localhost:4000/uploads/${data.lead2pimg}`}
+                        alt={data.lead2pimgalt}
+                        layout="fill"
+                        objectFit="cover"
+                    />
+                </div>
+                <h3 className="font-semibold text-lg">{data.lead2name}</h3>
+                <p className="text-gray-500">{data.lead2oc}</p>
+            </div>
+        </div>
+    </>
+);
 export default page

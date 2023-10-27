@@ -34,7 +34,7 @@ const PopularDestinations = () => {
         //   prevEl: ".js-destination-prev",
         // }}
         breakpoints={{
-          500: {
+          100: {
             slidesPerView: 1,
             spaceBetween: 20,
           },

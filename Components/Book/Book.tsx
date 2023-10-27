@@ -5,7 +5,7 @@ import {MdOutlineKeyboardArrowRight} from 'react-icons/md'
 import {FaRupeeSign} from 'react-icons/fa'
 const Booking = ({ onClose, Batch, reserveamount, foramount, withoutamount }) => {
     const ticketPrice = foramount ;
-    const firstTicketPrice = 2100.00;
+    const firstTicketPrice = reserveamount;
     const [isTabOneActive, setIsTabOneActive] = useState(true);
     const [ticketCount, setTicketCount] = useState(1);
     const [isShow, setIsShow] = useState(false);
@@ -210,13 +210,15 @@ const Booking = ({ onClose, Batch, reserveamount, foramount, withoutamount }) =>
         <label className="block text-sm  mb-2 text-center font-bold ">Select Dates</label>
                              <select className="w-full p-2 border rounded" name="date"  value={inputValue.date}
                             onChange={handleChange}  required>
-          
-          <option value="Facebook">Facebook</option>
-          <option value="Instagram">Instagram</option>
-          <option value="Google">Google</option>
-          <option value="Whatsapp">Whatsapp</option>
-          <option value="Other">Other</option>
-          {/* Add more sources as required */}
+                               <option value="" >Please select the Date</option>
+          {Batch.map((batch, idx) => (
+          <option value={batch.date} key={idx}>{batch.date}</option>
+))}
+            {/*  // <option value="Instagram">Instagram</option>
+          // <option value="Google">Google</option>
+          // <option value="Whatsapp">Whatsapp</option>
+          // <option value="Other">Other</option>
+       Add more sources as required */}
         </select>
       </div>
     

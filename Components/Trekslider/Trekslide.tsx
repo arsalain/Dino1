@@ -4,7 +4,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import { Navigation,Scrollbar } from 'swiper/modules';
+import { Navigation,Scrollbar,Pagination  } from 'swiper/modules';
 // SwiperCore.use([Navigation, Scrollbar]);
 const destinations = [
   {
@@ -13,7 +13,7 @@ const destinations = [
     rating: 4.7,
     reviews: 3014,
     price: 18000,
-    img: "/home/kedarnath.jpg",
+    img: "/home/kedar.jpg",
     badge: "BREAKFAST INCLUDED",
   },
   {
@@ -22,15 +22,15 @@ const destinations = [
     rating: 4.8,
     reviews: 2345,
     price: 19000,
-    img: "/home/m10 (10).jpg",
+    img: "/home/hamta.jpg",
   },
   {
     title: "Great Lakes Trek",
-    location: " Sonamarg , Jammu and Kashmir",
+    location: " Sonamarg , J & K",
     rating: 4.7,
     reviews: 3014,
     price: 20000,
-    img: "/home/m10 (8).jpg",
+    img: "/home/lake.jpg",
     badge: "BEST SELLER",
   },
   {
@@ -39,41 +39,43 @@ const destinations = [
     rating: 4.5,
     reviews: 5633,
     price: 18000,
-    img: "/home/winnats-pass-5455265_1920.jpg",
+    img: "/home/valley.jpg",
     badge: "TOP RATED",
   },
   {
-    title: "hoii of Flowers Treks",
+    title: "Roop Kund",
     location: "Uttarakhand",
     rating: 4.5,
     reviews: 5633,
     price: 18000,
-    img: "/home/winnats-pass-5455265_1920.jpg",
+    img: "/home/roop.jpg",
     badge: "TOP RATED",
   },
 ];
 const TrekSlider = () => {
   return (
-    <>
-    {/* <div className="mx-10" > */}
+    <div className=" p-4 relative">
       <Swiper
         spaceBetween={20}
         slidesPerView={4}
         navigation={{
             nextEl: '.swiper-but-next',
             prevEl: '.swiper-but-prev'
-          }}
-        // scrollbar={{ draggable: true }}
-        // className="overflow-visible"
+        }}
+        pagination={{
+            el: '.swiper-pagination',
+            clickable: true,
+            bulletClass: 'swiper-pagination-bullet',
+            bulletActiveClass: 'swiper-pagination-bullet-active',
+            renderBullet: function (index, className) {
+              return '<span class="' + className + ' bg-black"></span>';
+            },
+        }}
         scrollbar={{
           el: "#swiper-scrollbar",
           draggable: true,
         }}
-        modules={[Scrollbar, Navigation]}
-        // navigation={{
-        //   nextEl: ".js-destination-next",
-        //   prevEl: ".js-destination-prev",
-        // }}
+        modules={[Scrollbar, Navigation, Pagination]}
         breakpoints={{
           500: {
             slidesPerView: 1,
@@ -103,7 +105,7 @@ const TrekSlider = () => {
                   height={300}
                   src={item.img}
                   alt={item.title}
-                  className="h-64 transform transition-transform duration-300 group-hover:scale-110 rounded-lg" // Kept rounded-lg here
+                  className="h-64 transform transition-transform duration-300 group-hover:scale-110 rounded-lg"
                 />
               </div>
               <div className="p-5">
@@ -120,17 +122,12 @@ const TrekSlider = () => {
           </SwiperSlide>
         ))}
       </Swiper>
-      <div className="flex justify-between mt-4">
-      <button className="swiper-but-prev flex items-center justify-center w-5 h-5  shadow-md rounded-full text-white ">  Previous
-</button>
-<button className="swiper-but-next flex items-center justify-center w-10 h-5  shadow-md rounded-full  text-white">  Next
-</button>
-      {/* <button className="swiper-button-prev bg-black text-black !important"></button>
-<button className="swiper-button-next"></button> */}
-<div className=" bg-black-200  " id="swiper-scrollbar"></div>
-      </div>
-      {/* </div> */}
-    </>
+      <div className="flex justify-center mt-4 items-center">
+    <button className="swiper-but-prev flex items-center justify-center w-5 h-5 shadow-md rounded-full text-black mr-1">&#8592;</button> {/* Unicode left arrow */}
+    <div className="swiper-pagination"></div>
+    <button className="swiper-but-next flex items-center justify-center w-5 h-5 shadow-md rounded-full text-black ml-1">&#8594;</button> {/* Unicode right arrow */}
+</div>
+    </div>
   );
 };
 export default TrekSlider;
