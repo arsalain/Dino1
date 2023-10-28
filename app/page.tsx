@@ -44,7 +44,7 @@ export default function Home() {
 </section>
 
 <TestimonialSection />
-    {/* <Footer /> */}
+    <Footer />
       </div>
     </main>
   )

@@ -72,8 +72,9 @@ const Footer = () => {
               <FontAwesomeIcon icon={faLinkedinIn} />
             </motion.a>
           </div>
-        </div>
-        <div className="grid grid-cols-2 md:grid-cols-4  " >
+       </div>
+       
+          <div className="grid grid-cols-2 md:grid-cols-4  " >
         {sections.map((section, index) => (
   <motion.div key={section.title} initial={{ opacity: 0, y: 50 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, delay: index * 0.1 + 0.5 }} className="flex flex-col md:items-center md:mb-8 mb-4 md:space-y-4 space-y-0">
     <h2 className="font-semibold md:text-xl text-lg">{section.title}</h2>
@@ -91,10 +92,7 @@ const Footer = () => {
     </ul>
   </motion.div>
 ))} 
-
-
-{/* Contact Us */}
-<motion.div initial={{ opacity: 0, y: 50 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, delay: 0.7 }} className="flex flex-col md:items-center md:space-y-4 space-y-2">
+<motion.div initial={{ opacity: 0, y: 50 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, delay: 0.7 }} className="flex flex-col md:items-center md:space-y-4 space-y-2 overflow-x-hidden">
   <h2 className="font-semibold md:text-xl  text-lg md:mb-4">CONTACT US</h2>
   <div className="flex flex-col md:items-center md:mb-3 mb-0 relative group md:p-2">
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5, delay: 0.4 }} className="flex md:items-center md:space-x-3 space-x-1 z-10">
@@ -125,7 +123,7 @@ const Footer = () => {
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
           2023 Backpackers United Copyright Information
         </motion.div>
-        </div>
+        </div> */} 
     </motion.footer>
   );
 }

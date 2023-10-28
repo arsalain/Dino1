@@ -4,23 +4,22 @@ import {IoIosArrowDropleft} from 'react-icons/io'
 import {MdOutlineKeyboardArrowRight} from 'react-icons/md'
 import {FaRupeeSign} from 'react-icons/fa'
 const Booking = ({ onClose, Batch, reserveamount, foramount, withoutamount ,Name}) => {
-    const ticketPrice = 1 ;
-    const firstTicketPrice = reserveamount;
-    const transportPrice = withoutamount ;
+    const ticketPrice = 2;
+    const firstTicketPrice = 1;
+    const transportPrice = 1;
     const [isTabOneActive, setIsTabOneActive] = useState(true);
     const [ticketCount, setTicketCount] = useState(1);
     const [ticketCount1, setTicketCount1] = useState(0);
     const [isShow, setIsShow] = useState(false);
     const [isCheckboxTicked, setIsCheckboxTicked] = useState(false);
     const [isChecked, setIsChecked] = useState(false);
-
+    const [subtractedAmount, setSubtractedAmount] = useState(0);
     // Function to handle the checkbox change event
     const handleCheckboxChange = (e) => {
       setIsChecked(e.target.checked);
     };
 
     const getSubtotal = (ticketPrice, ticketCount, transportPrice, ticketCount1) => {
-      console.log("Inside getSubtotal with", { ticketPrice, ticketCount, transportPrice, ticketCount1 });
     
       let subtotal = 0;
       
@@ -36,16 +35,12 @@ const Booking = ({ onClose, Batch, reserveamount, foramount, withoutamount ,Name
     };
     
     const getGst = () => {
-      console.log("Inside getGst");
       const gstValue = getSubtotal(ticketPrice, ticketCount, transportPrice, ticketCount1) * 0.05;
-      console.log("Calculated GST:", gstValue);
       return gstValue;
     };
     
     const getTotal = () => {
-      console.log("Inside getTotal");
       const totalValue = getSubtotal(ticketPrice, ticketCount, transportPrice, ticketCount1) + getGst();
-      console.log("Calculated Total:", totalValue);
       return totalValue;
     };
     const getSubtotalFirst = () => {
@@ -80,7 +75,6 @@ const Booking = ({ onClose, Batch, reserveamount, foramount, withoutamount ,Name
           setTicketCount1(prev => prev - 1);
         }
       };
-      const finalPrice = getTotal().toFixed(2) 
   
     const [inputValue, setInputValue] = useState({
         date: '',
@@ -89,9 +83,22 @@ const Booking = ({ onClose, Batch, reserveamount, foramount, withoutamount ,Name
         number: '',
       });
       const [amount, setAmount] = useState(
-        isCheckboxTicked ? getTotal().toFixed(2) :getTotalFirst().toFixed(2) 
-    
+        isCheckboxTicked ? parseFloat(getTotal().toFixed(2)) : parseFloat(getTotalFirst().toFixed(2))
       );
+      // const [amount, setAmount] = useState()
+      useEffect(() => {
+        if (isCheckboxTicked) {
+          setAmount(parseFloat(getTotal().toFixed(2)));
+        } else {
+          setAmount(parseFloat(getTotalFirst().toFixed(2)));
+        }
+      }, [isCheckboxTicked, ticketCount, ticketCount1]);
+      useEffect(() => {
+        const result = Math.abs(getTotalFirst() - amount);
+        console.log("result", result)
+        setSubtractedAmount(result);
+      }, [amount]);
+      console.log("subtractedAmount",subtractedAmount)
       console.log(amount,"amount")
     const allFieldsFilled = Object.values(inputValue).every(input => input !== '');
     const handleChange = (e) => {
@@ -165,11 +172,14 @@ const Booking = ({ onClose, Batch, reserveamount, foramount, withoutamount ,Name
                 selecteddate: inputValue.date,
                 username: inputValue.name,  // Replace with actual data
                 phonenumber: inputValue.number,  // Replace with actual data
-                email: inputValue.email,  // Replace with actual data
+                email: inputValue.email, 
+                totalamount: foramount,
+                payableamount: getTotalFirst().toFixed(2),
+                pendingamount: subtractedAmount,
                 source: 'Razorpay',
                 gst:  isCheckboxTicked ? getGstFirst().toFixed(2) : getGst().toFixed(2) ,
                 withtransport: ticketCount,
-                withoutransport : ticketCount1,
+                withouttransport : ticketCount1,
                 amount:    isCheckboxTicked ? getTotalFirst().toFixed(2) : getTotal().toFixed(2) ,
                 razorpayOrderId: response.razorpay_order_id,
                 razorpayPaymentId: response.razorpay_payment_id
@@ -358,7 +368,7 @@ const Booking = ({ onClose, Batch, reserveamount, foramount, withoutamount ,Name
                       <button onClick={handleIncreaseTicket}>+</button>
                     </div>
                   </div>
-                 {withoutamount && <div className=" p-4 pt-0">
+                 {transportPrice && <div className=" p-4 pt-0">
                     <div className="flex items-center  justify-between space-x-4 rounded-xl p-3 bg-form1 border border-gray-400">
                       <span className='font-bold text-sm'>Without transport: ₹ {transportPrice}</span>
                       <button onClick={handleDecreaseTicket1} className='pl-20'>-</button>

@@ -183,7 +183,8 @@ const page = FC<PageProps> = ({ params })=> {
                 </div>
                 </section>
                 <section id="experts">
-            <div className="bg-white md:p-10 p-4 pt-0">
+            <div className="bg-white md:p-10 p-4 pt-0 md:pt-0">
+            
                 <div className="flex justify-between items-center md:hidden"> {/* hidden on medium and above screens */}
                     <h2 className="text-2xl font-bold md:mb-6 mb-2">EXPERTS ON THIS TRIP</h2>
                     <button onClick={() => toggleSection("expert")} className='text-xl'>
@@ -199,11 +200,11 @@ const page = FC<PageProps> = ({ params })=> {
                     <h2 className="text-2xl font-bold mb-6">EXPERTS ON THIS TRIP</h2>
                     <ExpertContent data={data} />
                 </div>
-            </div>
+                </div>
         </section>
         <section id="itinerary">
-    <div className="bg-white md:p-10 p-4 text-black">
-        <div className="border-b-2 border-gray-300 md:py-8 py-2">
+    <div className="bg-white md:p-10 p-4 md:pt-0 text-black">
+        <div className="border-b-2 border-t-2 border-gray-300 md:py-8 py-2">
             <div className="flex justify-between items-center md:hidden"> {/* hidden on medium and above screens */}
                 <h1 className="text-2xl font-bold md:mb-6 mb-2">ITINERARY</h1>
                 <button onClick={() => toggleSection("itinerary")} className='text-xl'>
@@ -311,35 +312,26 @@ const page = FC<PageProps> = ({ params })=> {
       </p>
     </div>
                 </section>
-                <section id='date'>
-              
-                <div className="bg-white p-10 pt-0">
-                <div className="bg-white mx-auto py-8 border-t-2 border-b-2 border-gray-300 ">
-      <h2 className="text-xl font-semibold mb-4 ">DATES & PRICES</h2>
-      <div className="border-b border-gray-300 mb-4 p-2">
-        <h3>Batches</h3>
-      </div>
-      {data && data.batch && data.batch.map((batch, idx) => (
-      <div className="flex justify-between items-center border-b border-gray-300 bg-gray-200  mb-4 p-4">
-        <div>
-          <p className="text-lg font-bold">{batch.date}</p>
+                <section id="date">
+    <div className="bg-white md:p-10 p-4 pt-0 md:pt-0">
+        
+        <div className="flex justify-between items-center md:hidden"> {/* hidden on medium and above screens */}
+            <h2 className="text-xl font-bold md:mb-6 mb-2">DATES & PRICES</h2>
+            <button onClick={() => toggleSection("date")} className='text-xl'>
+                {openSection === "date" ? <FontAwesomeIcon icon={faAngleUp} /> : <FontAwesomeIcon icon={faAngleDown} />}
+            </button>
         </div>
-        <div>
-          <div className='flex flex-row'>  <FontAwesomeIcon icon={faIndianRupeeSign} className='text-sm w-4 h-4 pt-1 ' /> {batch.amount} /- Per Person</div>
+        {openSection === "date" && (
+            <div className="md:hidden"> {/* hidden on medium and above screens */}
+                <DateContent data={data} />
+            </div>
+        )}
+        <div className="hidden md:block"> {/* shown only on medium and above screens */}
+            <h2 className="text-xl font-bold mb-6">DATES & PRICES</h2>
+            <DateContent data={data} />
         </div>
-        <div className="cursor-pointer">
-        <button className='bg-gray-500 py-2 px-10 rounded-lg text-white' >Send Enquiry</button>
-        </div>
-        <div className="cursor-pointer">
-        <button className='bg-yellow-500 py-2 px-10 rounded-lg' >Reserve Now</button>
-        </div>
-      </div>
-))}
-      <div className="text-sm text-gray-500">
-        <p>All trip prices are per person based on double occupancy, are subject to change without notice and do not include airfare. All prices and fares are quoted in U.S. dollars.</p>
-      </div>
     </div>
-    </div>
+</section>
  <section id='inclu'>
  <div className="flex justify-between p-10 pt-0 mx-auto bg-white">
  
@@ -397,7 +389,6 @@ const page = FC<PageProps> = ({ params })=> {
     </div>
     </div>
  </section>
-                </section>
                 <section >
                 <div className="container mx-auto p-10 pt-0 bg-white">
                 <div className='border-t-2 border-gray-300' >
@@ -483,5 +474,34 @@ const ExpertContent = ({ data }) => (
             </div>
         </div>
     </>
+);
+const DateContent = ({ data }) => (
+  <div className="bg-white py-8 border-t-2 border-b-2 border-gray-300">
+      <div className="border-b border-gray-300 mb-4 p-2">
+          <h3>Batches</h3>
+      </div>
+      {data && data.batch && data.batch.map((batch, idx) => (
+          <div className="flex justify-between items-center border-b border-gray-300 bg-gray-200 mb-4 p-4">
+              <div>
+                  <p className="text-lg font-bold">{batch.date}</p>
+              </div>
+              <div>
+                  <div className='flex flex-row'>  
+                      <FontAwesomeIcon icon={faIndianRupeeSign} className='text-sm w-4 h-4 pt-1 ' /> 
+                      {batch.amount} /- Per Person
+                  </div>
+              </div>
+              <div className="cursor-pointer">
+                  <button className='bg-gray-500 py-2 px-10 rounded-lg text-white' >Send Enquiry</button>
+              </div>
+              <div className="cursor-pointer">
+                  <button className='bg-yellow-500 py-2 px-10 rounded-lg' >Reserve Now</button>
+              </div>
+          </div>
+      ))}
+      <div className="text-sm text-gray-500">
+          <p>All trip prices are per person based on double occupancy, are subject to change without notice and do not include airfare. All prices and fares are quoted in U.S. dollars.</p>
+      </div>
+  </div>
 );
 export default page
