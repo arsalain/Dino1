@@ -219,10 +219,10 @@ const Booking = ({ onClose, Batch, reserveamount, foramount, withoutamount ,Name
             <div className="bg-white rounded shadow-lg mt-40 mb-2">
 
                 {isTabOneActive ? (
-                    <div >
-                    <div className='flex flex-row bg-form1 p-4 border-b border-gray-400'>
+                    <div className='w-auto' >
+                    <div className='flex flex-row bg-form1 p-4 border-b border-gray-400 justify-between md:gap-20 gap-10 '>
                         <button onClick={onClose} ><IoIosArrowDropleft className="text-3xl text-gray-400 hover:text-green-700" /></button>
-                        <div className='flex flex-col justify-center pl-20 pr-16 pt-4'>
+                        <div className='flex flex-col justify-center pt-4'>
                             <div className='text-xl font-bold text-center'>
                                 Who Is Booking ?
                                 </div>
@@ -271,20 +271,11 @@ const Booking = ({ onClose, Batch, reserveamount, foramount, withoutamount ,Name
         <input type="text" className="w-full p-2 border rounded" placeholder="Full Name" name="name"  value={inputValue.name}
                             onChange={handleChange}   required/>
       </div>
-      <div className="mb-4 flex justify-between">
-        <div className="mr-1 border border-gray-400 p-2 rounded-lg">
-          <label className="block text-sm font-bold mb-2">ISD Code</label>
-          <select className="w-full p-2 border rounded">
-            <option value="+91">+91</option>
-            {/* Add more ISD codes as required */}
-          </select>
-        </div>
-        <div className="ml-1 border border-gray-400 p-2 rounded-lg">
+         <div className="mb-4 border border-gray-400 p-2 rounded-lg">
           <label className="block text-sm font-bold mb-2">Phone Number (WhatsApp)</label>
-          <input type="text" className="w-80 p-2 border rounded" placeholder="Phone Number" name="number" value={inputValue.number}
+          <input type="text" className="w-full p-2 border rounded" placeholder="Phone Number" name="number" value={inputValue.number}
                             onChange={handleChange}  required/>
         </div>
-      </div>
       <div className="mb-4 border border-gray-400 p-2 rounded-lg">
         <label className="block text-sm font-bold mb-2">Email Address</label>
         <input type="email" className="w-full p-2 border rounded" placeholder="Email Address" name="email" value={inputValue.email}
@@ -295,10 +286,10 @@ const Booking = ({ onClose, Batch, reserveamount, foramount, withoutamount ,Name
           </div>
                     </div>
                 ) : (
-                    <div className='w-[420px] '>
-                    <div className='flex flex-row bg-form1 p-4 border-b border-gray-400'>
+                    <div className='md:w-[420px] w-[375px]'>
+                    <div className='flex flex-row bg-form1 justify-between p-2 border-b border-gray-400'>
                         <button onClick={switchToTabOne} ><IoIosArrowDropleft className="text-3xl text-gray-400 hover:text-green-700" /></button>
-                        <div className='flex flex-col justify-center pl-10 pr-10 pt-4'>
+                        <div className='flex flex-col justify-center  pt-4'>
                             <div className='text-xl font-bold text-center'>
                                 Create Tickets & Pay
                                 </div>

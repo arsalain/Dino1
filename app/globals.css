@@ -45,12 +45,11 @@
   height: 30px !important;
   margin-top: 40px !important;
   background-color: white !important;
-  color: black !important;/* This will reduce the size to 80% of the original */
+  color: black !important;
+  /* color: white !important;  */
+
 }
-.swiper-but-prev , .swiper-but-next {
-  background-color: none !important;
-  color: white;
-}
+
 .swiper-pagination-bullet-active {
   background: white !important;
 }

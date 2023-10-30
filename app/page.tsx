@@ -5,7 +5,9 @@ import Hero from '@/Components/Home/Hero/Hero'
 import Image from 'next/image'
 import TestimonialSection from '@/Components/Home/Testimonials/Testimonials'
 import Promo from '@/Components/Home/Promo/Promo'
-import TrekSlider from '@/Components/Trekslider/Trekslide'
+import TrekSlider from '@/Components/Home/Trekslider/Trekslide'
+import Popular from '@/Components/Home/Popular/Popular'
+
 
 export default function Home() {
   return (
@@ -13,7 +15,9 @@ export default function Home() {
       <div >
     <Header />
     <Hero />
-
+    <section className='mx-auto md:px-10 px-4' data-aos="fade-up">
+    <Popular />
+    </section>
      <section className="pt-16 pb-12" data-aos="fade-up">
   <div className="mx-auto md:px-10 px-4">
     <div className="flex flex-wrap items-end md:justify-center mb-5 space-y-5 md:space-y-0 md:space-x-5">
@@ -33,6 +37,7 @@ export default function Home() {
   </div>
 
 </section> 
+
 <div className='mx-10'>
   <TrekSlider />
 </div>
