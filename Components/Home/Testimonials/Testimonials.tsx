@@ -113,7 +113,7 @@ const TestimonialSection = () => {
   }, [controls, pauseScroll]);
 
   return (
-  
+  <div>
     <motion.section 
       initial={{ backgroundColor: 'white' }}
       animate={{ backgroundColor: 'black' }}
@@ -156,7 +156,27 @@ const TestimonialSection = () => {
           </motion.div>
         ))}
       </div>
+
     </motion.section>
+          <div className="flex md:justify-between md:mb-12 text-yellow-500 mx-4 md:mx-40 gap-4 my-5">
+          <div className="text-center">
+              <h3 className="text-sm md:text-3xl mb-2">4.7</h3>
+              <p className='text-sm md:text-base'>Google Rating</p>
+          </div>
+          <div className="text-center">
+              <h3 className="text-sm md:text-3xl mb-2">100,000+</h3>
+              <p className='text-sm md:text-base'>Delighted Traveler</p>
+          </div>
+          <div className="text-center">
+              <h3 className="text-sm md:text-3xl mb-2">100+</h3>
+              <p className='text-sm md:text-base'>Adventure Locations</p>
+          </div>
+          <div className="text-center">
+              <h3 className="text-sm md:text-3xl mb-2">574,974</h3>
+              <p className='text-sm md:text-base'>Our Volunteers</p>
+          </div>
+      </div>
+      </div>
   );
 };
 

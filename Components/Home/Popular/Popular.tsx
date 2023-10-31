@@ -2,21 +2,24 @@
 import React from 'react'
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-
+import Link from 'next/link';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 const Popular = () => {
-    const images = {
-        vertical: '/home/kedar.jpg',
+    const images =  { 
+       vertical: '/home/kedar.jpg',
         adjacent: [
             '/home/kedar.jpg',
             '/home/kedar.jpg',
             '/home/kedar.jpg',
-            '/home/kedar.jpg',
+          
         ],
         bottom: [
             '/home/kedar.jpg',
-            '/home/kedar.jpg'
+            '/home/kedar.jpg',
+            '/home/kedar.jpg',
         ],
-    };
+      }
     const destinations = [
         { name: 'KUMAON', image: '/home/kedar.jpg' },
         { name: 'GARHWAL', image: '/home/hamta.jpg' },
@@ -25,63 +28,141 @@ const Popular = () => {
         { name: 'KARERI', image: '/home/roop.jpg' },
       
     ];
-    const fadeIn = {
-        hidden: { opacity: 0 },
-        visible: { opacity: 1 }
-    };
     return (
         <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.2 }}
-        className="p-8 px-0 max-w-screen-xl mx-40"
+        className="md:p-10 p-5 px-0 max-w-screen-xl "
     >
-        <div>
-        <h2 className="text-xl md:text-3xl font-bold mb-6 text-yellow-500 text-center">TOP DESTINATIONS</h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-4">
-        {Array.from({ length: 2 }).map((_, idx) => (
-          <motion.div
-            key={idx}
+           <h2 className="text-xl md:text-3xl font-bold  text-yellow-500 text-center">Top Destinations</h2>
+           <div className="flex justify-center pt-5">
+           <hr className="border-t-2 border-white w-[5%]" />
+           </div>
+           <div className="grid md:grid-cols-6 grid-col-1 gap-4 md:p-10 md:pb-0 pb-0 p-0 pt-5">
+    {/* First large image */}
+
+    <motion.div
             whileHover={{ scale: 1.05 }}
-            className="col-span-1 md:col-span-1 relative overflow-hidden rounded-lg h-[440px]"
+            className="col-span-2 md:col-span-2 relative overflow-hidden w-full rounded-lg md:h-[500px] h-[400px]"
           >
             <Image
-              src="/destination/maldives.jpg"
-              alt={`Large Destination ${idx + 1}`}
+              src='/home/kedar.jpg'
+              alt="KUMAON"
               layout="fill"
               objectFit="cover"
             />
-            <div className="absolute top-0 left-0 w-full h-full pl-5 pt-5 bg-black bg-opacity-50 text-white p-2">
-              <h3 className="text-3xl">Thailand</h3>
-            </div>
-          </motion.div>
-        ))}
-      </div>
-      <div className="grid grid-cols-4 gap-4 mt-4">
-        {images.adjacent.map((img, idx) => (
-          <motion.div
-            key={idx}
-            whileHover={{ scale: 1.05, zIndex: 1 }}
-            className="col-span-1 md:col-span-1 relative overflow-hidden rounded-lg h-80"
+        <p className="absolute bottom-0 left-0 bg-black bg-opacity-50 text-white p-2 ">KUMAON</p>
+    </motion.div>
+    {/* First set of smaller images (3 images vertically) */}
+  
+    {/* Second set of smaller images (2 images vertically) */}
+    <div className="grid grid-rows-2 gap-2 col-span-2" >
+    <motion.div
+            whileHover={{ scale: 1.05 }}
+            className="col-span-1 md:col-span-2 relative overflow-hidden w-full rounded-lg md:h-[240px] h-[300px]"
           >
             <Image
-              src={img}
-              alt={`Small Destination ${idx + 1}`}
+              src='/home/kedar.jpg'
+              alt="GARHWAL"
               layout="fill"
               objectFit="cover"
             />
-            <div className="absolute top-0 left-0 bg-black bg-opacity-50 text-white p-2">
-              <h3 className="text-center">BACKPACKER HOSTELS IN DESTINATION {idx + 1}</h3>
-            </div>
-          </motion.div>
-        ))}
-      </div>
-      <div className="text-right mt-4">
-        <a href="#" className="text-blue-500 hover:underline">
-          All Destinations &rarr;
-        </a>
-      </div>
+            <p className="absolute bottom-0 left-0 bg-black bg-opacity-50 text-white p-2 rounded-tr-t-lg">GARHWAL</p>
+            </motion.div>
+            <motion.div
+            whileHover={{ scale: 1.05 }}
+            className="col-span-1 md:col-span-2 relative overflow-hidden w-full rounded-lg md:h-[240px] h-[300px]"
+          >
+            <Image
+              src='/home/kedar.jpg'
+              alt="MUSSOORIE" 
+              layout="fill"
+              objectFit="cover"
+            />
+            <p className="absolute bottom-0 left-0 bg-black bg-opacity-50 text-white p-2 rounded-tr-t-lg">MUSSOORIE</p>
+        </motion.div>
     </div>
+    <div className="grid md:grid-rows-3 grid-row-5 gap-4 col-span-2" >
+    <motion.div
+            whileHover={{ scale: 1.05 }}
+            className="row-span-2 md:row-span-1 relative overflow-hidden w-full rounded-lg md:h-[155px] h-[300px]"
+          >
+            <Image
+              src='/home/kedar.jpg'
+              alt="GARHWAL"
+              layout="fill"
+              objectFit="cover"
+            />
+            <p className="absolute bottom-0 left-0 bg-black bg-opacity-50 text-white p-2 ">GARHWAL</p>
+       </motion.div>
+       <motion.div
+            whileHover={{ scale: 1.05 }}
+            className="row-span-2 md:row-span-1  relative overflow-hidden w-full rounded-lg md:h-[155px] h-[300px]"
+          >
+            <Image
+              src='/home/kedar.jpg'
+              alt="GARHWAL"
+              layout="fill"
+              objectFit="cover"
+            />
+            <p className="absolute bottom-0 left-0 bg-black bg-opacity-50 text-white p-2">MUSSOORIE</p>
+        </motion.div>
+        <motion.div
+            whileHover={{ scale: 1.05 }}
+            className="relative overflow-hidden w-full rounded-lg md:h-[155px] h-[155px] row-span-1"
+          >
+            <Image
+              src='/home/kedar.jpg'
+              alt="GARHWAL"
+              layout="fill"
+              objectFit="cover"
+            />
+            <p className="absolute bottom-0 left-0 bg-black bg-opacity-50 text-white p-2">HIMACHAL</p>
+        </motion.div>
+    </div>
+</div>
+<div className="flex md:mx-10 mx-0 gap-4 pt-4">
+      {/* ... Previous code for all the existing images ... */}
+      {/* New image on the left */}
+      <div className="relative flex-1">
+      <motion.div
+            whileHover={{ scale: 1.05 }}
+            className="relative overflow-hidden w-full rounded-lg md:h-40 h-52"
+          >
+            <Image
+              src='/home/kedar.jpg'
+              alt="Description1"
+              layout="fill"
+              objectFit="cover"
+            />
+        <p className="absolute bottom-0 left-0 bg-black bg-opacity-50 text-white p-2 rounded-tr-t-lg">Description1</p>
+      </motion.div>
+      </div>
+      {/* New image on the right */}
+      <div className="relative flex-1">
+      <motion.div
+            whileHover={{ scale: 1.05 }}
+            className="relative overflow-hidden w-full rounded-lg md:h-40 h-52"
+          >
+            <Image
+              src='/home/kedar.jpg'
+              alt="Description1"
+              layout="fill"
+              objectFit="cover"
+            />
+        <p className="absolute bottom-0 left-0 bg-black bg-opacity-50 text-white p-2 rounded-tr-t-lg">Description2</p>
+      </motion.div>
+    </div>
+    </div>
+      {/* ... Repeat the pattern for the other images ... */}
+
+     
+      <div className="mt-4 ">
+        <Link href="#" className="text-yellow-500 hover:underline flex flex-row justify-end">
+          All Destinations <FontAwesomeIcon icon={faArrowRight} className='pt-1 pl-1' />
+        </Link>
+      </div>
     </motion.div>
   )
 }

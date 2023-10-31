@@ -49,7 +49,9 @@
   /* color: white !important;  */
 
 }
-
+.swiper-but-prev, .swiper-but-next {
+  color: white !important;
+}
 .swiper-pagination-bullet-active {
   background: white !important;
 }
