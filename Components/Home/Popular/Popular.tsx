@@ -1,61 +1,47 @@
-'use client'
-import React from 'react'
+'use client';
+import React from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 const Popular = () => {
-    const images =  { 
-       vertical: '/home/kedar.jpg',
-        adjacent: [
-            '/home/kedar.jpg',
-            '/home/kedar.jpg',
-            '/home/kedar.jpg',
-          
-        ],
-        bottom: [
-            '/home/kedar.jpg',
-            '/home/kedar.jpg',
-            '/home/kedar.jpg',
-        ],
-      }
-    const destinations = [
-        { name: 'KUMAON', image: '/home/kedar.jpg' },
-        { name: 'GARHWAL', image: '/home/hamta.jpg' },
-        { name: 'MUSSOORIE', image: '/home/lake.jpg' },
-        { name: 'HIMACHAL', image: '/home/valley.jpg' },
-        { name: 'KARERI', image: '/home/roop.jpg' },
-      
-    ];
-    return (
-        <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.2 }}
-        className="md:p-10 p-5 px-0 max-w-screen-xl "
-    >
-           <h2 className="text-xl md:text-3xl font-bold  text-yellow-500 text-center">Top Destinations</h2>
-           <div className="flex justify-center pt-5">
-           <hr className="border-t-2 border-white w-[5%]" />
-           </div>
-           <div className="grid md:grid-cols-6 grid-col-1 gap-4 md:p-10 md:pb-0 pb-0 p-0 pt-5">
-    {/* First large image */}
-
+  return (
     <motion.div
-            whileHover={{ scale: 1.05 }}
-            className="col-span-2 md:col-span-2 relative overflow-hidden w-full rounded-lg md:h-[500px] h-[400px]"
-          >
-            <Image
-              src='/home/kedar.jpg'
-              alt="KUMAON"
-              layout="fill"
-              objectFit="cover"
-            />
-        <p className="absolute bottom-0 left-0 bg-black bg-opacity-50 text-white p-2 ">KUMAON</p>
-    </motion.div>
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ delay: 0.2 }}
+      className="container mx-auto md:p-10 p-5 px-0 max-w-screen-xl"
+    >
+      <motion.h2
+        initial={{ y: -30 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="text-xl md:text-3xl font-bold text-yellow-500 text-center cursor-pointer"
+      >
+        Top Destinations
+      </motion.h2>
+      <div className="flex justify-center pt-2 md:pt-5">
+        <hr className="border-t-2 border-white md:w-[60PX] w-[20px]" />
+      </div>
+      <div className="grid md:grid-cols-6 grid-col-1 gap-4 md:p-10 md:pb-0 pb-0 p-0 pt-5">
+        {/* Example of one image with new styling */}
+        <motion.div
+              whileHover={{ scale: 1.05 }}
+              className="col-span-2 md:col-span-2 relative overflow-hidden w-full rounded-lg md:h-[500px] h-[400px]"
+        >
+          <Image
+            src='/home/WAYANAD.jpg'
+            alt="WAYANAD"
+            layout="fill"
+            objectFit="cover"
+          />
+          {/* Gradient overlay */}
+          <div className="absolute inset-0 bg-gradient-to-b  from-black to-transparent opacity-50"></div>
+          {/* Text at top left */}
+          <p className="absolute md:top-5 md:left-5 md:text-xl text-lg top-2 left-2 text-white">WAYANAD</p>
+        </motion.div>
     {/* First set of smaller images (3 images vertically) */}
-  
     {/* Second set of smaller images (2 images vertically) */}
     <div className="grid grid-rows-2 gap-2 col-span-2" >
     <motion.div
@@ -63,24 +49,28 @@ const Popular = () => {
             className="col-span-1 md:col-span-2 relative overflow-hidden w-full rounded-lg md:h-[240px] h-[300px]"
           >
             <Image
-              src='/home/kedar.jpg'
-              alt="GARHWAL"
+              src='/home/GOKARNA.JPG'
+              alt="GOKARNA"
               layout="fill"
               objectFit="cover"
             />
-            <p className="absolute bottom-0 left-0 bg-black bg-opacity-50 text-white p-2 rounded-tr-t-lg">GARHWAL</p>
+             <div className="absolute inset-0 bg-gradient-to-b  from-black to-transparent opacity-50"></div>
+          {/* Text at top left */}
+          <p className="absolute md:top-5 md:left-5 md:text-xl text-lg top-2 left-2 text-white">GOKARNA</p>
             </motion.div>
             <motion.div
             whileHover={{ scale: 1.05 }}
             className="col-span-1 md:col-span-2 relative overflow-hidden w-full rounded-lg md:h-[240px] h-[300px]"
           >
             <Image
-              src='/home/kedar.jpg'
-              alt="MUSSOORIE" 
+              src='/home/KASHMIR.jpg'
+              alt="KASHMIR"
               layout="fill"
               objectFit="cover"
             />
-            <p className="absolute bottom-0 left-0 bg-black bg-opacity-50 text-white p-2 rounded-tr-t-lg">MUSSOORIE</p>
+           <div className="absolute inset-0 bg-gradient-to-b  from-black to-transparent opacity-50"></div>
+          {/* Text at top left */}
+          <p className="absolute md:top-5 md:left-5 md:text-xl text-lg top-2 left-2 text-white">KASHMIR</p>
         </motion.div>
     </div>
     <div className="grid md:grid-rows-3 grid-row-5 gap-4 col-span-2" >
@@ -89,36 +79,42 @@ const Popular = () => {
             className="row-span-2 md:row-span-1 relative overflow-hidden w-full rounded-lg md:h-[155px] h-[300px]"
           >
             <Image
-              src='/home/kedar.jpg'
-              alt="GARHWAL"
+              src='/home/KODAIKANAL.jpg'
+              alt="KODAIKANAL"
               layout="fill"
               objectFit="cover"
             />
-            <p className="absolute bottom-0 left-0 bg-black bg-opacity-50 text-white p-2 ">GARHWAL</p>
+          <div className="absolute inset-0 bg-gradient-to-b  from-black to-transparent opacity-50"></div>
+          {/* Text at top left */}
+          <p className="absolute md:top-5 md:left-5 md:text-xl text-lg top-2 left-2 text-white">KODAIKANAL</p>
        </motion.div>
        <motion.div
             whileHover={{ scale: 1.05 }}
             className="row-span-2 md:row-span-1  relative overflow-hidden w-full rounded-lg md:h-[155px] h-[300px]"
           >
             <Image
-              src='/home/kedar.jpg'
-              alt="GARHWAL"
+              src='/home/MUNAR.jpg'
+              alt="MUNAR"
               layout="fill"
               objectFit="cover"
             />
-            <p className="absolute bottom-0 left-0 bg-black bg-opacity-50 text-white p-2">MUSSOORIE</p>
+            <div className="absolute inset-0 bg-gradient-to-b  from-black to-transparent opacity-50"></div>
+          {/* Text at top left */}
+          <p className="absolute md:top-5 md:left-5 md:text-xl text-lg top-2 left-2 text-white">MUNAR</p>
         </motion.div>
         <motion.div
             whileHover={{ scale: 1.05 }}
             className="relative overflow-hidden w-full rounded-lg md:h-[155px] h-[155px] row-span-1"
           >
             <Image
-              src='/home/kedar.jpg'
-              alt="GARHWAL"
+              src='/home/CHIKMANGALUR.jpg'
+              alt="CHIKAMAGALUR"
               layout="fill"
               objectFit="cover"
             />
-            <p className="absolute bottom-0 left-0 bg-black bg-opacity-50 text-white p-2">HIMACHAL</p>
+          <div className="absolute inset-0 bg-gradient-to-b  from-black to-transparent opacity-50"></div>
+          {/* Text at top left */}
+          <p className="absolute md:top-5 md:left-5 md:text-xl text-lg top-2 left-2 text-white">CHIKAMAGALUR</p>
         </motion.div>
     </div>
 </div>
@@ -131,12 +127,14 @@ const Popular = () => {
             className="relative overflow-hidden w-full rounded-lg md:h-40 h-52"
           >
             <Image
-              src='/home/kedar.jpg'
-              alt="Description1"
+              src='/home/GOA.jpg'
+              alt="GOA"
               layout="fill"
               objectFit="cover"
             />
-        <p className="absolute bottom-0 left-0 bg-black bg-opacity-50 text-white p-2 rounded-tr-t-lg">Description1</p>
+       <div className="absolute inset-0 bg-gradient-to-b  from-black to-transparent opacity-50"></div>
+          {/* Text at top left */}
+          <p className="absolute md:top-5 md:left-5 md:text-xl text-lg top-2 left-2 text-white">GOA</p>
       </motion.div>
       </div>
       {/* New image on the right */}
@@ -146,25 +144,27 @@ const Popular = () => {
             className="relative overflow-hidden w-full rounded-lg md:h-40 h-52"
           >
             <Image
-              src='/home/kedar.jpg'
-              alt="Description1"
+              src='/home/ANDAMAN.jpg'
+              alt="ANDAMAN"
               layout="fill"
               objectFit="cover"
             />
-        <p className="absolute bottom-0 left-0 bg-black bg-opacity-50 text-white p-2 rounded-tr-t-lg">Description2</p>
+        <div className="absolute inset-0 bg-gradient-to-b  from-black to-transparent opacity-50"></div>
+          {/* Text at top left */}
+          <p className="absolute md:top-5 md:left-5 md:text-xl text-lg top-2 left-2 text-white">ANDAMAN AND NICOBAR ISLAND</p>
       </motion.div>
     </div>
     </div>
       {/* ... Repeat the pattern for the other images ... */}
-
-     
-      <div className="mt-4 ">
-        <Link href="#" className="text-yellow-500 hover:underline flex flex-row justify-end">
-          All Destinations <FontAwesomeIcon icon={faArrowRight} className='pt-1 pl-1' />
+      <div className="mt-4 text-right">
+        <Link href="#">
+          <span className="text-yellow-500 hover:underline flex flex-row justify-end">
+            All Destinations <FontAwesomeIcon icon={faArrowRight} className='pt-1 pl-1' />
+          </span>
         </Link>
       </div>
     </motion.div>
-  )
-}
+  );
+};
 
-export default Popular
+export default Popular;

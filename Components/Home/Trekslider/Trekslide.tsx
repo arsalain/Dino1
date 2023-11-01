@@ -86,24 +86,37 @@ const TrekSlider = () => {
         }}
       >
          {destinations.map((item, idx) => (
-          <SwiperSlide key={idx}>
-            <div className="rounded-lg shadow-lg relative group bg-white">
-              <div className="overflow-hidden relative rounded-t-lg h-64 ">
-                <Image
-                  src={item.img}
-                  alt={item.title}
-                  objectFit="cover"
-                  layout="fill"
-                  className="transform transition-transform duration-300 group-hover:scale-110"
-                />
-              </div>
-              <div className="p-5">
-                <h4 className="text-xl mb-2">{item.title}</h4>
-                <p className="text-gray-500 mb-4">{item.location}</p>
-                <p>Starting from Rupees {item.price}</p>
-              </div>
-            </div>
-          </SwiperSlide>
+   <SwiperSlide key={idx}>
+   <a href={`/${item.title}`} className="block"> {/* Make the entire card a link */}
+     <div className="rounded-xl shadow-lg relative flex flex-col items-center justify-between h-full transition duration-300 cursor-pointer hover:shadow-2xl hover:scale-105 transform bg-black text-white p-4">
+       <div className="overflow-hidden relative rounded-xl h-72 w-full">
+         <Image
+           src={item.img}
+           alt={item.title}
+           objectFit="cover"
+           layout="fill"
+           className="transform transition-transform duration-300"
+         />
+         <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div> {/* Gradient overlay */}
+       </div>
+       {item.badge && (
+         <span className="absolute top-0 left-0 bg-yellow-500 text-white uppercase text-xs p-1 m-2 rounded">
+           {item.badge}
+         </span>
+       )}
+       <div className="p-4 text-center">
+         <h4 className="text-lg mb-1">{item.title}</h4>
+         <p className="text-sm mb-2">{item.location}</p>
+         <p className="text-md">Starting from INR {item.price}</p>
+       </div>
+       <div className="flex justify-center w-full mt-2">
+         <button className="px-3 py-1 bg-yellow-500 text-black font-semibold rounded-full hover:bg-yellow-600 transition duration-300">
+           Book Now
+         </button>
+       </div>
+     </div>
+   </a>
+  </SwiperSlide>
         ))}
       </Swiper>
       <div className="flex justify-center mt-4 items-center">
