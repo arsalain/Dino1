@@ -7,6 +7,7 @@ import "swiper/css/pagination";
 import { Navigation,Scrollbar,Pagination  } from 'swiper/modules';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import Link from "next/link";
 // SwiperCore.use([Navigation, Scrollbar]);
 const destinations = [
   {
@@ -87,7 +88,7 @@ const TrekSlider = () => {
       >
          {destinations.map((item, idx) => (
    <SwiperSlide key={idx}>
-   <a href={`/${item.title}`} className="block"> {/* Make the entire card a link */}
+   <Link href={`/${item.title}`} className="block"> {/* Make the entire card a link */}
      <div className="rounded-xl shadow-lg relative flex flex-col items-center justify-between h-full transition duration-300 cursor-pointer hover:shadow-2xl hover:scale-105 transform bg-black text-white p-4">
        <div className="overflow-hidden relative rounded-xl h-72 w-full">
          <Image
@@ -115,7 +116,7 @@ const TrekSlider = () => {
          </button>
        </div>
      </div>
-   </a>
+   </Link>
   </SwiperSlide>
         ))}
       </Swiper>
