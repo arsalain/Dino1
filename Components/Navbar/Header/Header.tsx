@@ -9,6 +9,7 @@ const variants = {
 };
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
+
   return (
     <>
       <motion.header
@@ -35,7 +36,7 @@ const Header = () => {
                 transition={{ duration: 0.3, delay: index * 0.1 + 0.2 }}
                 className="hover-effect"
               >
-                <Link href={link === 'Home' ? '/' : `/${link.toLowerCase()}`}>{link}</Link>
+                <Link href={link === 'Home' ? '/' : link === 'Contact Us' ? '/contact'  : `/${link.toLowerCase()}`}>{ link}</Link>
               </motion.div>
             ))}
             <Link href='/signup'>
@@ -80,8 +81,8 @@ const Header = () => {
             >
               {['Home', 'Destinations', 'Treks', 'Tours', 'Contact Us'].map((link, index) => (
                 <motion.div key={link} variants={variants}>
-                  <Link href={link === 'Home' ? '/' : `/${link.toLowerCase()}`}>
-                    <span className="text-white text-xl">{link}</span>
+                  <Link href={link === 'Home' ? '/' : link === 'ContactUs' ? '/contact' : `/${link.toLowerCase()}`}>
+                    <span className="text-white text-xl">{ link}</span>
                   </Link>
                 </motion.div>
               ))}

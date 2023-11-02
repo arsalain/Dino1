@@ -10,25 +10,25 @@ const sections = [
   {
     title: 'LEGAL',
     links: [
-      { text: 'Terms of Use', url: '#' },
-      { text: 'Privacy Policy', url: '#' },
-      { text: 'Terms & Conditions', url: '#' },
+      { text: 'Terms of Use', url: '/terms' },
+      { text: 'Privacy Policy', url: 'privacy' },
+      { text: 'Terms & Conditions', url: 'condition' },
     ],
   },
   {
     title: 'QUICK LINKS',
     links: [
-      { text: 'Destinations', url: '#' },
-      { text: 'Book a Trip', url: '#' },
-      { text: 'International Trip', url: '#' },
+      { text: 'Destinations', url: 'destinations' },
+      { text: 'Book a Trip', url: 'destinations' },
+      { text: 'International Trip', url: 'destinations' },
     ],
   },
   {
     title: 'JOIN US',
     links: [
-      { text: 'About Us', url: '#' },
-      { text: 'Careers', url: '#' },
-      { text: 'Partner with Us', url: '#' },
+      { text: 'About Us', url: 'about' },
+      { text: 'Careers', url: 'career' },
+      { text: 'Partner with Us', url: 'partner' },
     ],
   },
 ];
@@ -123,7 +123,7 @@ const Footer = () => {
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
           2023 Backpackers United Copyright Information
         </motion.div>
-        </div> */} 
+        </div> 
     </motion.footer>
   );
 }

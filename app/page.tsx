@@ -7,6 +7,7 @@ import TestimonialSection from '@/Components/Home/Testimonials/Testimonials'
 import Promo from '@/Components/Home/Promo/Promo'
 import TrekSlider from '@/Components/Home/Trekslider/Trekslide'
 import Popular from '@/Components/Home/Popular/Popular'
+import LocationListSection from '@/Components/Home/Location/Location'
 
 
 export default function Home() {
@@ -57,6 +58,7 @@ export default function Home() {
 </section>
 
 <TestimonialSection />
+<LocationListSection />
     <Footer />
       </div>
     </main>
