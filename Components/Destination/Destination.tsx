@@ -1,18 +1,26 @@
+"use client"
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import { Scrollbar,Pagination  } from 'swiper/modules';
+import "swiper/css/grid";
+import { Scrollbar,Pagination,Grid  } from 'swiper/modules';
 import Image from 'next/image';
 
-const Destination = ({dest}) => {
+const Destination = ({dest, uniqueId ,row ,height}) => {
+    const slideHeight = `h-[${height}px]`; 
+    console.log(slideHeight,"slight")
   return (
-    <>
-       {/* <Swiper
-        spaceBetween={20}
+    <div>
+       <Swiper
+        spaceBetween={40}
         slidesPerView={4}
+        grid= {{
+            rows: row,
+            fill: "row",
+          }}
         pagination={{
-            el: '.swiper-pagination',
+            el:  `.swiper-pagination-${uniqueId}`,
             clickable: true,
             bulletClass: 'swiper-pagination-bullet',
             bulletActiveClass: 'swiper-pagination-bullet-active',
@@ -20,7 +28,7 @@ const Destination = ({dest}) => {
               return '<span class="' + className + ' bg-black"></span>';
             },
         }}
-        modules={[Scrollbar, Pagination]}
+        modules={[ Pagination, Grid ]}
         breakpoints={{
           100: {
             slidesPerView: 1,
@@ -37,10 +45,10 @@ const Destination = ({dest}) => {
             slidesPerView: 4,
           },
         }}
-      > */}
+      >
     {dest.map((destination) => (
-        //   <SwiperSlide key={destination.id}>
-            <div className="relative w-[300px] rounded-lg md:h-[300px] h-[400px]">
+          <SwiperSlide key={destination.id}>
+            <div className="relative w-full rounded-lg " style={{ height: `${height}px` }}>
               <Image
                 src={destination.image}
                 alt={destination.alt}
@@ -55,10 +63,13 @@ const Destination = ({dest}) => {
                 <hr className="border-t-2 border-white md:w-[20px] w-[20px]" />
               </div>
             </div>
-        //   </SwiperSlide>
+          </SwiperSlide>
         ))}
-   {/* </Swiper> */}
-    </>
+   </Swiper>
+   <div className="flex justify-center mt-4 items-center">
+   <div className={`swiper-pagination swiper-pagination-${uniqueId}`}></div>
+    </div>
+    </div>
   )
 }
 

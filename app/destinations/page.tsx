@@ -1,9 +1,13 @@
+"use client"
 import Destination from '@/Components/Destination/Destination'
 import Footer from '@/Components/Navbar/Footer/Footer'
 import Header from '@/Components/Navbar/Header/Header'
-import React from 'react'
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import Link from 'next/link'
+import React, { useState } from 'react'
+import {faMagnifyingGlass} from '@fortawesome/free-solid-svg-icons';
 const page = () => {
+  const [searchInput, setSearchInput] = useState("")
   const international = [
     {
       id: 1,
@@ -48,24 +52,200 @@ const page = () => {
       alt: "Vietnam",
     },
   ];
-    
+  const southindia = [
+    {
+      id: 1,
+      name: "Alleppey",
+      image: "/home/domestic.jpg",
+      alt: "Alleppey",
+    },
+    {
+      id: 2,
+      name: "Bangalore",
+      image: "/home/domestic.jpg",
+      alt: "Bangalore",
+    },
+    {
+      id: 3,
+      name: "Chennai",
+      image: "/home/domestic.jpg",
+      alt: "Chennai",
+    },
+    {
+      id: 4,
+      name: "Chikmagalur",
+      image: "/home/domestic.jpg",
+      alt: "Chikmagalur",
+    },
+    {
+      id: 5,
+      name: "Coorg",
+      image: "/home/domestic.jpg",
+      alt: "Coorg",
+    },
+    {
+      id: 6,
+      name: "Dandeli",
+      image: "/home/domestic.jpg",
+      alt: "Dandeli",
+    },
+    {
+      id: 7,
+      name: "Goa",
+      image: "/home/domestic.jpg",
+      alt: "Goa",
+    },
+    {
+      id: 8,
+      name: "Gokarna",
+      image: "/home/domestic.jpg",
+      alt: "Gokarna",
+    },
+    {
+      id: 9,
+      name: "Hampi",
+      image: "/home/domestic.jpg",
+      alt: "Hampi",
+    },
+    {
+      id: 10,
+      name: "Hyderabad",
+      image: "/home/domestic.jpg",
+      alt: "Hyderabad",
+    },
+    {
+      id: 11,
+      name: "Kochi",
+      image: "/home/domestic.jpg",
+      alt: "Kochi",
+    },
+    {
+      id: 12,
+      name: "Kodaikanal",
+      image: "/home/domestic.jpg",
+      alt: "Kodaikanal",
+    },
+    {
+      id: 13,
+      name: "Kozhikode",
+      image: "/home/domestic.jpg",
+      alt: "Kozhikode",
+    },
+    {
+      id: 14,
+      name: "Mangalore",
+      image: "/home/domestic.jpg",
+      alt: "Mangalore",
+    },
+    {
+      id: 15,
+      name: "Mysore",
+      image: "/home/domestic.jpg",
+      alt: "Mysore",
+    },
+    {
+      id: 16,
+      name: "Munnar",
+      image: "/home/domestic.jpg",
+      alt: "Munnar",
+    },
+    {
+      id: 17,
+      name: "Murdeshwar",
+      image: "/home/domestic.jpg",
+      alt: "Murdeshwar",
+    },
+    {
+      id: 18,
+      name: "Ooty",
+      image: "/home/domestic.jpg",
+      alt: "Ooty",
+    },
+    {
+      id: 19,
+      name: "Pondicherry",
+      image: "/home/domestic.jpg",
+      alt: "Pondicherry",
+    },
+    {
+      id: 20,
+      name: "Varkala",
+      image: "/home/domestic.jpg",
+      alt: "Varkala",
+    },
+    {
+      id: 21,
+      name: "Wayanad",
+      image: "/home/domestic.jpg",
+      alt: "Wayanad",
+    }
+  ];
+  
   return (
     <div className='bg-black'>
       <Header />
-      <div className='h-[60px]'>
+      <div className='h-[60px] '>
       </div>
-      <div className='h-[50vh] text-white font-bold text-center flex justify-center items-center text-xl md:text-4xl border-t-2 border-b-2 border-gray-700'>
-      Destinations
+      <div className='h-[50vh] text-white font-bold text-center flex flex-col justify-center items-center  border-t-2 border-b-2 border-gray-700'>
+     <div className='text-xl md:text-4xl'>Destinations</div> 
+      <div className="flex items-center bg-white w-1/2 rounded-xl p-1 border-2 border-gray-200 mt-4">
+                <input
+                    type="text"
+                    placeholder="Search for amazing treks"
+                    className="flex-grow p-2 outline-none"
+                    onChange={(e) => setSearchInput(e.target.value)}
+                    value={searchInput}
+                />
+                <button className="text-black p-2">
+                    <FontAwesomeIcon icon={faMagnifyingGlass} className="text-xl" />
+                </button>
+            </div>
       </div>
- <div className=' mx-10 py-10'>
+
+
+            {/* {searchResult.filter(item => {
+                const searchTerm = searchInput.toLowerCase()
+                const fullname = item.name.toLowerCase()
+                return searchTerm && fullname.startsWith(searchTerm)
+            }).map((list) => (
+                <div className="p-4 font-bold">
+                    <Link href={list.link}>
+                        <a className="no-underline text-black">{list.name}</a>
+                    </Link>
+                </div>
+            ))} */}
+      
+ <div className=' mx-10 pt-10'>
  <div className="text-center md:text-center">
           <h2 className="text-center text-xl md:text-3xl font-bold text-yellow-500">International Trips</h2>
           <div className="flex justify-center pt-2 md:pt-5">
         <hr className="border-t-2 border-white md:w-[60PX] w-[30px]" />
       </div>
         </div>
-    <div>
-      <Destination dest={international} />
+    <div className='pt-10'>
+      <Destination dest={international} uniqueId="international" row="1" height="350"/>
+    </div>
+ </div>
+ <div className=' mx-10 pt-10'>
+ <div className="text-center md:text-center">
+          <h2 className="text-center text-xl md:text-3xl font-bold text-yellow-500">South India Trips</h2>
+          <div className="flex justify-center pt-2 md:pt-5">
+        <hr className="border-t-2 border-white md:w-[60PX] w-[30px]" />
+      </div>
+        </div>
+    <div className='pt-10'>
+      <Destination dest={southindia} uniqueId="domestic" row="2" height="170" />
+    </div>
+ </div>
+ <div className=' mx-10 py-10'>
+ <div className="text-center md:text-center">
+          <h2 className="text-center text-xl md:text-3xl font-bold text-yellow-500">North India Trips</h2>
+          <div className="flex justify-center pt-2 md:pt-5">
+        <hr className="border-t-2 border-white md:w-[60PX] w-[30px]" />
+      </div>
+        </div>
+    <div className='pt-10'>
+      <Destination dest={international} uniqueId="northindia" row="1" height="350"/>
     </div>
  </div>
       <Footer />
