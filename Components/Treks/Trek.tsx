@@ -6,57 +6,21 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Navigation,Pagination  } from 'swiper/modules';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowRight, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { faIndianRupeeSign, faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import Link from "next/link";
 // SwiperCore.use([Navigation, Scrollbar]);
-const destinations = [
-  {
-    title: "Kedar Kanta Trek",
-    location: "Singtur Range, Uttarakhand",
-    price: 18000,
-    img: "/home/kedar.jpg",
-    badge: "BREAKFAST INCLUDED",
-  },
-  {
-    title: "Hamta Pass Trek",
-    location: "Kullu valley , Himachal Pradesh",
-    price: 19000,
-    img: "/home/hamta.jpg",
-  },
-  {
-    title: "Great Lakes Trek",
-    location: " Sonamarg , J & K",
-    price: 20000,
-    img: "/home/lake.jpg",
-    badge: "BEST SELLER",
-  },
-  {
-    title: "Valley of Flowers Treks",
-    location: "Uttarakhand",
-    price: 18000,
-    img: "/home/valley.jpg",
-    badge: "TOP RATED",
-  },
-  {
-    title: "Roop Kund",
-    location: "Uttarakhand",
-    price: 18000,
-    img: "/home/roop.jpg",
-    badge: "TOP RATED",
-  },
-];
-const Trek = () => {
+const Trek = ({trek,uniqueId }) => {
   return (
     <div className=" relative">
       <Swiper
         spaceBetween={20}
         slidesPerView={4}
         navigation={{
-            nextEl: '.swiper-but-next',
-            prevEl: '.swiper-but-prev'
+            nextEl: `.swiper-but-next-${uniqueId}`,
+            prevEl: `.swiper-but-prev-${uniqueId}`
         }}
         pagination={{
-            el: '.swiper-pagination',
+            el:  `.swiper-pagination-${uniqueId}`,
             clickable: true,
             bulletClass: 'swiper-pagination-bullet',
             bulletActiveClass: 'swiper-pagination-bullet-active',
@@ -82,7 +46,7 @@ const Trek = () => {
           },
         }}
       >
-         {destinations.map((item, idx) => (
+         {trek.map((item, idx) => (
    <SwiperSlide key={idx}>
    <Link href={`/${item.title}`} className="block"> {/* Make the entire card a link */}
      <div className="rounded-xl shadow-lg relative flex flex-col items-center justify-between h-full transition duration-300 cursor-pointer hover:shadow-2xl hover:scale-105 transform bg-black text-white p-4">
@@ -103,13 +67,13 @@ const Trek = () => {
        )}
        <div className="p-4 text-center">
          <h4 className="text-lg mb-1">{item.title}</h4>
-         <p className="text-sm mb-2">{item.location}</p>
-         <p className="text-md">Starting from INR {item.price}</p>
-       </div>
-       <div className="flex justify-center w-full mt-2">
+   
+       <div className="flex justify-between w-full mt-2 mx-4">
+       <p className="text-md pt-1"><FontAwesomeIcon icon={faIndianRupeeSign} className="pr-1"/>{item.price}</p>
          <button className="px-3 py-1 bg-yellow-500 text-black font-semibold rounded-full hover:bg-yellow-600 transition duration-300">
            Book Now
          </button>
+       </div>
        </div>
      </div>
    </Link>
@@ -117,9 +81,9 @@ const Trek = () => {
         ))}
       </Swiper>
       <div className="flex justify-center mt-4 items-center">
-    <button className="swiper-but-prev flex items-center justify-center w-5 h-5 shadow-md rounded-full mr-1"><FontAwesomeIcon icon={faArrowLeft} /></button> {/* Unicode left arrow */}
-    <div className="swiper-pagination"></div>
-    <button className="swiper-but-next flex items-center justify-center w-5 h-5 shadow-md rounded-full ml-1"><FontAwesomeIcon icon={faArrowRight} /></button> {/* Unicode right arrow */}
+    <button className={`swiper-but-prev swiper-but-prev-${uniqueId} flex items-center justify-center w-5 h-5 shadow-md rounded-full mr-1`}><FontAwesomeIcon icon={faArrowLeft} /></button> {/* Unicode left arrow */}
+    <div className={`swiper-pagination swiper-pagination-${uniqueId}`}></div>
+    <button className={`swiper-but-next swiper-but-next-${uniqueId} flex items-center justify-center w-5 h-5 shadow-md rounded-full ml-1`}><FontAwesomeIcon icon={faArrowRight} /></button> {/* Unicode right arrow */}
 </div>
     </div>
   );

@@ -99,28 +99,24 @@ const AboutUs = () => {
     <>
       <Header />
       <motion.div initial="initial" animate="animate" transition="transition" className="container mx-auto px-4 py-6">
-        {/* Padding for the header */}
         <div className="pt-10"></div>
-        <motion.h1 variants={aboutUsVariants} className="text-left text-6xl text-yellow-500 mb-6">Our Story</motion.h1>
-        {/* Flex container for text and image */}
-        <div className="flex flex-wrap justify-between items-center">
-          {/* Text section */}
+        <motion.h1 variants={aboutUsVariants} className="text-center text-6xl text-yellow-500 mb-6">Our Story</motion.h1>
+        <div className="flex flex-row justify-between items-center gap-10">
           <motion.div variants={aboutUsVariants} className="text-white lg:w-1/2">
-            {/* Updated storytelling section with more engaging content */}
             <p>Welcome to Backpackers United – your gateway to extraordinary, life-changing travel experiences! Since our inception in 2017, we've grown rapidly into a vibrant community for adventurous souls seeking the road less traveled. Our enthusiastic team is on a relentless mission to unveil nature's hidden jewels, advocating sustainable and responsible exploration.</p>
             <p>We excel in crafting journeys that resonate with diverse interests. From mesmerizing treks and thrilling cycling adventures to bespoke holiday packages and backpacking escapades, we have it all. Our clients rave about the unforgettable memories and friendships forged on our trips.</p>
             <p>Embark on a journey with Backpackers United. Let's create stories worth telling and memories that last a lifetime. Adventure is out there – let's discover it together!</p>
-             {/* Call to action */}
-            {/* <Link href="/contact">
+            <Link href="/contact">
               <div className="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded">Join Our Adventures</div>
-            </Link> */}
+            </Link>
           </motion.div>
-          {/* Image section */}
-          <div className="lg:w-1/2">
-            <Image src="/your-story-image.jpg" alt="Travel Story" width={500} height={300} objectFit="cover" className="rounded-lg"/>
+          {/* <div className='ml-10'> */}
+          <div className="lg:w-1/2 relative w-full h-[300px] ">
+            <Image src="/about/about.jpg" alt="Travel Story" layout='fill' objectFit="cover" className="rounded-lg"/>
           </div>
+          {/* </div> */}
         </div>
-        <motion.h2 variants={aboutUsVariants} className="text-left text-5xl text-yellow-500 my-6">Meet Our Backpackers</motion.h2>
+        <motion.h2 variants={aboutUsVariants} className="text-center text-5xl text-yellow-500 my-6">Meet Our Backpackers</motion.h2>
         <div className="flex flex-wrap justify-center">
           {teamMembers.map((member, index) => (
             <motion.div key={index} variants={teamMemberVariants} className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 p-4">
