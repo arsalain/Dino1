@@ -28,7 +28,7 @@ const Popular = () => {
         {/* Example of one image with new styling */}
         <motion.div
               whileHover={{ scale: 1.05 }}
-              className="col-span-2 md:col-span-2 relative overflow-hidden w-full rounded-lg md:h-[500px] h-[400px]"
+              className="col-span-2 md:col-span-2 relative overflow-hidden w-full rounded-lg md:h-[500px] h-[155px]"
         >
           <Image
             src='/home/WAYANAD.jpg'
@@ -46,7 +46,7 @@ const Popular = () => {
     <div className="grid grid-rows-2 gap-2 col-span-2" >
     <motion.div
             whileHover={{ scale: 1.05 }}
-            className="col-span-1 md:col-span-2 relative overflow-hidden w-full rounded-lg md:h-[240px] h-[300px]"
+            className="col-span-1 md:col-span-2 relative overflow-hidden w-full rounded-lg md:h-[240px] h-[155px]"
           >
             <Image
               src='/home/GOKARNA.JPG'
@@ -60,7 +60,7 @@ const Popular = () => {
             </motion.div>
             <motion.div
             whileHover={{ scale: 1.05 }}
-            className="col-span-1 md:col-span-2 relative overflow-hidden w-full rounded-lg md:h-[240px] h-[300px]"
+            className="col-span-1 md:col-span-2 relative overflow-hidden w-full rounded-lg md:h-[240px] h-[155px]"
           >
             <Image
               src='/home/KASHMIR.jpg'
@@ -76,7 +76,7 @@ const Popular = () => {
     <div className="grid md:grid-rows-3 grid-row-5 gap-4 col-span-2" >
     <motion.div
             whileHover={{ scale: 1.05 }}
-            className="row-span-2 md:row-span-1 relative overflow-hidden w-full rounded-lg md:h-[155px] h-[300px]"
+            className="row-span-2 md:row-span-1 relative overflow-hidden w-full rounded-lg md:h-[155px] h-[155px]"
           >
             <Image
               src='/home/KODAIKANAL.jpg'
@@ -90,7 +90,7 @@ const Popular = () => {
        </motion.div>
        <motion.div
             whileHover={{ scale: 1.05 }}
-            className="row-span-2 md:row-span-1  relative overflow-hidden w-full rounded-lg md:h-[155px] h-[300px]"
+            className="row-span-2 md:row-span-1  relative overflow-hidden w-full rounded-lg md:h-[155px] h-[155px]"
           >
             <Image
               src='/home/MUNAR.jpg'

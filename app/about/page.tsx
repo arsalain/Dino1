@@ -52,7 +52,7 @@ const teamMembers = [
   },
   {
     name: 'Syed Mudassir Hussain',
-    designation: 'Backend Developer',
+    designation: 'Software Developer',
     photoUrl: 'https://imgtr.ee/images/2023/11/02/ecfb610ff5d3ee28de180779787ba87a.th.jpeg'
   },{
     name: 'Pramod',
@@ -70,8 +70,8 @@ const teamMembers = [
     photoUrl: 'https://imgtr.ee/images/2023/11/02/04246e04c2161fe29055555bd6f81966.th.jpeg'
   },
   {
-    name: 'Shreekanta G',
-    designation: 'Operations Executive',
+    name: 'Shreekanth G',
+    designation: 'Operations',
     photoUrl: 'https://imgtr.ee/images/2023/11/02/b3e9269d3c2bede3fe000a6bfcf3817a.th.jpeg'
   },
   {
@@ -98,7 +98,7 @@ const AboutUs = () => {
   return (
     <>
       <Header />
-      <motion.div initial="initial" animate="animate" transition="transition" className="container mx-auto px-4 py-6">
+      <motion.div initial="initial" animate="animate" transition="transition" className="container mx-auto px-4 py-6 bg-black">
         <div className="pt-10"></div>
         <motion.h1 variants={aboutUsVariants} className="text-center text-6xl text-yellow-500 mb-6">Our Story</motion.h1>
         <div className="flex flex-row justify-between items-center gap-10">
