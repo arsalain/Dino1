@@ -54,8 +54,6 @@ itinerary: '',
     rtypename: '',
     rlevel: '',
     rlevelname: '',
-    rservice: '',
-    rservicename: '',
     rlink: '' }],
     batch: [{ date: '', amount: '' }],
     // ... initialize other array fields similarly
@@ -273,10 +271,10 @@ trekData.notincluded.forEach((item, index) => {
   
 
   return (
-    <div className="container mx-auto p-4">
+    <div className="container mx-auto p-4 ">
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         <div className="flex flex-col gap-2">
-          <label htmlFor="name" className="font-bold">Trek Name:</label>
+          <label htmlFor="name" className="font-bold">Trek / Tour Name:</label>
           <input
             type="text"
             id="name"
@@ -288,7 +286,7 @@ trekData.notincluded.forEach((item, index) => {
           />
         </div>
         <div className="flex flex-col px-2 w-1/2">
-    <label htmlFor="testimage" className="font-bold">test Image:</label>
+    <label htmlFor="testimage" className="font-bold">Cover Image:</label>
     <input
       type="file"
       id="testimage"
@@ -300,12 +298,24 @@ trekData.notincluded.forEach((item, index) => {
   </div>
   <input
         type="text"
-        placeholder="Image Alt test image"
+        placeholder="Image Alt text"
         name="testimagealt"
         value={trekData.testimagealt}
         onChange={handleChange}
         className="w-full p-3 border border-gray-300 rounded"
       />
+      <div className="flex flex-col px-2 w-full">
+    <label htmlFor="maintype" className="font-bold">Main Type:</label>
+    <input
+      type="text"
+      id="maintype"
+      name="maintype"
+      placeholder="Enter: 'grouptour', 'longtour' , 'international', 'northindiatour', 'northindiatrek', 'karnatakatrek', 'keralatrek', 'tntrek' "
+      value={trekData.maintype}
+      onChange={handleChange}
+      className="p-2 border border-gray-300 rounded"
+    />
+  </div>
     
         <div className="flex flex-wrap">
   {/* Amount Input */}
@@ -323,18 +333,7 @@ trekData.notincluded.forEach((item, index) => {
   </div>
   
   {/* Main Type Input */}
-  <div className="flex flex-col px-2 w-1/2">
-    <label htmlFor="maintype" className="font-bold">Main Type:</label>
-    <input
-      type="text"
-      id="maintype"
-      name="maintype"
-      placeholder="Enter main type"
-      value={trekData.maintype}
-      onChange={handleChange}
-      className="p-2 border border-gray-300 rounded"
-    />
-  </div>
+  
   {/* State Input */}
   <div className="flex flex-col px-2 w-1/2">
     <label htmlFor="state" className="font-bold">State:</label>
@@ -367,7 +366,7 @@ trekData.notincluded.forEach((item, index) => {
       type="text"
       id="for"
       name="for"
-      placeholder="Enter for"
+      placeholder="Enter: 'for' or 'from'(without transfers)"
       value={trekData.for}
       onChange={handleChange}
       className="p-2 border border-gray-300 rounded"
@@ -395,7 +394,7 @@ trekData.notincluded.forEach((item, index) => {
       type="number"
       id="reserveamount"
       name="reserveamount"
-      placeholder="Enter reserve amount"
+      placeholder="Enter the booking amount"
       value={trekData.reserveamount}
       onChange={handleChange}
       className="p-2 border border-gray-300 rounded"
@@ -409,7 +408,7 @@ trekData.notincluded.forEach((item, index) => {
       type="text"
       id="day"
       name="day"
-      placeholder="Enter day"
+      placeholder="Enter the number of days Eg. '2 Days / 1 Night'"
       value={trekData.day}
       onChange={handleChange}
       className="p-2 border border-gray-300 rounded"
@@ -423,7 +422,7 @@ trekData.notincluded.forEach((item, index) => {
       type="text"
       id="trektype"
       name="trektype"
-      placeholder="Enter trek type"
+      placeholder="Enter - 'Trek Type' / 'Tour Type'"
       value={trekData.trektype}
       onChange={handleChange}
       className="p-2 border border-gray-300 rounded"
@@ -437,7 +436,7 @@ trekData.notincluded.forEach((item, index) => {
       type="text"
       id="trektypename"
       name="trektypename"
-      placeholder="Enter trek type name"
+      placeholder="Enter: Beach Trek, Waterfall trek, Hill Trek"
       value={trekData.trektypename}
       onChange={handleChange}
       className="p-2 border border-gray-300 rounded"
@@ -451,7 +450,7 @@ trekData.notincluded.forEach((item, index) => {
       type="text"
       id="level"
       name="level"
-      placeholder="Enter level"
+      placeholder="Enter 'Activity level'"
       value={trekData.level}
       onChange={handleChange}
       className="p-2 border border-gray-300 rounded"
@@ -465,7 +464,7 @@ trekData.notincluded.forEach((item, index) => {
       type="text"
       id="levelname"
       name="levelname"
-      placeholder="Enter level name"
+      placeholder="Enter 'easy', 'moderate', etc. "
       value={trekData.levelname}
       onChange={handleChange}
       className="p-2 border border-gray-300 rounded"
@@ -479,7 +478,7 @@ trekData.notincluded.forEach((item, index) => {
       type="text"
       id="service"
       name="service"
-      placeholder="Enter service"
+      placeholder="Enter 'Stay Type'"
       value={trekData.service}
       onChange={handleChange}
       className="p-2 border border-gray-300 rounded"
@@ -491,7 +490,7 @@ trekData.notincluded.forEach((item, index) => {
       type="text"
       id="servicename"
       name="servicename"
-      placeholder="Enter service Name"
+      placeholder="Enter 'Homestay', '3-Star Hotel, etc."
       value={trekData.servicename}
       onChange={handleChange}
       className="p-2 border border-gray-300 rounded"
@@ -505,7 +504,7 @@ trekData.notincluded.forEach((item, index) => {
     <textarea
       id="itinerary"
       name="itinerary"
-      placeholder="Enter itinerary details"
+      placeholder="Enter itinerary paragraph - 'Ask Aaqib - common but change the name"
       value={trekData.itinerary}
       onChange={handleChange}
       className="p-2 border border-gray-300 rounded"
@@ -518,7 +517,7 @@ trekData.notincluded.forEach((item, index) => {
     <textarea
       id="expertpara"
       name="expertpara"
-      placeholder="Enter expert paragraph"
+      placeholder="Enter expert paragraph - Ask Aaqib for this"
       value={trekData.expertpara}
       onChange={handleChange}
       className="p-2 border border-gray-300 rounded"
@@ -559,26 +558,12 @@ trekData.notincluded.forEach((item, index) => {
 </div>
   {/* Expectation Paragraph */}
   <div className="flex flex-col px-2 w-1/2">
-    <label htmlFor="expectpara" className="font-bold">Expectation Paragraph:</label>
+    <label htmlFor="expectpara" className="font-bold">What to expect?</label>
     <textarea
       id="expectpara"
       name="expectpara"
-      placeholder="Enter expectation paragraph"
+      placeholder="Enter what to expect paragraph"
       value={trekData.expectpara}
-      onChange={handleChange}
-      className="p-2 border border-gray-300 rounded"
-    />
-  </div>
-
-  {/* Expectation Heading 1 */}
-  <div className="flex flex-col px-2 w-1/2">
-    <label htmlFor="expecthead1" className="font-bold">Expectation Heading 1:</label>
-    <input
-      type="text"
-      id="expecthead1"
-      name="expecthead1"
-      placeholder="Enter heading for expectation 1"
-      value={trekData.expecthead1}
       onChange={handleChange}
       className="p-2 border border-gray-300 rounded"
     />
@@ -589,7 +574,7 @@ trekData.notincluded.forEach((item, index) => {
       type="text"
       id="expecthead1"
       name="expecthead1"
-      placeholder="Enter accommodations heading"
+      placeholder="Enter 'Accommodations' "
       value={trekData.expecthead1}
       onChange={handleChange}
       className="p-2 border border-gray-300 rounded"
@@ -602,7 +587,7 @@ trekData.notincluded.forEach((item, index) => {
     <textarea
       id="expecthead1para"
       name="expecthead1para"
-      placeholder="Enter accommodations paragraph"
+      placeholder="Enter'Accommodations' paragraph"
       value={trekData.expecthead1para}
       onChange={handleChange}
       className="p-2 border border-gray-300 rounded"
@@ -611,12 +596,12 @@ trekData.notincluded.forEach((item, index) => {
 
   {/* Expedition Team Heading */}
   <div className="flex flex-col px-2 w-1/2">
-    <label htmlFor="expecthead2" className="font-bold">Expedition Team Heading:</label>
+    <label htmlFor="expecthead2" className="font-bold">Backpackers United Team Heading:</label>
     <input
       type="text"
       id="expecthead2"
       name="expecthead2"
-      placeholder="Enter expedition team heading"
+      placeholder="Enter 'Backpackers United Team'"
       value={trekData.expecthead2}
       onChange={handleChange}
       className="p-2 border border-gray-300 rounded"
@@ -625,115 +610,17 @@ trekData.notincluded.forEach((item, index) => {
 
   {/* Expedition Team Paragraph */}
   <div className="flex flex-col px-2 w-1/2">
-    <label htmlFor="expecthead2para" className="font-bold">Expedition Team Paragraph:</label>
+    <label htmlFor="expecthead2para" className="font-bold">Backpackers United Team Paragraph:</label>
     <textarea
       id="expecthead2para"
       name="expecthead2para"
-      placeholder="Enter expedition team paragraph"
+      placeholder="Enter Backpackers United team common"
       value={trekData.expecthead2para}
       onChange={handleChange}
       className="p-2 border border-gray-300 rounded"
     />
   </div>
-
-  {/* Leader 1 Name */}
-  <div className="flex flex-col px-2 w-1/2">
-    <label htmlFor="lead1name" className="font-bold">Leader 1 Name:</label>
-    <input
-      type="text"
-      id="lead1name"
-      name="lead1name"
-      placeholder="Enter leader 1 name"
-      value={trekData.lead1name}
-      onChange={handleChange}
-      className="p-2 border border-gray-300 rounded"
-    />
-  </div>
-
-  {/* Leader 1 Occupation */}
-  <div className="flex flex-col px-2 w-1/2">
-    <label htmlFor="lead1oc" className="font-bold">Leader 1 Occupation:</label>
-    <input
-      type="text"
-      id="lead1oc"
-      name="lead1oc"
-      placeholder="Enter leader 1 occupation"
-      value={trekData.lead1oc}
-      onChange={handleChange}
-      className="p-2 border border-gray-300 rounded"
-    />
-  </div>
-
-  {/* Leader 2 Name */}
-  <div className="flex flex-col px-2 w-1/2">
-    <label htmlFor="lead2name" className="font-bold">Leader 2 Name:</label>
-    <input
-      type="text"
-      id="lead2name"
-      name="lead2name"
-      placeholder="Enter leader 2 name"
-      value={trekData.lead2name}
-      onChange={handleChange}
-      className="p-2 border border-gray-300 rounded"
-    />
-  </div>
-
-  {/* Leader 2 Occupation */}
-  <div className="flex flex-col px-2 w-1/2">
-    <label htmlFor="lead2oc" className="font-bold">Leader 2 Occupation:</label>
-    <input
-      type="text"
-      id="lead2oc"
-      name="lead2oc"
-      placeholder="Enter leader 2 occupation"
-      value={trekData.lead2oc}
-      onChange={handleChange}
-      className="p-2 border border-gray-300 rounded"
-    />
-  </div>
-  {/* ... Other fields will follow the same pattern ... */}
-
-  {/* Leader 1 Image */}
-  <div className="flex flex-col px-2 w-1/2">
-    <label htmlFor="lead1pimg" className="font-bold">Leader 1 Image:</label>
-    <input
-      type="file"
-      id="lead1pimg"
-      name="lead1pimg"
-      onChange={handleFileChange} // Ensure you have a handler for file changes
-      className="p-2 border border-gray-300 rounded"
-    />
-          <input
-        type="text"
-        placeholder="Image Alt lead1 image"
-        name="lead1pimgalt"
-        value={trekData.lead1pimgalt}
-        onChange={handleChange}
-        className="w-full p-3 border border-gray-300 rounded"
-      />
-  </div>
-
-  {/* Leader 2 Image */}
-  <div className="flex flex-col px-2 w-1/2">
-    <label htmlFor="lead2pimg" className="font-bold">Leader 2 Image:</label>
-    <input
-      type="file"
-      id="lead2pimg"
-      name="lead2pimg"
-      onChange={handleFileChange} // Ensure you have a handler for file changes
-      className="p-2 border border-gray-300 rounded"
-    />
-      <input
-        type="text"
-        placeholder="Image Alt lead2 image"
-        name="lead2pimgalt"
-        value={trekData.lead2pimgalt}
-        onChange={handleChange}
-        className="w-full p-3 border border-gray-300 rounded"
-      />
-  </div>
-
-  {/* ... Continue with other fields ... */}
+  
 
 </div>
         {/* More input fields for other trekData fields */}
@@ -745,7 +632,7 @@ trekData.notincluded.forEach((item, index) => {
       <label className="font-bold text-lg mb-2">Day {index + 1}</label>
       <input
         type="text"
-        placeholder="Day Title"
+        placeholder="Day Title: 'Day 0', 'Day 1', 'Day 2', and so on"
         name="day"
         value={day.day}
         onChange={(e) => handleDayChange(index, e)}
@@ -753,7 +640,7 @@ trekData.notincluded.forEach((item, index) => {
       />
       <input
         type="text"
-        placeholder="City Name"
+        placeholder=" Title: Departure from Bangalore"
         name="cityName"
         value={day.cityName}
         onChange={(e) => handleDayChange(index, e)}
@@ -761,7 +648,7 @@ trekData.notincluded.forEach((item, index) => {
       />
       <input
         type="text"
-        placeholder="Meals"
+        placeholder="Breakfast, Lunch, Dinner, High Tea, whatever"
         name="meals"
         value={day.meals}
         onChange={(e) => handleDayChange(index, e)}
@@ -773,7 +660,7 @@ trekData.notincluded.forEach((item, index) => {
           <input
             key={descIndex}
             type="text"
-            placeholder={`Description ${descIndex + 1}`}
+            placeholder={`Bullet Point  ${descIndex + 1}`}
             name={`description[${descIndex}]`}
             value={desc}
             onChange={(e) => handleDescriptionChange(index, descIndex, e)}
@@ -790,7 +677,7 @@ trekData.notincluded.forEach((item, index) => {
       </div>
       {/* Cover Image */}
       <div className="flex items-center gap-2">
-        <label className="font-bold text-lg mb-2 flex-shrink-0">Cover Image:</label>
+        <label className="font-bold text-lg mb-2 flex-shrink-0"> Image:</label>
         <input
           type="file"
           onChange={(e) => handleDayFileChange(index, e)}
@@ -915,7 +802,7 @@ trekData.notincluded.forEach((item, index) => {
       <input
         type="text"
         name="rday"
-        placeholder="Day"
+        placeholder="Enter '2 Days', '3 Days', '7 Days', and so on"
         value={relatedItem.rday}
         onChange={(e) => handleRelatedChange(index, e)}
         className="mb-2 p-2 border border-gray-300 rounded w-full"
@@ -925,7 +812,7 @@ trekData.notincluded.forEach((item, index) => {
       <input
         type="text"
         name="rname"
-        placeholder="Name"
+        placeholder="Name: 'Ooty Tour', 'Wayanad Tour', 'Chikmagalur Tour', and so on"
         value={relatedItem.rname}
         onChange={(e) => handleRelatedChange(index, e)}
         className="mb-2 p-2 border border-gray-300 rounded w-full"
@@ -956,7 +843,7 @@ trekData.notincluded.forEach((item, index) => {
       <input
         type="number"
         name="ramount"
-        placeholder="Amount"
+        placeholder="Amount for the tour/trek"
         value={relatedItem.ramount}
         onChange={(e) => handleRelatedChange(index, e)}
         className="mb-2 p-2 border border-gray-300 rounded w-full"
@@ -967,7 +854,7 @@ trekData.notincluded.forEach((item, index) => {
       <input
         type="text"
         name="rtype"
-        placeholder="Type"
+        placeholder="Enter ''Tour/ Trek' Type'"
         value={relatedItem.rtype}
         onChange={(e) => handleRelatedChange(index, e)}
         className="mb-2 p-2 border border-gray-300 rounded w-full"
@@ -977,7 +864,7 @@ trekData.notincluded.forEach((item, index) => {
       <input
         type="text"
         name="rtypename"
-        placeholder="Type Name"
+        placeholder="Enter 'Adventure Tour', 'Hill Tour', and so on"
         value={relatedItem.rtypename}
         onChange={(e) => handleRelatedChange(index, e)}
         className="mb-2 p-2 border border-gray-300 rounded w-full"
@@ -987,7 +874,7 @@ trekData.notincluded.forEach((item, index) => {
       <input
         type="text"
         name="rlevel"
-        placeholder="Level"
+        placeholder="Enter 'State'"
         value={relatedItem.rlevel}
         onChange={(e) => handleRelatedChange(index, e)}
         className="mb-2 p-2 border border-gray-300 rounded w-full"
@@ -997,42 +884,13 @@ trekData.notincluded.forEach((item, index) => {
       <input
         type="text"
         name="rlevelname"
-        placeholder="Level Name"
+        placeholder="Enter name of the State"
         value={relatedItem.rlevelname}
         onChange={(e) => handleRelatedChange(index, e)}
         className="mb-2 p-2 border border-gray-300 rounded w-full"
       />
       </div>
-      <div className="px-2 w-1/2">
-      <input
-        type="text"
-        name="rservice"
-        placeholder="Service"
-        value={relatedItem.rservice}
-        onChange={(e) => handleRelatedChange(index, e)}
-        className="mb-2 p-2 border border-gray-300 rounded w-full"
-      />
-      </div>
-      <div className="px-2 w-1/2">
-      <input
-        type="text"
-        name="rservicename"
-        placeholder="Service Name"
-        value={relatedItem.rservicename}
-        onChange={(e) => handleRelatedChange(index, e)}
-        className="mb-2 p-2 border border-gray-300 rounded w-full"
-      />
-      </div>
-      <div className="px-2 w-1/2">
-      <input
-        type="text"
-        name="rlink"
-        placeholder="Link"
-        value={relatedItem.rlink}
-        onChange={(e) => handleRelatedChange(index, e)}
-        className="mb-2 p-2 border border-gray-300 rounded w-full"
-      />
-      </div>
+      
       </div>
       {/* Remove Item Button */}
       <button
