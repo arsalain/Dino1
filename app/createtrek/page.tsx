@@ -6,6 +6,8 @@ import { useState } from 'react';
 const page = () => {
   const [trekData, setTrekData] = useState({
     name: '',
+    testimage: null,
+    testimagealt:'',
     amount: '',
     maintype: '',
     statetype: '',
@@ -19,20 +21,27 @@ trektypename: '',
 level: '',
 levelname: '',
 service: '',
+servicename: '',
 statename: '',
 expertpara: '',
+expectpara: '',
+expecthead1: '',
+expecthead1para: '',
+expecthead2: '',
+expecthead2para: '',
 lead1name: '',
 lead1oc: '',
-lead1pimg: '',
+lead1pimg: null,
 lead1pimgalt: '',
 lead2name: '',
 lead2oc: '',
-lead2pimg: '',
+lead2pimg: null,
 lead2pimgalt: '',
 itinerary: '',
     days: [
       { day: '', cityName: '', description: [''], meals: '', imagealt: '', image:null }
     ],
+    over:[],
     included: [],
     notincluded: [],
     things: [],
@@ -81,7 +90,18 @@ console.log(trekData,"trek")
     updatedDays[index] = { ...updatedDays[index], image: e.target.files[0] };
     setTrekData({ ...trekData, days: updatedDays });
   };
-
+  const handleFileChange = (e) => {
+    // Assuming that you are calling this function with the proper 'name' attribute of the input
+    const { name, files } = e.target;
+  
+    if (files.length > 0) {
+      // If there's a file selected, update the trekData state with the new file.
+      setTrekData(prevState => ({
+        ...prevState,
+        [name]: files[0] // Store the first selected file.
+      }));
+    }
+  };
   // Function to add a new day
   const addNewDay = () => {
     setTrekData({
@@ -109,12 +129,16 @@ console.log(trekData,"trek")
     updatedBatch[index] = { ...updatedBatch[index], [e.target.name]: e.target.value };
     setTrekData({ ...trekData, batch: updatedBatch });
   };
-  
+
   const handleAddBatchItem = () => {
-    setTrekData(prev => ({
-      ...prev,
-      batch: [...prev.batch, { date: '', amount: '' }],
-    }));
+    setTrekData({  ...trekData,
+        batch: [
+          ...trekData.batch,
+          {
+       date: '', amount: '' }
+    ],
+          })
+
   };
   const handleRelatedChange = (index, e) => {
     const updatedRelated = [...trekData.related];
@@ -164,7 +188,7 @@ const handleSubmit = async (e) => {
 
     // Append non-array fields to formData
     for (const [key, value] of Object.entries(trekData)) {
-        if (!['days', 'included', 'notincluded', 'things'].includes(key)) {
+        if (!['days', 'included', 'notincluded', 'things','over','related','batch'].includes(key)) {
           formData.append(key, value);
         }
       }
@@ -183,6 +207,27 @@ const handleSubmit = async (e) => {
         }
       });
       formData.append('days', JSON.stringify(trekData.days));
+      trekData.related.forEach((related, index) => {
+        for (const [key, value] of Object.entries(related)) {
+            if (related.rimage && related.rimage instanceof File) {
+                formData.append(`relatedImage[${index}]`, related.rimage, related.rimage.name);
+              
+          } else if (typeof value === 'string' || typeof value === 'number') {
+            // All other values that are strings or numbers can be sent as text fields.
+            formData.append(`related[${index}].${key}`, value);
+          }
+          // Note: If there are other types of fields, you may need to handle them accordingly.
+        }
+      });
+      formData.append('related', JSON.stringify(trekData.related));
+
+
+    trekData.batch.forEach((batch, index) => {
+        formData.append(`batch[${index}].date`, batch.date);
+        formData.append(`batch[${index}].amount`, batch.amount);
+      });
+      formData.append('batch', JSON.stringify(trekData.batch));
+
       trekData.included.forEach((item, index) => {
         formData.append(`included[${index}]`, item.trim());
       });
@@ -195,6 +240,9 @@ trekData.notincluded.forEach((item, index) => {
   // Assuming trekData.things is an array
   trekData.things.forEach((item, index) => {
     formData.append(`things[${index}]`, item.trim());
+  });
+  trekData.over.forEach((item, index) => {
+    formData.append(`over[${index}]`, item.trim());
   });
   
   // 'days' is an array of objects and might include File objects for images
@@ -239,12 +287,32 @@ trekData.notincluded.forEach((item, index) => {
             className="p-2 border border-gray-300 rounded"
           />
         </div>
+        <div className="flex flex-col px-2 w-1/2">
+    <label htmlFor="testimage" className="font-bold">test Image:</label>
+    <input
+      type="file"
+      id="testimage"
+      name="testimage"
+      onChange={handleFileChange} // Ensure you have a handler for file changes
+      className="p-2 border border-gray-300 rounded"
+    />
+
+  </div>
+  <input
+        type="text"
+        placeholder="Image Alt test image"
+        name="testimagealt"
+        value={trekData.testimagealt}
+        onChange={handleChange}
+        className="w-full p-3 border border-gray-300 rounded"
+      />
+    
         <div className="flex flex-wrap">
   {/* Amount Input */}
   <div className="flex flex-col px-2 w-1/2">
     <label htmlFor="amount" className="font-bold">Amount:</label>
     <input
-      type="text"
+      type="number"
       id="amount"
       name="amount"
       placeholder="Enter amount"
@@ -267,7 +335,6 @@ trekData.notincluded.forEach((item, index) => {
       className="p-2 border border-gray-300 rounded"
     />
   </div>
-  <div className="flex flex-wrap">
   {/* State Input */}
   <div className="flex flex-col px-2 w-1/2">
     <label htmlFor="state" className="font-bold">State:</label>
@@ -281,7 +348,18 @@ trekData.notincluded.forEach((item, index) => {
       className="p-2 border border-gray-300 rounded"
     />
   </div>
-
+  <div className="flex flex-col px-2 w-1/2">
+    <label htmlFor="state" className="font-bold">State Name</label>
+    <input
+      type="text"
+      id="statename"
+      name="statename"
+      placeholder="Enter state Name"
+      value={trekData.statename}
+      onChange={handleChange}
+      className="p-2 border border-gray-300 rounded"
+    />
+  </div>
   {/* For Input */}
   <div className="flex flex-col px-2 w-1/2">
     <label htmlFor="for" className="font-bold">For:</label>
@@ -300,7 +378,7 @@ trekData.notincluded.forEach((item, index) => {
   <div className="flex flex-col px-2 w-1/2">
     <label htmlFor="fromamount" className="font-bold">From Amount:</label>
     <input
-      type="text"
+      type="number"
       id="fromamount"
       name="fromamount"
       placeholder="Enter from amount"
@@ -314,7 +392,7 @@ trekData.notincluded.forEach((item, index) => {
   <div className="flex flex-col px-2 w-1/2">
     <label htmlFor="reserveamount" className="font-bold">Reserve Amount:</label>
     <input
-      type="text"
+      type="number"
       id="reserveamount"
       name="reserveamount"
       placeholder="Enter reserve amount"
@@ -407,14 +485,24 @@ trekData.notincluded.forEach((item, index) => {
       className="p-2 border border-gray-300 rounded"
     />
   </div>
-
+  <div className="flex flex-col px-2 w-1/2">
+    <label htmlFor="service" className="font-bold">Service Name:</label>
+    <input
+      type="text"
+      id="servicename"
+      name="servicename"
+      placeholder="Enter service Name"
+      value={trekData.servicename}
+      onChange={handleChange}
+      className="p-2 border border-gray-300 rounded"
+    />
+  </div>
   {/* ... Add input fields for all other properties in a similar fashion ... */}
 
   {/* Itinerary Input */}
   <div className="flex flex-col px-2 w-1/2">
     <label htmlFor="itinerary" className="font-bold">Itinerary:</label>
-    <input
-      type="text"
+    <textarea
       id="itinerary"
       name="itinerary"
       placeholder="Enter itinerary details"
@@ -427,8 +515,7 @@ trekData.notincluded.forEach((item, index) => {
   {/* Expert Paragraph Input */}
   <div className="flex flex-col px-2 w-1/2">
     <label htmlFor="expertpara" className="font-bold">Expert Paragraph:</label>
-    <input
-      type="text"
+    <textarea
       id="expertpara"
       name="expertpara"
       placeholder="Enter expert paragraph"
@@ -439,36 +526,216 @@ trekData.notincluded.forEach((item, index) => {
   </div>
 
   {/* Lead 1 Name Input */}
+
+
+  {/* ...continue for the rest of the fields... */}
+
+<div className='w-full px-2 py-2'>
+  <h3 className="text-center font-semibold">OverView</h3>
+  {trekData.over.map((item, index) => (
+    <div key={index} className="flex flex-row gap-2 items-center">
+      <textarea
+        value={item}
+        placeholder={`Overview Para  ${index + 1}`}
+        onChange={(e) => handleChangeArray('over', index, e.target.value)}
+        className="p-2 border border-gray-300 rounded w-full"
+      />
+      <button
+        type="button"
+        onClick={() => handleRemoveArrayItem('over', index)}
+        className="bg-red-500 text-white px-2 py-1 rounded"
+      >
+        Remove
+      </button>
+    </div>
+  ))}
+  <button
+    type="button"
+    onClick={() => handleAddArrayItem('over')}
+    className="mt-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700 w-full"
+  >
+    Add Overview
+  </button>
+</div>
+  {/* Expectation Paragraph */}
   <div className="flex flex-col px-2 w-1/2">
-    <label htmlFor="lead1name" className="font-bold">Lead 1 Name:</label>
+    <label htmlFor="expectpara" className="font-bold">Expectation Paragraph:</label>
+    <textarea
+      id="expectpara"
+      name="expectpara"
+      placeholder="Enter expectation paragraph"
+      value={trekData.expectpara}
+      onChange={handleChange}
+      className="p-2 border border-gray-300 rounded"
+    />
+  </div>
+
+  {/* Expectation Heading 1 */}
+  <div className="flex flex-col px-2 w-1/2">
+    <label htmlFor="expecthead1" className="font-bold">Expectation Heading 1:</label>
+    <input
+      type="text"
+      id="expecthead1"
+      name="expecthead1"
+      placeholder="Enter heading for expectation 1"
+      value={trekData.expecthead1}
+      onChange={handleChange}
+      className="p-2 border border-gray-300 rounded"
+    />
+  </div>
+  <div className="flex flex-col px-2 w-1/2">
+    <label htmlFor="expecthead1" className="font-bold">Accommodations Heading:</label>
+    <input
+      type="text"
+      id="expecthead1"
+      name="expecthead1"
+      placeholder="Enter accommodations heading"
+      value={trekData.expecthead1}
+      onChange={handleChange}
+      className="p-2 border border-gray-300 rounded"
+    />
+  </div>
+
+  {/* Accommodations Paragraph */}
+  <div className="flex flex-col px-2 w-1/2">
+    <label htmlFor="expecthead1para" className="font-bold">Accommodations Paragraph:</label>
+    <textarea
+      id="expecthead1para"
+      name="expecthead1para"
+      placeholder="Enter accommodations paragraph"
+      value={trekData.expecthead1para}
+      onChange={handleChange}
+      className="p-2 border border-gray-300 rounded"
+    />
+  </div>
+
+  {/* Expedition Team Heading */}
+  <div className="flex flex-col px-2 w-1/2">
+    <label htmlFor="expecthead2" className="font-bold">Expedition Team Heading:</label>
+    <input
+      type="text"
+      id="expecthead2"
+      name="expecthead2"
+      placeholder="Enter expedition team heading"
+      value={trekData.expecthead2}
+      onChange={handleChange}
+      className="p-2 border border-gray-300 rounded"
+    />
+  </div>
+
+  {/* Expedition Team Paragraph */}
+  <div className="flex flex-col px-2 w-1/2">
+    <label htmlFor="expecthead2para" className="font-bold">Expedition Team Paragraph:</label>
+    <textarea
+      id="expecthead2para"
+      name="expecthead2para"
+      placeholder="Enter expedition team paragraph"
+      value={trekData.expecthead2para}
+      onChange={handleChange}
+      className="p-2 border border-gray-300 rounded"
+    />
+  </div>
+
+  {/* Leader 1 Name */}
+  <div className="flex flex-col px-2 w-1/2">
+    <label htmlFor="lead1name" className="font-bold">Leader 1 Name:</label>
     <input
       type="text"
       id="lead1name"
       name="lead1name"
-      placeholder="Enter lead 1 name"
+      placeholder="Enter leader 1 name"
       value={trekData.lead1name}
       onChange={handleChange}
       className="p-2 border border-gray-300 rounded"
     />
   </div>
 
-  {/* Lead 1 Occupation Input */}
+  {/* Leader 1 Occupation */}
   <div className="flex flex-col px-2 w-1/2">
-    <label htmlFor="lead1oc" className="font-bold">Lead 1 Occupation:</label>
+    <label htmlFor="lead1oc" className="font-bold">Leader 1 Occupation:</label>
     <input
       type="text"
       id="lead1oc"
       name="lead1oc"
-      placeholder="Enter lead 1 occupation"
+      placeholder="Enter leader 1 occupation"
       value={trekData.lead1oc}
       onChange={handleChange}
       className="p-2 border border-gray-300 rounded"
     />
   </div>
-</div>
-  {/* ...continue for the rest of the fields... */}
-</div>
 
+  {/* Leader 2 Name */}
+  <div className="flex flex-col px-2 w-1/2">
+    <label htmlFor="lead2name" className="font-bold">Leader 2 Name:</label>
+    <input
+      type="text"
+      id="lead2name"
+      name="lead2name"
+      placeholder="Enter leader 2 name"
+      value={trekData.lead2name}
+      onChange={handleChange}
+      className="p-2 border border-gray-300 rounded"
+    />
+  </div>
+
+  {/* Leader 2 Occupation */}
+  <div className="flex flex-col px-2 w-1/2">
+    <label htmlFor="lead2oc" className="font-bold">Leader 2 Occupation:</label>
+    <input
+      type="text"
+      id="lead2oc"
+      name="lead2oc"
+      placeholder="Enter leader 2 occupation"
+      value={trekData.lead2oc}
+      onChange={handleChange}
+      className="p-2 border border-gray-300 rounded"
+    />
+  </div>
+  {/* ... Other fields will follow the same pattern ... */}
+
+  {/* Leader 1 Image */}
+  <div className="flex flex-col px-2 w-1/2">
+    <label htmlFor="lead1pimg" className="font-bold">Leader 1 Image:</label>
+    <input
+      type="file"
+      id="lead1pimg"
+      name="lead1pimg"
+      onChange={handleFileChange} // Ensure you have a handler for file changes
+      className="p-2 border border-gray-300 rounded"
+    />
+          <input
+        type="text"
+        placeholder="Image Alt lead1 image"
+        name="lead1pimgalt"
+        value={trekData.lead1pimgalt}
+        onChange={handleChange}
+        className="w-full p-3 border border-gray-300 rounded"
+      />
+  </div>
+
+  {/* Leader 2 Image */}
+  <div className="flex flex-col px-2 w-1/2">
+    <label htmlFor="lead2pimg" className="font-bold">Leader 2 Image:</label>
+    <input
+      type="file"
+      id="lead2pimg"
+      name="lead2pimg"
+      onChange={handleFileChange} // Ensure you have a handler for file changes
+      className="p-2 border border-gray-300 rounded"
+    />
+      <input
+        type="text"
+        placeholder="Image Alt lead2 image"
+        name="lead2pimgalt"
+        value={trekData.lead2pimgalt}
+        onChange={handleChange}
+        className="w-full p-3 border border-gray-300 rounded"
+      />
+  </div>
+
+  {/* ... Continue with other fields ... */}
+
+</div>
         {/* More input fields for other trekData fields */}
 
         {/* Dynamic input fields for 'days' */}
@@ -641,49 +908,133 @@ trekData.notincluded.forEach((item, index) => {
   {trekData.related.map((relatedItem, index) => (
     <div key={index} className="flex flex-col mb-4 border p-4">
       <h3 className="font-bold mb-2">Related Item {index + 1}</h3>
+      {/* Existing Fields */}
+      <div className="flex flex-wrap -mx-2">
+        {/* Row 1 */}
+        <div className="px-2 w-1/2">
       <input
         type="text"
         name="rday"
         placeholder="Day"
         value={relatedItem.rday}
         onChange={(e) => handleRelatedChange(index, e)}
-        className="mb-2 p-2 border border-gray-300 rounded"
+        className="mb-2 p-2 border border-gray-300 rounded w-full"
       />
+      </div>
+      <div className="px-2 w-1/2">
       <input
         type="text"
         name="rname"
         placeholder="Name"
         value={relatedItem.rname}
         onChange={(e) => handleRelatedChange(index, e)}
-        className="mb-2 p-2 border border-gray-300 rounded"
+        className="mb-2 p-2 border border-gray-300 rounded w-full"
       />
-      {/* ... Add other input fields as needed ... */}
-      <input
-        type="text"
-        name="rimagealt"
-        placeholder="Image Alt Text"
-        value={relatedItem.rimagealt}
-        onChange={(e) => handleRelatedChange(index, e)}
-        className="mb-2 p-2 border border-gray-300 rounded"
-      />
-      <input
-        type="number"
-        name="ramount"
-        placeholder="Amount"
-        value={relatedItem.ramount}
-        onChange={(e) => handleRelatedChange(index, e)}
-        className="mb-2 p-2 border border-gray-300 rounded"
-      />
-      {/* ... Continue with other fields ... */}
+      </div>
+      <div className="px-2 w-1/2">
       <div className="file-upload mb-2">
         <label htmlFor={`rimage-${index}`} className="block mb-2 font-bold">Image:</label>
         <input
           type="file"
           id={`rimage-${index}`}
           onChange={(e) => handleRelatedFileChange(index, e)}
-          className="mb-2"
+          className="mb-2 "
         />
       </div>
+      </div>
+      <div className="px-2 w-1/2">
+      <input
+        type="text"
+        name="rimagealt"
+        placeholder="Image Alt Text"
+        value={relatedItem.rimagealt}
+        onChange={(e) => handleRelatedChange(index, e)}
+        className="mb-2 p-2 border border-gray-300 rounded w-full"
+      />
+      </div>
+      <div className="px-2 w-1/2">
+      <input
+        type="number"
+        name="ramount"
+        placeholder="Amount"
+        value={relatedItem.ramount}
+        onChange={(e) => handleRelatedChange(index, e)}
+        className="mb-2 p-2 border border-gray-300 rounded w-full"
+      />
+      </div>
+      {/* New Fields */}
+      <div className="px-2 w-1/2">
+      <input
+        type="text"
+        name="rtype"
+        placeholder="Type"
+        value={relatedItem.rtype}
+        onChange={(e) => handleRelatedChange(index, e)}
+        className="mb-2 p-2 border border-gray-300 rounded w-full"
+      />
+      </div>
+      <div className="px-2 w-1/2">
+      <input
+        type="text"
+        name="rtypename"
+        placeholder="Type Name"
+        value={relatedItem.rtypename}
+        onChange={(e) => handleRelatedChange(index, e)}
+        className="mb-2 p-2 border border-gray-300 rounded w-full"
+      />
+      </div>
+      <div className="px-2 w-1/2">
+      <input
+        type="text"
+        name="rlevel"
+        placeholder="Level"
+        value={relatedItem.rlevel}
+        onChange={(e) => handleRelatedChange(index, e)}
+        className="mb-2 p-2 border border-gray-300 rounded w-full"
+      />
+      </div>
+      <div className="px-2 w-1/2">
+      <input
+        type="text"
+        name="rlevelname"
+        placeholder="Level Name"
+        value={relatedItem.rlevelname}
+        onChange={(e) => handleRelatedChange(index, e)}
+        className="mb-2 p-2 border border-gray-300 rounded w-full"
+      />
+      </div>
+      <div className="px-2 w-1/2">
+      <input
+        type="text"
+        name="rservice"
+        placeholder="Service"
+        value={relatedItem.rservice}
+        onChange={(e) => handleRelatedChange(index, e)}
+        className="mb-2 p-2 border border-gray-300 rounded w-full"
+      />
+      </div>
+      <div className="px-2 w-1/2">
+      <input
+        type="text"
+        name="rservicename"
+        placeholder="Service Name"
+        value={relatedItem.rservicename}
+        onChange={(e) => handleRelatedChange(index, e)}
+        className="mb-2 p-2 border border-gray-300 rounded w-full"
+      />
+      </div>
+      <div className="px-2 w-1/2">
+      <input
+        type="text"
+        name="rlink"
+        placeholder="Link"
+        value={relatedItem.rlink}
+        onChange={(e) => handleRelatedChange(index, e)}
+        className="mb-2 p-2 border border-gray-300 rounded w-full"
+      />
+      </div>
+      </div>
+      {/* Remove Item Button */}
       <button
         type="button"
         onClick={() => handleRemoveArrayItem('related', index)}
@@ -693,6 +1044,7 @@ trekData.notincluded.forEach((item, index) => {
       </button>
     </div>
   ))}
+  {/* Add New Related Item Button */}
   <button
     type="button"
     onClick={addNewRelated}
@@ -701,7 +1053,6 @@ trekData.notincluded.forEach((item, index) => {
     Add New Related Item
   </button>
 </div>
-{/* ... Rest of the form ... */}
 
 {/* ... Other parts of the form ... */}
 {/* Related section */}
