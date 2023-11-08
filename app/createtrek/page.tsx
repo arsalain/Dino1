@@ -53,8 +53,7 @@ itinerary: '',
     rtype: '',
     rtypename: '',
     rlevel: '',
-    rlevelname: '',
-    rlink: '' }],
+    rlevelname: '' }],
     batch: [{ date: '', amount: '' }],
     // ... initialize other array fields similarly
   });
@@ -114,6 +113,12 @@ console.log(trekData,"trek")
       return { ...prev, [name]: newArray };
     });
   };
+  const handleAddArrayItem = (field) => {
+    setTrekData((prevTrekData) => ({
+      ...prevTrekData,
+      [field]: [...prevTrekData[field], ''], // Add a new empty string item
+    }));
+  };
   const handleRemoveArrayItem = (name, index) => {
     setTrekData((prev) => {
       const newArray = [...prev[name]];
@@ -148,12 +153,7 @@ console.log(trekData,"trek")
     updatedRelated[index] = { ...updatedRelated[index], rimage: e.target.files[0] };
     setTrekData({ ...trekData, related: updatedRelated });
   };
-  const handleAddArrayItem = (field) => {
-    setTrekData((prevTrekData) => ({
-      ...prevTrekData,
-      [field]: [...prevTrekData[field], ''], // Add a new empty string item
-    }));
-  };
+
   const addNewRelated = () => {
     setTrekData({
       ...trekData,
@@ -171,7 +171,6 @@ console.log(trekData,"trek")
           rlevelname: '',
           rservice: '',
           rservicename: '',
-          rlink:''
         }
       ],
     });
@@ -956,14 +955,7 @@ trekData.notincluded.forEach((item, index) => {
 </button>
 
         {/* Submit button */}
-        <div className='flex justify-center'>
-        <button 
-          type="submit"
-          className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-700"
-        >
-          Create Trek
-        </button>
-        </div>
+    
 
     </form>
     </div>
