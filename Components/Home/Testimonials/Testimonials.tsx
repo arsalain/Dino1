@@ -163,7 +163,7 @@ const TestimonialSection = () => {
               <h3 className="text-xl font-semibold ml-4">{testimonial.name}</h3>
             </div>
             <p className="text-base mb-4">{testimonial.content}</p>
-            <div className="text-yellow-400 flex">
+            <div className="text-yellow-500 flex">
               {Array.from({ length: testimonial.rating }, (_, index) => (
                 <FontAwesomeIcon icon={faStar} key={index} />
               ))}

@@ -6,6 +6,7 @@ const page = () => {
         name: '',
         coverimage: null,
         imagealt:'',
+        maintype:'',
         over:[],
         products: [],
         blogs: []
@@ -123,6 +124,23 @@ const page = () => {
         onChange={handleChange}
         className="w-full p-3 border border-gray-300 rounded"
       />
+      <div className="flex flex-col gap-2">
+  <label htmlFor="destination" className="font-bold">
+    Destination type:
+  </label>
+  <select
+    id="maintype"
+    name="maintype"
+    value={destData.maintype}
+    onChange={handleChange}
+    className="p-2 border border-gray-300 rounded"
+  >
+    <option value=''>Please select a type</option>
+    <option value="southindia">South India Trips</option>
+    <option value="northindia">North India Trips</option>
+    <option value="international">International Trips</option>
+  </select>
+</div>
       <div className='w-full px-2 py-2'>
   <h3 className="text-center font-semibold">OverView</h3>
   {destData.over.map((item, index) => (
@@ -209,7 +227,7 @@ const page = () => {
           type="submit"
           className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-700"
         >
-          Create Trek
+          Create Destination
         </button>
         </div>
       </form>

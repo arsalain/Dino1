@@ -4,11 +4,11 @@ import React from 'react'
 import { motion } from 'framer-motion'
 const Promo = () => {
   return (
-    <div className="flex flex-col md:flex-row justify-between items-stretch w-full max-w-screen-2xl md:py-20 pt-5 mx-auto sm:px-6 lg:px-8 xl:px-12 2xl:px-16">
+    <div className="flex flex-col md:flex-row justify-between items-stretch w-full md:max-w-screen-2xl md:py-20 pt-5  sm:px-6 lg:px-8 xl:px-12 2xl:px-16 ">
       {/* Left Section */}
       <motion.div
         whileHover={{ scale: 1.05 }}
-        className="relative h-[30rem] md:h-[40rem] flex-grow bg-center rounded-lg shadow-lg md:mr-2 xl:mr-4"
+        className="relative h-[20rem] md:h-[25rem] flex-grow bg-center rounded-lg shadow-lg md:mr-2  xl:mr-4"
       >
         <Image
           src="/home/promo1.jpg"
@@ -30,7 +30,7 @@ const Promo = () => {
       {/* Right Section */}
       <motion.div
         whileHover={{ scale: 1.05 }}
-        className="relative mt-4 md:mt-0 h-[30rem] md:h-[40rem] flex-grow bg-center rounded-lg shadow-lg md:ml-2 xl:ml-4"
+        className="relative mt-4 md:mt-0 h-[20rem] md:h-[25rem]  flex-grow bg-center rounded-lg shadow-lg md:ml-2 xl:ml-4"
       >
         <Image
           src="/home/promo2.png"

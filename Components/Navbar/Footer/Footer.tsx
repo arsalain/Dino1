@@ -11,24 +11,24 @@ const sections = [
     title: 'LEGAL',
     links: [
       { text: 'Terms of Use', url: '/terms' },
-      { text: 'Privacy Policy', url: 'privacy' },
-      { text: 'Terms & Conditions', url: 'condition' },
+      { text: 'Privacy Policy', url: '/privacy' },
+      { text: 'Terms & Conditions', url: '/condition' },
     ],
   },
   {
     title: 'QUICK LINKS',
     links: [
-      { text: 'Destinations', url: 'destinations' },
-      { text: 'Book a Trip', url: 'destinations' },
-      { text: 'International Trip', url: 'destinations' },
+      { text: 'Destinations', url: '/destinations' },
+      { text: 'Book a Trip', url: '/destinations' },
+      { text: 'International Trip', url: '/destinations' },
     ],
   },
   {
     title: 'JOIN US',
     links: [
-      { text: 'About Us', url: 'about' },
-      { text: 'Careers', url: 'career' },
-      { text: 'Partner with Us', url: 'partner' },
+      { text: 'About Us', url: '/about' },
+      { text: 'Careers', url: '/career' },
+      { text: 'Partner with Us', url: '/partner' },
     ],
   },
 ];

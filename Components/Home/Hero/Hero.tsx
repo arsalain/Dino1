@@ -3,7 +3,7 @@ import { motion, useAnimation } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-
+import CountUp from 'react-countup';
 const Hero = () => {
   const controls = useAnimation();
   const [changingText, setChangingText] = useState('TRAVEL');
@@ -40,7 +40,6 @@ const Hero = () => {
         console.error('Error fetching data:', error);
       }
     }
-
     fetchData();
   }, []);
   return (
@@ -72,25 +71,32 @@ const Hero = () => {
           Discover amazing places at exclusive deals!
         </motion.p>
         <div className=" flex flex-row mt-6 ">
-      <div className="px-3 py-2 rounded-lg bg-white w-[200px] md:w-[380px] ">
+      <div className="px-3 py-2 rounded-lg bg-white w-[200px] md:w-[380px] z-10 ">
         <input
           type="text"
           placeholder="Search"
-          className="bg-white  text-black outline-none"
+          className="bg-white  text-black outline-none w-full"
           onChange={(e) => setSearchInput(e.target.value)}
           value={searchInput}
         />
-        {Array.isArray(products) && products
-          .filter((item) => {
-            const searchTerm = searchInput.toLowerCase();
-            const fullname = item.name.toLowerCase();
-            return searchTerm && fullname.startsWith(searchTerm) && fullname !== searchTerm;
-          })
-          .map((list,index) => (
-            <div className="text-black" onClick={() => onSearch(list.name)} key={index}>
-              {list.name}
-            </div>
-          ))}
+{Array.isArray(products) && searchInput.length >= 3 && products
+  .filter((item) => {
+    const searchTerm = searchInput.toLowerCase();
+    const fullname = item.name.toLowerCase();
+    return fullname.includes(searchTerm);
+  })
+  .map((product, index) => (
+    <div 
+      className="text-black cursor-pointer" // Added cursor-pointer for better UX
+      onClick={() => onSearch(product.name)}
+      key={product.id || index} // Use product.id if available, otherwise index
+    >
+      {product.name}
+    </div>
+  ))
+}
+
+
       </div>
       <motion.button
                initial={{ backgroundColor: "#FBBF24", color: "#000" }}
@@ -100,9 +106,7 @@ const Hero = () => {
           >
         {search ? (
           <Link href={`/product/${search._id}`}>
-            
             Explore
-    
           </Link>
         ) : (
           <div>Explore</div>
@@ -110,9 +114,36 @@ const Hero = () => {
       </motion.button>
     </div>
       </div>
+      <div className="w-full absolute bottom-0 left-0 bg-black bg-opacity-50">
+  <div className="flex justify-evenly items-center text-white py-4">
+    <div className="text-center">
+      <p className="text-4xl font-bold">
+        <CountUp end={4.7} decimals={1} duration={2.75} />
+      </p>
+      <p className="text-yellow-400">Google Rating</p>
+    </div>
+    <div className="text-center">
+      <p className="text-4xl font-bold">
+        <CountUp end={100141} duration={2.75} separator="," />
+      </p>
+      <p className="text-yellow-400">Satisfied Travelers</p>
+    </div>
+    <div className="text-center">
+      <p className="text-4xl font-bold">
+        <CountUp end={156} duration={2.75} />
+      </p>
+      <p className="text-yellow-400">Tour Captains</p>
+    </div>
+    <div className="text-center">
+      <p className="text-4xl font-bold">
+        <CountUp end={50} duration={2.75} /> +
+      </p>
+      <p className="text-yellow-400">Destinations</p>
+    </div>
+  </div>
+</div>
     </motion.div>
     </div>
   );
 }
-
 export default Hero

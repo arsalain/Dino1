@@ -955,8 +955,14 @@ trekData.notincluded.forEach((item, index) => {
 </button>
 
         {/* Submit button */}
-    
-
+    <div className='flex justify-center'>
+        <button
+  type="submit"
+  className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-700 mt-4"
+>
+ Create Trek/Tour
+</button>
+</div>
     </form>
     </div>
   );

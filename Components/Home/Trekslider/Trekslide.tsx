@@ -106,16 +106,19 @@ const TrekSlider = () => {
          </span>
        )}
        <div className="p-4 text-center">
-         <h4 className="text-lg mb-1">{item.title}</h4>
-         <p className="text-sm mb-2">{item.location}</p>
-         <p className="text-md">Starting from INR {item.price}</p>
+  <h4 className="text-lg mb-1">{item.title}</h4>
+  <p className="text-sm mb-2">{item.location}</p>
        </div>
-       <div className="flex justify-center w-full mt-2">
-         <button className="px-3 py-1 bg-yellow-500 text-black font-semibold rounded-full hover:bg-yellow-600 transition duration-300">
-           Book Now
-         </button>
-       </div>
-     </div>
+       <div className="flex flex-col sm:flex-row justify-between items-center mt-4 space-x-0 sm:space-x-4"> {/* Adjusted margin-top and space between price and button */}
+  <div className="flex flex-col items-start mb-2 sm:mb-0">
+    <p className="text-xs text-gray-400">Starting from</p>
+    <p className="text-lg font-bold">INR {item.price}</p>
+  </div>
+  <button className="px-4 py-2 bg-yellow-500 text-black font-semibold rounded-full border-2 border-yellow-500 hover:bg-transparent hover:text-yellow-500 transition duration-300"> {/* Adjusted padding and hover effect for button */}
+    Book Now
+  </button>
+</div>
+</div>
    </Link>
   </SwiperSlide>
         ))}

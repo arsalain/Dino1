@@ -51,7 +51,7 @@ export default function Home() {
   </div>
 </div>
 <section data-aos="fade-up">
-<div className='mx-auto'>
+<div className='mx-4'>
     <Promo />
   </div>
 
