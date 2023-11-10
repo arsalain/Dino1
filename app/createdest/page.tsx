@@ -5,6 +5,7 @@ const page = () => {
     const [destData, setDestData] = useState({
         name: '',
         coverimage: null,
+        urllink:'',
         imagealt:'',
         maintype:'',
         over:[],
@@ -124,6 +125,18 @@ const page = () => {
         onChange={handleChange}
         className="w-full p-3 border border-gray-300 rounded"
       />
+          <div className="flex flex-col gap-2">
+          <label htmlFor="name" className="font-bold">Url link</label>
+          <input
+            type="text"
+            id="urllink"
+            name="urllink"
+            placeholder=' Enter the url of destination'
+            value={destData.urllink}
+            onChange={handleChange}
+            className="p-2 border border-gray-300 rounded"
+          />
+        </div>
       <div className="flex flex-col gap-2">
   <label htmlFor="destination" className="font-bold">
     Destination type:

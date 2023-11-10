@@ -8,6 +8,7 @@ const page = () => {
     name: '',
     testimage: null,
     testimagealt:'',
+    urllink:'',
     amount: '',
     maintype: '',
     statetype: '',
@@ -303,6 +304,18 @@ trekData.notincluded.forEach((item, index) => {
         onChange={handleChange}
         className="w-full p-3 border border-gray-300 rounded"
       />
+             <div className="flex flex-col gap-2">
+          <label htmlFor="name" className="font-bold">Url link</label>
+          <input
+            type="text"
+            id="urllink"
+            name="urllink"
+            placeholder=' Enter the url of trek/tour'
+            value={trekData.urllink}
+            onChange={handleChange}
+            className="p-2 border border-gray-300 rounded"
+          />
+        </div>
       <div className="flex flex-col px-2 w-full">
     <label htmlFor="maintype" className="font-bold">Main Type:</label>
     <input
