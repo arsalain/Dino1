@@ -156,8 +156,8 @@ const Popular = () => {
     </div>
     </div>
       {/* ... Repeat the pattern for the other images ... */}
-      <div className="mt-4 text-right">
-        <Link href="#">
+      <div className="mt-4 text-right md:text-xl text-sm">
+        <Link href="/destinations">
           <span className="text-yellow-500 hover:underline flex flex-row justify-end">
             All Destinations <FontAwesomeIcon icon={faArrowRight} className='pt-1 pl-1' />
           </span>

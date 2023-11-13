@@ -4,183 +4,55 @@ import Footer from '@/Components/Navbar/Footer/Footer'
 import Header from '@/Components/Navbar/Header/Header'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Link from 'next/link'
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import {faMagnifyingGlass} from '@fortawesome/free-solid-svg-icons';
 const page = () => {
   const [searchInput, setSearchInput] = useState("")
-  const international = [
-    {
-      id: 1,
-      name: "Bhutan",
-      image: "/home/inter.jpg", // Use the same image for all countries
-      alt: "Bhutan",
-    },
-    {
-      id: 2,
-      name: "Dubai",
-      image: "/home/inter.jpg", // Use the same image for all countries
-      alt: "Dubai",
-    },
-    {
-      id: 3,
-      name: "Indonesia",
-      image: "/home/inter.jpg", // Use the same image for all countries
-      alt: "Indonesia",
-    },
-    {
-      id: 4,
-      name: "Maldives",
-      image: "/home/inter.jpg", // Use the same image for all countries
-      alt: "Maldives",
-    },
-    {
-      id: 5,
-      name: "Sri Lanka",
-      image: "/home/inter.jpg", // Use the same image for all countries
-      alt: "Sri Lanka",
-    },
-    {
-      id: 6,
-      name: "Thailand",
-      image: "/home/inter.jpg", // Replace with the actual image path
-      alt: "Thailand",
-    },
-    {
-      id: 7,
-      name: "Vietnam",
-      image: "/home/inter.jpg", // Replace with the actual image path
-      alt: "Vietnam",
-    },
-  ];
-  const southindia = [
-    {
-      id: 1,
-      name: "Alleppey",
-      image: "/home/domestic.jpg",
-      alt: "Alleppey",
-    },
-    {
-      id: 2,
-      name: "Bangalore",
-      image: "/home/domestic.jpg",
-      alt: "Bangalore",
-    },
-    {
-      id: 3,
-      name: "Chennai",
-      image: "/home/domestic.jpg",
-      alt: "Chennai",
-    },
-    {
-      id: 4,
-      name: "Chikmagalur",
-      image: "/home/domestic.jpg",
-      alt: "Chikmagalur",
-    },
-    {
-      id: 5,
-      name: "Coorg",
-      image: "/home/domestic.jpg",
-      alt: "Coorg",
-    },
-    {
-      id: 6,
-      name: "Dandeli",
-      image: "/home/domestic.jpg",
-      alt: "Dandeli",
-    },
-    {
-      id: 7,
-      name: "Goa",
-      image: "/home/domestic.jpg",
-      alt: "Goa",
-    },
-    {
-      id: 8,
-      name: "Gokarna",
-      image: "/home/domestic.jpg",
-      alt: "Gokarna",
-    },
-    {
-      id: 9,
-      name: "Hampi",
-      image: "/home/domestic.jpg",
-      alt: "Hampi",
-    },
-    {
-      id: 10,
-      name: "Hyderabad",
-      image: "/home/domestic.jpg",
-      alt: "Hyderabad",
-    },
-    {
-      id: 11,
-      name: "Kochi",
-      image: "/home/domestic.jpg",
-      alt: "Kochi",
-    },
-    {
-      id: 12,
-      name: "Kodaikanal",
-      image: "/home/domestic.jpg",
-      alt: "Kodaikanal",
-    },
-    {
-      id: 13,
-      name: "Kozhikode",
-      image: "/home/domestic.jpg",
-      alt: "Kozhikode",
-    },
-    {
-      id: 14,
-      name: "Mangalore",
-      image: "/home/domestic.jpg",
-      alt: "Mangalore",
-    },
-    {
-      id: 15,
-      name: "Mysore",
-      image: "/home/domestic.jpg",
-      alt: "Mysore",
-    },
-    {
-      id: 16,
-      name: "Munnar",
-      image: "/home/domestic.jpg",
-      alt: "Munnar",
-    },
-    {
-      id: 17,
-      name: "Murdeshwar",
-      image: "/home/domestic.jpg",
-      alt: "Murdeshwar",
-    },
-    {
-      id: 18,
-      name: "Ooty",
-      image: "/home/domestic.jpg",
-      alt: "Ooty",
-    },
-    {
-      id: 19,
-      name: "Pondicherry",
-      image: "/home/domestic.jpg",
-      alt: "Pondicherry",
-    },
-    {
-      id: 20,
-      name: "Varkala",
-      image: "/home/domestic.jpg",
-      alt: "Varkala",
-    },
-    {
-      id: 21,
-      name: "Wayanad",
-      image: "/home/domestic.jpg",
-      alt: "Wayanad",
-    }
-  ];
-  
+  const [southIndiaDestinations, setSouthIndiaDestinations] = useState([]);
+  const [northIndiaDestinations, setNorthIndiaDestinations] = useState([]);
+  const [internationalDestinations, setInternationalDestinations] = useState([]);
+  console.log(internationalDestinations,"slight")
+  useEffect(() => {
+    // Fetch data for South India destinations
+    const fetchSouthIndiaDestinations = async () => {
+      try {
+        const response = await fetch('http://localhost:4000/dest/southindia');
+        const data = await response.json();
+        setSouthIndiaDestinations(data);
+      } catch (error) {
+        console.error('Error fetching South India destinations:', error);
+      }
+    };
+
+    // Fetch data for North India destinations
+    const fetchNorthIndiaDestinations = async () => {
+      try {
+        const response = await fetch('http://localhost:4000/dest/northindia');
+        const data = await response.json();
+        setNorthIndiaDestinations(data);
+
+      } catch (error) {
+        console.error('Error fetching North India destinations:', error);
+      }
+    };
+
+    // Fetch data for International destinations
+    const fetchInternationalDestinations = async () => {
+      try {
+        const response = await fetch('http://localhost:4000/dest/international');
+        const data = await response.json();
+        setInternationalDestinations(data);
+      } catch (error) {
+        console.error('Error fetching International destinations:', error);
+      }
+    };
+
+    // Fetch data for all destinations
+    fetchSouthIndiaDestinations();
+    fetchNorthIndiaDestinations();
+    fetchInternationalDestinations();
+  }, []);
+ 
   return (
     <div className='bg-black'>
       <Header />
@@ -188,11 +60,11 @@ const page = () => {
       </div>
       <div className='h-[50vh] text-white font-bold text-center flex flex-col justify-center items-center  border-t-2 border-b-2 border-gray-700'>
      <div className='text-xl md:text-4xl'>Destinations</div> 
-      <div className="flex items-center bg-white w-1/2 rounded-xl p-1 border-2 border-gray-200 mt-4">
+      <div className="flex items-center bg-white w-[80%] md:w-1/2 rounded-xl p-1 border-2 border-gray-200 mt-4">
                 <input
                     type="text"
-                    placeholder="Search for amazing treks"
-                    className="flex-grow p-2 outline-none"
+                    placeholder="Search for amazing destations"
+                    className="flex-grow p-2 outline-none text-black"
                     onChange={(e) => setSearchInput(e.target.value)}
                     value={searchInput}
                 />
@@ -223,7 +95,7 @@ const page = () => {
       </div>
         </div>
     <div className='pt-10'>
-      <Destination dest={international} uniqueId="international" row="1" height="350"/>
+      <Destination dest={internationalDestinations} uniqueId="international" row="1" height="350"/>
     </div>
  </div>
  <div className=' mx-10 pt-10'>
@@ -234,7 +106,7 @@ const page = () => {
       </div>
         </div>
     <div className='pt-10'>
-      <Destination dest={southindia} uniqueId="domestic" row="2" height="170" />
+      <Destination dest={southIndiaDestinations} uniqueId="domestic" row="2" height="170" />
     </div>
  </div>
  <div className=' mx-10 py-10'>
@@ -245,7 +117,7 @@ const page = () => {
       </div>
         </div>
     <div className='pt-10'>
-      <Destination dest={international} uniqueId="northindia" row="1" height="350"/>
+      <Destination dest={northIndiaDestinations} uniqueId="northindia" row="1" height="350"/>
     </div>
  </div>
       <Footer />

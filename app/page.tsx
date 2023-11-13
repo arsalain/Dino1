@@ -56,9 +56,12 @@ export default function Home() {
   </div>
 
 </section>
-
+<section data-aos="fade-up">
 <TestimonialSection />
+</section>
+<section data-aos="fade-up">
 <LocationListSection />
+</section>
     <Footer />
       </div>
     </main>

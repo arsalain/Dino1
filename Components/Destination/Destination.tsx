@@ -9,7 +9,7 @@ import Image from 'next/image';
 
 const Destination = ({dest, uniqueId ,row ,height}) => {
     const slideHeight = `h-[${height}px]`; 
-    console.log(slideHeight,"slight")
+
   return (
     <div>
        <Swiper
@@ -46,14 +46,15 @@ const Destination = ({dest, uniqueId ,row ,height}) => {
           },
         }}
       >
-    {dest.map((destination) => (
+    {dest && dest.map((destination) => (
           <SwiperSlide key={destination.id}>
             <div className="relative w-full rounded-lg " style={{ height: `${height}px` }}>
               <Image
-                src={destination.image}
+                src={`http://localhost:4000/uploads/${destination.coverimage}`}  
                 alt={destination.alt}
                 layout="fill"
                 objectFit="cover"
+                className="rounded-lg"
               />
               {/* Gradient overlay */}
               <div className="absolute inset-0 bg-gradient-to-b from-black to-transparent opacity-50"></div>

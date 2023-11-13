@@ -117,28 +117,28 @@ const Hero = () => {
       <div className="w-full absolute bottom-0 left-0 bg-black bg-opacity-50">
   <div className="flex justify-evenly items-center text-white py-4">
     <div className="text-center">
-      <p className="text-4xl font-bold">
+      <p className="md:text-4xl text-sm font-bold">
         <CountUp end={4.7} decimals={1} duration={2.75} />
       </p>
-      <p className="text-yellow-400">Google Rating</p>
+      <p className="text-yellow-400 md:text-base text-xs">Google Rating</p>
     </div>
     <div className="text-center">
-      <p className="text-4xl font-bold">
+      <p className="md:text-4xl text-sm font-bold">
         <CountUp end={100141} duration={2.75} separator="," />
       </p>
-      <p className="text-yellow-400">Satisfied Travelers</p>
+      <p className="text-yellow-400 md:text-base text-xs">Satisfied Travelers</p>
     </div>
     <div className="text-center">
-      <p className="text-4xl font-bold">
-        <CountUp end={156} duration={2.75} />
+      <p className="md:text-4xl text-sm  font-bold">
+        <CountUp end={180} duration={2.75} />
       </p>
-      <p className="text-yellow-400">Tour Captains</p>
+      <p className="text-yellow-400 md:text-base text-xs">Tour Captains</p>
     </div>
     <div className="text-center">
-      <p className="text-4xl font-bold">
+      <p className="md:text-4xl text-sm  font-bold">
         <CountUp end={50} duration={2.75} /> +
       </p>
-      <p className="text-yellow-400">Destinations</p>
+      <p className="text-yellow-400 md:text-base text-xs">Destinations</p>
     </div>
   </div>
 </div>

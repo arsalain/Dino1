@@ -13,7 +13,7 @@ const Faq = ({ items }) => {
     };
   
     return (
-        <div className="flex flex-col w-full mx-10">
+        <div className="flex flex-col w-full">
         {items.map((item, index) => (
           <div key={index} className="border-b border-gray-300">
             <button

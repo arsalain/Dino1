@@ -4,7 +4,7 @@ import React from 'react'
 import { motion } from 'framer-motion'
 const Promo = () => {
   return (
-    <div className="flex flex-col md:flex-row justify-between items-stretch w-full md:max-w-screen-2xl md:py-20 pt-5  sm:px-6 lg:px-8 xl:px-12 2xl:px-16 ">
+    <div className="flex flex-col md:flex-row justify-between items-stretch w-full md:max-w-screen-2xl md:py-10 pb-10 pt-5  sm:px-6 lg:px-8 xl:px-12 2xl:px-16 ">
       {/* Left Section */}
       <motion.div
         whileHover={{ scale: 1.05 }}

@@ -138,7 +138,7 @@ const TestimonialSection = () => {
         <hr className="border-t-2 border-white md:w-[60PX] w-[30px]" />
       </div>
       </motion.h2>
-      <div className='relative md:p-16 md:px-8 px-8 py-10' >
+      <div className='relative md:p-16 md:px-8  py-10' >
       <div className='absolute md:top-5 md:left-10 top-3 left-3 text-xl md:text-4xl text-yellow-500'><FontAwesomeIcon icon={faQuoteLeft} /></div>
       <div className='absolute md:bottom-8 md:right-10 bottom-3 right-3 text-xl md:text-4xl text-yellow-500'><FontAwesomeIcon icon={faQuoteRight} /></div>
  
@@ -156,13 +156,13 @@ const TestimonialSection = () => {
             animate={{ opacity: 1, y: 0 }}
             whileHover={{ scale: 1.05 }}
             transition={{ duration: 0.5, ease: "easeInOut" }}
-            className="relative bg-gradient-to-r from-gray-900 to-black rounded-lg shadow-lg p-4 m-2 flex-none w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 h-auto text-white"
+            className="relative bg-gradient-to-r from-gray-900 to-black rounded-lg shadow-lg md:p-4 p-1 m-2 flex-none w-[100px] sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 h-auto text-white"
           >
             <div className="flex items-center mb-4">
-              <div className="w-10 h-10 bg-cover rounded-full" style={{ backgroundImage: "url('https://i.picsum.photos/id/237/200/300.jpg')" }}></div>
-              <h3 className="text-xl font-semibold ml-4">{testimonial.name}</h3>
+              {/* <div className="w-10 h-10 bg-cover rounded-full" style={{ backgroundImage: "url('https://i.picsum.photos/id/237/200/300.jpg')" }}></div> */}
+              <h3 className="md:text-xl text-sm font-semibold md:ml-4 ml-1">{testimonial.name}</h3>
             </div>
-            <p className="text-base mb-4">{testimonial.content}</p>
+            <p className="md:text-base text-xs mb-4">{testimonial.content}</p>
             <div className="text-yellow-500 flex">
               {Array.from({ length: testimonial.rating }, (_, index) => (
                 <FontAwesomeIcon icon={faStar} key={index} />

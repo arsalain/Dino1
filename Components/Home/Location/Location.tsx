@@ -15,10 +15,10 @@ const LocationListSection = () => {
     </div>
   );
   return (
-    <div className="bg-black text-white py-8 border-b border-gray-700">
+    <div className="bg-black text-white md:py-8 border-b border-gray-700">
       <div className="container mx-auto text-center">
-        <h2 className="text-3xl mb-6">Our Locations</h2>
-        <div className="text-lg mb-6">
+        <h2 className="md:text-3xl text-xl mb-6">Our Locations</h2>
+        <div className="md:text-lg mb-6">
           <span onClick={() => setActiveCategory('all')} className={activeCategory === 'all' ? 'underline cursor-pointer' : 'cursor-pointer'}>All</span> |
           <span onClick={() => setActiveCategory('international')} className={activeCategory === 'international' ? 'underline cursor-pointer' : 'cursor-pointer'}> International</span> |
           <span onClick={() => setActiveCategory('northIndian')} className={activeCategory === 'northIndian' ? 'underline cursor-pointer' : 'cursor-pointer'}> North Indian</span> |
