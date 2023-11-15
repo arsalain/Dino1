@@ -53,11 +53,11 @@ const page = () => {
       </div>
       <div className='h-[50vh] text-white font-bold text-center flex flex-col justify-center items-center  border-t-2 border-b-2 border-gray-700'>
      <div className='text-xl md:text-4xl'>Treks</div> 
-      <div className="flex items-center bg-white w-1/3 rounded-lg p-1 border-2 border-gray-200 mt-4">
+      <div className="flex items-center bg-white md:w-1/3 w-3/4 rounded-lg p-1 border-2 border-gray-200 mt-4">
                 <input
                     type="text"
                     placeholder="Search for amazing treks"
-                    className="flex-grow p-2 outline-none"
+                    className="flex-grow p-2 outline-none text-black"
                     onChange={(e) => setSearchInput(e.target.value)}
                     value={searchInput}
                 />
