@@ -26,10 +26,11 @@ const Popular = () => {
       </div>
       <div className="grid md:grid-cols-6 grid-col-1 gap-4 md:p-10 md:pb-0 pb-0 p-0 pt-5">
         {/* Example of one image with new styling */}
-        <motion.div
+      
+         <motion.div
               whileHover={{ scale: 1.05 }}
               className="col-span-2 md:col-span-2 relative overflow-hidden w-full rounded-lg md:h-[500px] h-[155px]"
-        >
+        >  <Link href="/destinations/wayanad" >   
           <Image
             src='/home/WAYANAD.jpg'
             alt="WAYANAD"
@@ -39,7 +40,7 @@ const Popular = () => {
           {/* Gradient overlay */}
           <div className="absolute inset-0 bg-gradient-to-b  from-black to-transparent opacity-50"></div>
           {/* Text at top left */}
-          <p className="absolute md:top-5 md:left-5 md:text-xl text-lg top-2 left-2 text-white">WAYANAD</p>
+          <p className="absolute md:top-5 md:left-5 md:text-xl text-lg top-2 left-2 text-white">WAYANAD</p></Link>
         </motion.div>
     {/* First set of smaller images (3 images vertically) */}
     {/* Second set of smaller images (2 images vertically) */}
@@ -47,7 +48,7 @@ const Popular = () => {
     <motion.div
             whileHover={{ scale: 1.05 }}
             className="col-span-1 md:col-span-2 relative overflow-hidden w-full rounded-lg md:h-[240px] h-[155px]"
-          >
+          > <Link href="/destinations/gokarna" >  
             <Image
               src='/home/GOKARNA.JPG'
               alt="GOKARNA"
@@ -57,11 +58,12 @@ const Popular = () => {
              <div className="absolute inset-0 bg-gradient-to-b  from-black to-transparent opacity-50"></div>
           {/* Text at top left */}
           <p className="absolute md:top-5 md:left-5 md:text-xl text-lg top-2 left-2 text-white">GOKARNA</p>
+          </Link>
             </motion.div>
             <motion.div
             whileHover={{ scale: 1.05 }}
             className="col-span-1 md:col-span-2 relative overflow-hidden w-full rounded-lg md:h-[240px] h-[155px]"
-          >
+          > <Link href="/destinations/kashmir" >  
             <Image
               src='/home/KASHMIR.jpg'
               alt="KASHMIR"
@@ -71,13 +73,14 @@ const Popular = () => {
            <div className="absolute inset-0 bg-gradient-to-b  from-black to-transparent opacity-50"></div>
           {/* Text at top left */}
           <p className="absolute md:top-5 md:left-5 md:text-xl text-lg top-2 left-2 text-white">KASHMIR</p>
+          </Link>
         </motion.div>
     </div>
     <div className="grid md:grid-rows-3 grid-row-5 gap-4 col-span-2" >
     <motion.div
             whileHover={{ scale: 1.05 }}
             className="row-span-2 md:row-span-1 relative overflow-hidden w-full rounded-lg md:h-[155px] h-[155px]"
-          >
+          > <Link href="/destinations/kodaikanal" >  
             <Image
               src='/home/KODAIKANAL.jpg'
               alt="KODAIKANAL"
@@ -87,11 +90,12 @@ const Popular = () => {
           <div className="absolute inset-0 bg-gradient-to-b  from-black to-transparent opacity-50"></div>
           {/* Text at top left */}
           <p className="absolute md:top-5 md:left-5 md:text-xl text-lg top-2 left-2 text-white">KODAIKANAL</p>
+          </Link>
        </motion.div>
        <motion.div
             whileHover={{ scale: 1.05 }}
             className="row-span-2 md:row-span-1  relative overflow-hidden w-full rounded-lg md:h-[155px] h-[155px]"
-          >
+          > <Link href="/destinations/munnar" >  
             <Image
               src='/home/MUNAR.jpg'
               alt="MUNAR"
@@ -100,12 +104,13 @@ const Popular = () => {
             />
             <div className="absolute inset-0 bg-gradient-to-b  from-black to-transparent opacity-50"></div>
           {/* Text at top left */}
-          <p className="absolute md:top-5 md:left-5 md:text-xl text-lg top-2 left-2 text-white">MUNAR</p>
+          <p className="absolute md:top-5 md:left-5 md:text-xl text-lg top-2 left-2 text-white">MUNNAR</p>
+          </Link>
         </motion.div>
         <motion.div
             whileHover={{ scale: 1.05 }}
             className="relative overflow-hidden w-full rounded-lg md:h-[155px] h-[155px] row-span-1"
-          >
+          > <Link href="/destinations/chikmagalur" >  
             <Image
               src='/home/CHIKMANGALUR.jpg'
               alt="CHIKAMAGALUR"
@@ -114,7 +119,8 @@ const Popular = () => {
             />
           <div className="absolute inset-0 bg-gradient-to-b  from-black to-transparent opacity-50"></div>
           {/* Text at top left */}
-          <p className="absolute md:top-5 md:left-5 md:text-xl text-lg top-2 left-2 text-white">CHIKAMAGALUR</p>
+          <p className="absolute md:top-5 md:left-5 md:text-xl text-lg top-2 left-2 text-white">CHIKMAGALUR</p>
+          </Link>
         </motion.div>
     </div>
 </div>
@@ -125,7 +131,7 @@ const Popular = () => {
       <motion.div
             whileHover={{ scale: 1.05 }}
             className="relative overflow-hidden w-full rounded-lg md:h-40 h-52"
-          >
+          > <Link href="/destinations/goa" >  
             <Image
               src='/home/GOA.jpg'
               alt="GOA"
@@ -135,6 +141,7 @@ const Popular = () => {
        <div className="absolute inset-0 bg-gradient-to-b  from-black to-transparent opacity-50"></div>
           {/* Text at top left */}
           <p className="absolute md:top-5 md:left-5 md:text-xl text-lg top-2 left-2 text-white">GOA</p>
+          </Link>
       </motion.div>
       </div>
       {/* New image on the right */}
@@ -142,7 +149,7 @@ const Popular = () => {
       <motion.div
             whileHover={{ scale: 1.05 }}
             className="relative overflow-hidden w-full rounded-lg md:h-40 h-52"
-          >
+          > <Link href="/destinations/andaman" >  
             <Image
               src='/home/ANDAMAN.jpg'
               alt="ANDAMAN"
@@ -152,6 +159,7 @@ const Popular = () => {
         <div className="absolute inset-0 bg-gradient-to-b  from-black to-transparent opacity-50"></div>
           {/* Text at top left */}
           <p className="absolute md:top-5 md:left-5 md:text-xl text-lg top-2 left-2 text-white">ANDAMAN AND NICOBAR ISLAND</p>
+          </Link>
       </motion.div>
     </div>
     </div>

@@ -4,11 +4,76 @@ import Footer from '@/Components/Navbar/Footer/Footer'
 import Header from '@/Components/Navbar/Header/Header'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Link from 'next/link'
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import {faMagnifyingGlass} from '@fortawesome/free-solid-svg-icons';
 import Trek from '@/Components/Treks/Trek'
 const page = () => {
   const [searchInput, setSearchInput] = useState("")
+  const [northIndiaTrekTreks, setNorthIndiaTrekTreks] = useState([]);
+const [karnatakaTrekTreks, setKarnatakaTrekTreks] = useState([]);
+const [keralaTrekTreks, setKeralaTrekTreks] = useState([]);
+const [tnTrekTreks, setTnTrekTreks] = useState([]);
+
+useEffect(() => {
+  const fetchNorthIndiaTrekTreks = async () => {
+    try {
+      const response = await fetch('http://localhost:4000/trek/northindiatrek');
+      const data = await response.json();
+      setNorthIndiaTrekTreks(data);
+    } catch (error) {
+      console.error('Error fetching North India Trek treks:', error);
+    }
+  };
+
+  // Fetch data for North India Trek treks
+  fetchNorthIndiaTrekTreks();
+}, []);
+
+useEffect(() => {
+  const fetchKarnatakaTrekTreks = async () => {
+    try {
+      const response = await fetch('http://localhost:4000/trek/karnatakatrek');
+      const data = await response.json();
+      setKarnatakaTrekTreks(data);
+    } catch (error) {
+      console.error('Error fetching Karnataka Trek treks:', error);
+    }
+  };
+
+  // Fetch data for Karnataka Trek treks
+  fetchKarnatakaTrekTreks();
+}, []);
+
+useEffect(() => {
+  const fetchKeralaTrekTreks = async () => {
+    try {
+      const response = await fetch('http://localhost:4000/trek/keralatrek');
+      const data = await response.json();
+      setKeralaTrekTreks(data);
+    } catch (error) {
+      console.error('Error fetching Kerala Trek treks:', error);
+    }
+  };
+
+  // Fetch data for Kerala Trek treks
+  fetchKeralaTrekTreks();
+}, []);
+
+useEffect(() => {
+  const fetchTnTrekTreks = async () => {
+    try {
+      const response = await fetch('http://localhost:4000/trek/tntrek');
+      const data = await response.json();
+      setTnTrekTreks(data);
+    } catch (error) {
+      console.error('Error fetching TN Trek treks:', error);
+    }
+  };
+
+  // Fetch data for TN Trek treks
+  fetchTnTrekTreks();
+}, []);
+
   const destinations = [
     {
       title: "Kedar Kanta Trek",
@@ -88,7 +153,7 @@ const page = () => {
       </div>
         </div>
     <div className='pt-10'>
-      <Trek trek={destinations}  uniqueId="Karnataka" />
+      <Trek trek={karnatakaTrekTreks} name="trek" uniqueId="Karnataka" />
     </div>
  </div>
  <div className=' mx-10 pt-10'>
@@ -99,7 +164,7 @@ const page = () => {
       </div>
         </div>
     <div className='pt-10'>
-    <Trek trek={destinations}  uniqueId="kerala" />
+    {/* <Trek trek={keralaTrekTreks} name="trek" uniqueId="kerala" /> */}
     </div>
  </div>
  <div className=' mx-10 py-10'>
@@ -110,7 +175,7 @@ const page = () => {
       </div>
         </div>
     <div className='pt-10'>
-    <Trek trek={destinations}  uniqueId="tamilnadu" />
+    {/* <Trek trek={tnTrekTreks}  name="trek" uniqueId="tamilnadu" /> */}
     </div>
  </div>
  <div className=' mx-10 py-10'>
@@ -121,7 +186,7 @@ const page = () => {
       </div>
         </div>
     <div className='pt-10'>
-    <Trek trek={destinations}  uniqueId="northindia" />
+    <Trek trek={northIndiaTrekTreks} name="trek" uniqueId="northindia" />
     </div>
  </div>
       <Footer />

@@ -6,6 +6,7 @@ import "swiper/css/pagination";
 import "swiper/css/grid";
 import { Scrollbar,Pagination,Grid  } from 'swiper/modules';
 import Image from 'next/image';
+import Link from "next/link";
 
 const Destination = ({dest, uniqueId ,row ,height}) => {
     const slideHeight = `h-[${height}px]`; 
@@ -48,10 +49,11 @@ const Destination = ({dest, uniqueId ,row ,height}) => {
       >
     {dest && dest.map((destination) => (
           <SwiperSlide key={destination.id}>
+            <Link href={`/destinations/${destination.urllink}`}>
             <div className="relative w-full rounded-lg " style={{ height: `${height}px` }}>
               <Image
                 src={`http://localhost:4000/uploads/${destination.coverimage}`}  
-                alt={destination.alt}
+                alt={destination.imagealt}
                 layout="fill"
                 objectFit="cover"
                 className="rounded-lg"
@@ -64,6 +66,7 @@ const Destination = ({dest, uniqueId ,row ,height}) => {
                 <hr className="border-t-2 border-white md:w-[20px] w-[20px]" />
               </div>
             </div>
+            </Link>
           </SwiperSlide>
         ))}
    </Swiper>

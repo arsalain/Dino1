@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faIndianRupeeSign, faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import Link from "next/link";
 // SwiperCore.use([Navigation, Scrollbar]);
-const Trek = ({trek,uniqueId }) => {
+const Trek = ({trek,uniqueId,name }) => {
   return (
     <div className=" relative">
       <Swiper
@@ -46,13 +46,13 @@ const Trek = ({trek,uniqueId }) => {
           },
         }}
       >
-         {trek.map((item, idx) => (
-   <SwiperSlide key={idx}>
-   <Link href={`/${item.title}`} className="block"> {/* Make the entire card a link */}
+         {trek && trek.map((item) => (
+   <SwiperSlide key={item._id}>
+   <Link href={`${name}/${item.urllink}`} className="block"> {/* Make the entire card a link */}
      <div className="rounded-xl shadow-lg relative flex flex-col items-center justify-between h-full transition duration-300 cursor-pointer hover:shadow-2xl hover:scale-105 transform bg-black text-white p-4">
        <div className="overflow-hidden relative rounded-xl h-72 w-full">
          <Image
-           src={item.img}
+           src={`http://localhost:4000/uploads/${item.testimage}`} 
            alt={item.title}
            objectFit="cover"
            layout="fill"
@@ -66,10 +66,10 @@ const Trek = ({trek,uniqueId }) => {
          </span>
        )}
        <div className="p-4 text-center">
-         <h4 className="text-lg mb-1">{item.title}</h4>
+         <h4 className="text-lg mb-1">{item.name}</h4>
    
        <div className="flex justify-between w-full mt-2 mx-4">
-       <p className="text-md pt-1"><FontAwesomeIcon icon={faIndianRupeeSign} className="pr-1"/>{item.price}</p>
+       <p className="text-md pt-1"><FontAwesomeIcon icon={faIndianRupeeSign} className="pr-1"/>{item.amount}</p>
          <button className="px-3 py-1 bg-yellow-500 text-black font-semibold rounded-full hover:bg-yellow-600 transition duration-300">
            Book Now
          </button>

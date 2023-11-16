@@ -4,47 +4,77 @@ import Footer from '@/Components/Navbar/Footer/Footer'
 import Header from '@/Components/Navbar/Header/Header'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Link from 'next/link'
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import {faMagnifyingGlass} from '@fortawesome/free-solid-svg-icons';
 import Trek from '@/Components/Treks/Trek'
 const page = () => {
   const [searchInput, setSearchInput] = useState("")
-  const destinations = [
-    {
-      title: "Kedar Kanta Trek",
-      location: "Singtur Range, Uttarakhand",
-      price: 18000,
-      img: "/home/kedar.jpg",
-      badge: "BREAKFAST INCLUDED",
-    },
-    {
-      title: "Hamta Pass Trek",
-      location: "Kullu valley , Himachal Pradesh",
-      price: 19000,
-      img: "/home/hamta.jpg",
-    },
-    {
-      title: "Great Lakes Trek",
-      location: " Sonamarg , J & K",
-      price: 20000,
-      img: "/home/lake.jpg",
-      badge: "BEST SELLER",
-    },
-    {
-      title: "Valley of Flowers Treks",
-      location: "Uttarakhand",
-      price: 18000,
-      img: "/home/valley.jpg",
-      badge: "TOP RATED",
-    },
-    {
-      title: "Roop Kund",
-      location: "Uttarakhand",
-      price: 18000,
-      img: "/home/roop.jpg",
-      badge: "TOP RATED",
-    },
-  ];
+  const [groupTourTreks, setGroupTourTreks] = useState([]);
+  const [longTourTreks, setLongTourTreks] = useState([]);
+  const [internationalTreks, setInternationalTreks] = useState([]);
+  const [northIndiaTourTreks, setNorthIndiaTourTreks] = useState([]);
+  useEffect(() => {
+        const fetchGroupTourTreks = async () => {
+          try {
+            const response = await fetch('http://localhost:4000/trek/grouptour');
+            const data = await response.json();
+            setGroupTourTreks(data);
+          } catch (error) {
+            console.error('Error fetching Group Tour treks:', error);
+          }
+        };
+        
+        // Fetch data for Group Tour treks
+        fetchGroupTourTreks();
+ 
+  }, []);
+  useEffect(() => {
+    const fetchLongTourTreks = async () => {
+      try {
+        const response = await fetch('http://localhost:4000/trek/longtour');
+        const data = await response.json();
+        setLongTourTreks(data);
+      } catch (error) {
+        console.error('Error fetching Long Tour treks:', error);
+      }
+    };
+  
+    // Fetch data for Long Tour treks
+    fetchLongTourTreks();
+  }, []);
+  
+  // Fetch data for International treks
+  useEffect(() => {
+    const fetchInternationalTreks = async () => {
+      try {
+        const response = await fetch('http://localhost:4000/trek/international');
+        const data = await response.json();
+        setInternationalTreks(data);
+      } catch (error) {
+        console.error('Error fetching International treks:', error);
+      }
+    };
+  
+    // Fetch data for International treks
+    fetchInternationalTreks();
+  }, []);
+  
+  // Fetch data for North India Tour treks
+  useEffect(() => {
+    const fetchNorthIndiaTourTreks = async () => {
+      try {
+        const response = await fetch('http://localhost:4000/trek/northindiatour');
+        const data = await response.json();
+        setNorthIndiaTourTreks(data);
+      } catch (error) {
+        console.error('Error fetching North India Tour treks:', error);
+      }
+    };
+  
+    // Fetch data for North India Tour treks
+    fetchNorthIndiaTourTreks();
+  }, []);
+
   
   return (
     <div className='bg-black'>
@@ -88,7 +118,7 @@ const page = () => {
       </div>
         </div>
     <div className='pt-10'>
-      <Trek trek={destinations}  uniqueId="Karnataka" />
+      <Trek trek={groupTourTreks} name="tour" uniqueId="Karnataka" />
     </div>
  </div>
  <div className=' mx-10 pt-10'>
@@ -99,7 +129,7 @@ const page = () => {
       </div>
         </div>
     <div className='pt-10'>
-    <Trek trek={destinations}  uniqueId="kerala" />
+    <Trek trek={longTourTreks} name="tour"  uniqueId="kerala" />
     </div>
  </div>
  <div className=' mx-10 py-10'>
@@ -110,7 +140,7 @@ const page = () => {
       </div>
         </div>
     <div className='pt-10'>
-    <Trek trek={destinations}  uniqueId="tamilnadu" />
+    <Trek trek={internationalTreks} name="tour"   uniqueId="tamilnadu" />
     </div>
  </div>
  <div className=' mx-10 py-10'>
@@ -121,7 +151,7 @@ const page = () => {
       </div>
         </div>
     <div className='pt-10'>
-    <Trek trek={destinations}  uniqueId="northindia" />
+    <Trek trek={northIndiaTourTreks} name="tour"   uniqueId="northindia" />
     </div>
  </div>
       <Footer />
