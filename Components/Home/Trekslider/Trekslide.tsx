@@ -11,38 +11,43 @@ import Link from "next/link";
 // SwiperCore.use([Navigation, Scrollbar]);
 const destinations = [
   {
-    title: "Kedar Kanta Trek",
+    title: "Kedarkanta Trek",
     location: "Singtur Range, Uttarakhand",
-    price: 18000,
-    img: "/home/kedar.jpg",
+    price: 5999,
+    img: "/home/kedarkanta.webp",
     badge: "BREAKFAST INCLUDED",
+    url:"kedarkantha-trek"
   },
   {
     title: "Hamta Pass Trek",
-    location: "Kullu valley , Himachal Pradesh",
-    price: 19000,
-    img: "/home/hamta.jpg",
+    location: "Kullu, Himachal Pradesh",
+    price: 7000,
+    img: "/home/Hampta.webp",
+    url:"hampta-pass-trek"
   },
   {
-    title: "Great Lakes Trek",
-    location: " Sonamarg , J & K",
-    price: 20000,
-    img: "/home/lake.jpg",
+    title: "Brahmatal Trek",
+    location: "Kuling, Uttarakhand",
+    price: 6299,
+    img: "/home/Brahmatal.webp",
     badge: "BEST SELLER",
+    url:"brahmatal-trek"
   },
   {
-    title: "Valley of Flowers Treks",
-    location: "Uttarakhand",
-    price: 18000,
-    img: "/home/valley.jpg",
+    title: "Kudremukh",
+    location: "Chikamagalur, Karnataka",
+    price: 3999,
+    img: "/home/kudremukh.webp",
     badge: "TOP RATED",
+    url:"kudremukh-trek"
   },
   {
-    title: "Roop Kund",
-    location: "Uttarakhand",
-    price: 18000,
-    img: "/home/roop.jpg",
+    title: "Kumara Parvatha",
+    location: "Kukke Subramanya, ",
+    price: 3999,
+    img: "/home/kp.webp",
     badge: "TOP RATED",
+    url:"kumara-parvatha-trek"
   },
 ];
 const TrekSlider = () => {
@@ -88,7 +93,7 @@ const TrekSlider = () => {
       >
          {destinations.map((item, idx) => (
    <SwiperSlide key={idx}>
-   <Link href={`/${item.title}`} className="block"> {/* Make the entire card a link */}
+{/* Make the entire card a link */}
      <div className="rounded-xl shadow-lg relative flex flex-col items-center justify-between h-full transition duration-300 cursor-pointer hover:shadow-2xl hover:scale-105 transform bg-black text-white p-4">
        <div className="overflow-hidden relative rounded-xl h-72 w-full">
          <Image
@@ -114,12 +119,13 @@ const TrekSlider = () => {
     <p className="text-xs text-gray-400">Starting from</p>
     <p className="text-lg font-bold">INR {item.price}</p>
   </div>
+  <Link href={`/trek/${item.url}`} className="block"> 
   <button className="px-4 py-2 bg-yellow-500 text-black font-semibold rounded-full border-2 border-yellow-500 hover:bg-transparent hover:text-yellow-500 transition duration-300"> {/* Adjusted padding and hover effect for button */}
     Book Now
-  </button>
+  </button>   </Link>
 </div>
 </div>
-   </Link>
+
   </SwiperSlide>
         ))}
       </Swiper>

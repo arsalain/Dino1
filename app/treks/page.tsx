@@ -164,7 +164,7 @@ useEffect(() => {
       </div>
         </div>
     <div className='pt-10'>
-    {/* <Trek trek={keralaTrekTreks} name="trek" uniqueId="kerala" /> */}
+    <Trek trek={keralaTrekTreks} name="trek" uniqueId="kerala" />
     </div>
  </div>
  <div className=' mx-10 py-10'>
@@ -175,7 +175,7 @@ useEffect(() => {
       </div>
         </div>
     <div className='pt-10'>
-    {/* <Trek trek={tnTrekTreks}  name="trek" uniqueId="tamilnadu" /> */}
+    <Trek trek={tnTrekTreks}  name="trek" uniqueId="tamilnadu" />
     </div>
  </div>
  <div className=' mx-10 py-10'>

@@ -4,19 +4,24 @@ import { motion } from 'framer-motion';
 const LocationListSection = () => {
   const [activeCategory, setActiveCategory] = useState('all');
   const internationalLocations = ["Bhutan", "Cambodia", "Dubai", "Indonesia", "Maldives", "Singapore", "Sri Lanka", "Thailand", "Vietnam"];
-  const northIndianLocations = ["Agra", "Bir", "Darjeeling", "Delhi", "Gangtok","Jaipur", "Jodhpur", "Leh", "Manali", "Meghalaya", "Rishikesh" ,"Shimla", "Spiti", "Srinagar", "Udaipur"];
-  const southIndianLocations = ["Alleppey", "Bangalore", "Chennai", "Chikmagalur", "Coorg", "Dandeli", "Goa", "Gokarna", "Hampi", "Hyderabad", "Kochi", "Kodaikanal", "Kozhikode", "Mangalore", "Mysore", "Munnar", "Murdeshwar", "Ooty", "Pondicherry", "Varkala", "Wayanad"];
+  const northIndianLocations = ["Agra", "Bir", "Darjeeling", "Delhi", "Gangtok", "Haridwar", "Jaipur", "Jodhpur", "Kasol", "Kullu", "Leh", "Manali", "Mussoorie", "Meghalaya", "Rishikesh", "Shimla", "Spiti", "Srinagar", "Udaipur"];
+  const southIndianLocations = ["Alleppey", "Bangalore", "Chennai", "Chikmagalur", "Coorg", "Dandeli", "Goa", "Gokarna", "Hampi", "Kochi", "Kannur", "Kodaikanal", "Mangalore", "Mysore", "Munnar", "Murdeshwar", "Ooty", "Pondicherry", "Sakleshpur", "Thekkady", "Vagamon", "Varkala", "Wayanad"];
+  const getUrlForLocation = (location) => {
+    return `/destinations/${location.replace(/\s+/g, '-').toLowerCase()}`;
+  };
   const displayLocations = (locations) => (
     <div className="flex flex-wrap justify-center">
       {locations.map((location, idx) => (
         <motion.div
-        key={idx}
-        className="m-2 cursor-pointer"
-        whileHover={{ scale: 1.2, color: '#FFC34D' }}
-        whileTap={{ scale: 0.9 }}
-      >
-        {location}
-      </motion.div>
+          key={idx}
+          className="m-2 cursor-pointer"
+          whileHover={{ scale: 1.2, color: '#FFC34D' }}
+          whileTap={{ scale: 0.9 }}
+        >
+          <a href={getUrlForLocation(location)} className="text-white hover:text-yellow-500">
+            {location}
+          </a>
+        </motion.div>
       ))}
     </div>
   );

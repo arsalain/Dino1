@@ -48,9 +48,7 @@ const page = () => {
 </motion.h2>
 <p className="pb-4">To the maximum extent permitted by law, Backpackers United and its affiliates, partners, and suppliers shall not be liable for any direct, indirect, incidental, consequential, or special damages arising out of or in connection with your use of the Website, services, or these Terms. This limitation applies regardless of the legal theory on which the claim is based and whether we have been advised of the possibility of such damages.
 </p>
-            <Link href="/contact">
-              <div className="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded">Join Our Adventures</div>
-            </Link>
+        
           </motion.div>
       
     
