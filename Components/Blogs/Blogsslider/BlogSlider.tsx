@@ -45,7 +45,7 @@ const dest = [
     badge: "TOP RATED",
   },
 ];
-const  BlogSlider = () => {
+const  BlogSlider = ({data}) => {
   return (
     <div className="relative bg-black">
          <h2 className="text-3xl text-white font-bold text-center py-6">
@@ -85,14 +85,14 @@ const  BlogSlider = () => {
           },
         }}
       >
-         {dest.map((item, idx) => (
-   <SwiperSlide key={idx}>
-   <Link href={`/${item.title}`} className="block"> {/* Make the entire card a link */}
+{data && data.products && data.products.map((item) => (
+   <SwiperSlide key={data._id}>
+   {/* Make the entire card a link */}
      <div className="rounded-xl shadow-lg relative flex flex-col items-center justify-between h-full transition duration-300 cursor-pointer hover:shadow-2xl hover:scale-105 transform bg-black text-white p-4">
      <div className="overflow-hidden relative rounded-xl h-60 w-full">
          <Image
-           src={item.img}
-           alt={item.title}
+           src={`http://localhost:4000/uploads/${item.testimage}`} 
+           alt={item.testimagealt}
            objectFit="cover"
            layout="fill"
            className="transform transition-transform duration-300"
@@ -105,20 +105,21 @@ const  BlogSlider = () => {
          </span>
        )}
        <div className="p-4 text-center">
-  <h4 className="text-lg mb-1">{item.title}</h4>
-  <p className="text-sm mb-2">{item.location}</p>
+  <h4 className="text-lg mb-1">{item.name}</h4>
+  <p className="text-sm mb-2">{item.statename}</p>
        </div>
        <div className="flex flex-col sm:flex-row justify-between items-center mt-4 space-x-0 sm:space-x-4"> {/* Adjusted margin-top and space between price and button */}
   <div className="flex flex-col items-start mb-2 sm:mb-0">
     <p className="text-xs text-gray-400">Starting from</p>
-    <p className="text-lg font-bold">INR {item.price}</p>
+    <p className="text-lg font-bold">INR {item.amount}</p>
   </div>
+  <Link href={`/tour/${item.urllink}`} className="block">
   <button className="px-4 py-2 bg-yellow-500 text-black font-semibold rounded-full border-2 border-yellow-500 hover:bg-transparent hover:text-yellow-500 transition duration-300"> {/* Adjusted padding and hover effect for button */}
     Book Now
   </button>
+  </Link>
 </div>
 </div>
-   </Link>
   </SwiperSlide>
         ))}
       </Swiper>

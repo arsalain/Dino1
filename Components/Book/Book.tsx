@@ -3,6 +3,8 @@ import React,{useState,useEffect} from 'react'
 import {IoIosArrowDropleft} from 'react-icons/io'
 import {MdOutlineKeyboardArrowRight} from 'react-icons/md'
 import {FaRupeeSign} from 'react-icons/fa'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPlay } from '@fortawesome/free-solid-svg-icons'
 const Booking = ({ onClose, Batch, reserveamount, foramount, withoutamount ,Name}) => {
     const ticketPrice = 2;
     const firstTicketPrice = 1;
@@ -216,12 +218,12 @@ const Booking = ({ onClose, Batch, reserveamount, foramount, withoutamount ,Name
     // }, []);
     return (
         <div className="fixed top-0 left-0 w-full h-full   flex items-center justify-center bg-black bg-opacity-50 overflow-y-auto z-10">
-            <div className="bg-white rounded shadow-lg mt-40 mb-2">
+            <div className="bg-black text-white rounded shadow-lg mt-40 mb-2">
 
                 {isTabOneActive ? (
                     <div className='w-auto' >
                     <div className='flex flex-row bg-form1 p-4 border-b border-gray-400 justify-between md:gap-20 gap-10 '>
-                        <button onClick={onClose} ><IoIosArrowDropleft className="text-3xl text-gray-400 hover:text-green-700" /></button>
+                        <button onClick={onClose} ><IoIosArrowDropleft className="text-3xl text-gray-400 hover:text-yellow-500" /></button>
                         <div className='flex flex-col justify-center pt-4'>
                             <div className='text-xl font-bold text-center'>
                                 Who Is Booking ?
@@ -234,25 +236,22 @@ const Booking = ({ onClose, Batch, reserveamount, foramount, withoutamount ,Name
                             <div className="flex mt-5 ">
       {/* First rounded circle */}
       <div className="relative">
-        <div className={`w-4 h-4 rounded-full ${isTabOneActive ? 'bg-yellow-500' : 'bg-blue-200'} flex items-center justify-center text-white`}>
-        </div>
-        <div className="absolute h-0.5 w-2 bg-blue-200 top-2 left-4"></div>
+      
+  <FontAwesomeIcon icon={faPlay} className={`text-2xl ${isTabOneActive ? 'text-yellow-500' : 'text-blue-200'} flex items-center justify-center`}/>
+ 
+        <div className="absolute h-0.5 w-[12px] bg-blue-200 top-[11px] left-[18px]"></div>
       </div>
-      <div className="relative">
-        <div className={`w-4 h-4 rounded-full ${!isTabOneActive ? 'bg-yellow-500' : 'bg-blue-200'} flex items-center justify-center text-white ml-2`}>
-        </div>
-        <div className="absolute h-0.5 w-2 bg-blue-200 top-2 left-6"></div>
-      </div>
-      <div className="w-4 h-4 rounded-full bg-blue-200 flex items-center justify-center text-white ml-2">
-        </div>
+
+       <FontAwesomeIcon icon={faPlay} className={`text-2xl ${!isTabOneActive ? 'text-yellow-500' : 'text-blue-200'} flex items-center justify-center ml-3`}/>
+
     </div>
                                 </div>
                     </div>
                     <div className='p-4'>
                     <form onSubmit={handleSubmit}>
-                    <div className="mb-4 border border-gray-400 p-2 rounded-lg">
-        <label className="block text-sm  mb-2 text-center font-bold ">Select Dates</label>
-                             <select className="w-full p-2 border rounded" name="date"  value={inputValue.date}
+                    <div className="mb-2  rounded-lg">
+        <label className="block text-sm  mb-2 text-center  text-yellow-500 ">Select Dates</label>
+                             <select className="w-full p-2 border rounded text-black" name="date"  value={inputValue.date}
                             onChange={handleChange}  required>
                                <option value="" >Please select the Date</option>
           {Batch ? Batch.map((batch, idx) => (
@@ -266,20 +265,22 @@ const Booking = ({ onClose, Batch, reserveamount, foramount, withoutamount ,Name
         </select>
       </div>
     
-      <div className="mb-4 border border-gray-400 p-2 rounded-lg">
-        <label className="block text-sm font-bold mb-2">Name</label>
-        <input type="text" className="w-full p-2 border rounded" placeholder="Full Name" name="name"  value={inputValue.name}
+      <div className="mb-2   rounded-lg">
+        <label className="block text-sm text-yellow-500  mb-2">Full Name</label>
+        <input type="text" className="w-full p-2 border rounded text-black" placeholder="Full Name" name="name"  value={inputValue.name}
                             onChange={handleChange}   required/>
       </div>
-         <div className="mb-4 border border-gray-400 p-2 rounded-lg">
-          <label className="block text-sm font-bold mb-2">Phone Number (WhatsApp)</label>
-          <input type="text" className="w-full p-2 border rounded" placeholder="Phone Number" name="number" value={inputValue.number}
+      <div className='flex flex-row gap-2'>
+         <div className="mb-2   rounded-lg md:w-1/2 w-[58%]">
+          <label className="block text-sm text-yellow-500 mb-2">Phone Number </label>
+          <input type="text" className="w-full p-2 border rounded text-black" placeholder="Phone Number" name="number" value={inputValue.number}
                             onChange={handleChange}  required/>
         </div>
-      <div className="mb-4 border border-gray-400 p-2 rounded-lg">
-        <label className="block text-sm font-bold mb-2">Email Address</label>
-        <input type="email" className="w-full p-2 border rounded" placeholder="Email Address" name="email" value={inputValue.email}
+      <div className="mb-2 rounded-lg w-full">
+        <label className="block text-sm text-yellow-500 mb-2">Email Address</label>
+        <input type="email" className="w-full p-2 border rounded text-black" placeholder="Email Address" name="email" value={inputValue.email}
                             onChange={handleChange}  required/>
+      </div>
       </div>
       <button type='submit' className="w-full bg-yellow-500 text-white p-3 rounded mt-2" >Next</button>
       </form>
@@ -288,10 +289,10 @@ const Booking = ({ onClose, Batch, reserveamount, foramount, withoutamount ,Name
                 ) : (
                     <div className='md:w-[420px] w-[375px]'>
                     <div className='flex flex-row bg-form1 justify-between p-2 border-b border-gray-400'>
-                        <button onClick={switchToTabOne} ><IoIosArrowDropleft className="text-3xl text-gray-400 hover:text-green-700" /></button>
+                        <button onClick={switchToTabOne} ><IoIosArrowDropleft className="text-3xl text-gray-400 hover:text-yellow-500" /></button>
                         <div className='flex flex-col justify-center  pt-4'>
                             <div className='text-xl font-bold text-center'>
-                                Create Tickets & Pay
+                                Book Your Event Now
                                 </div>
                                 <div className='text-sm text-gray-400 pt-1 text-center'>
                                {Name}
@@ -301,18 +302,16 @@ const Booking = ({ onClose, Batch, reserveamount, foramount, withoutamount ,Name
                             <div className="flex mt-5 ">
       {/* First rounded circle */}
       <div className="relative">
-        <div className={`w-4 h-4 rounded-full ${isTabOneActive ? 'bg-yellow-500' : 'bg-blue-200'} flex items-center justify-center text-white`}>
-        </div>
-        <div className="absolute h-0.5 w-2 bg-blue-200 top-2 left-4"></div>
+        {/* <div className={`w-4 h-4 rounded-full ${isTabOneActive ? 'bg-yellow-500' : 'bg-blue-200'} flex items-center justify-center text-white`}>
+        </div> */}
+  <FontAwesomeIcon icon={faPlay} className={`text-2xl ${isTabOneActive ? 'text-yellow-500' : 'text-blue-200'} flex items-center justify-center`}/>
+ 
+        <div className="absolute h-0.5 w-[12px] bg-blue-200 top-[11px] left-[18px]"></div>
       </div>
-      <div className="relative">
-        <div className={`w-4 h-4 rounded-full ${!isTabOneActive ? 'bg-yellow-500' : 'bg-blue-200'} flex items-center justify-center text-white ml-2`}>
-        </div>
-        <div className="absolute h-0.5 w-2 bg-blue-200 top-2 left-6"></div>
-      </div>
-      <div className="w-4 h-4 rounded-full bg-blue-200 flex items-center justify-center text-white ml-2">
-        </div>
-        </div>
+
+       <FontAwesomeIcon icon={faPlay} className={`text-2xl ${!isTabOneActive ? 'text-yellow-500' : 'text-blue-200'} flex items-center justify-center ml-3`}/>
+
+    </div>
         </div>
         <div className={isShow ? 'block' : 'hidden'} >
                  <div className='px-6 border-t-5 border-gray-400 border-t-4 mt-5 text-gray-600 h-[250px]' >
@@ -351,7 +350,7 @@ const Booking = ({ onClose, Batch, reserveamount, foramount, withoutamount ,Name
 </div>
                     <div className={isShow ? 'hidden' : 'block'}>
                     <div className=" p-4 pb-2">
-                    <label className="block text-sm mb-2 mt-6 text-gray-400 font-bold">Select Ticket(s)</label>
+                    <label className="block text-sm mb-2 mt-6 text-yellow-500 ">Select Ticket(s)</label>
                     <div className="flex items-center  justify-between space-x-4 rounded-xl p-3 bg-form1 border border-gray-400">
                       <span className='font-bold text-sm'>With transport: ₹ {ticketPrice}</span>
                       <button onClick={handleDecreaseTicket} className='pl-[100px]'>-</button>

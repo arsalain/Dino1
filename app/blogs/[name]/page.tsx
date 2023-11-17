@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import Head from 'next/head';
 import Image from 'next/image';
 import BlogSlider from '@/Components/Blogs/Blogsslider/BlogSlider';
+import Header from '@/Components/Navbar/Header/Header';
 interface PageProps {
   params: {
       name: string;
@@ -84,41 +85,40 @@ const page = FC<PageProps> = ({ params })=> {
   };
   return (
     <>
-     <div className='bg-black '>
-     <div className="flex items-center mb-12 pt-8">
-       <div className="bg-yellow-500 w-1 h-16 mr-8 self-center"></div>
-      <h1 className="text-4xl inline-block align-middle text-white">
+     <div className='bg-black w-full'>
+      <Header />
+     <div className="flex  pt-20">
+       <div className="bg-yellow-500 w-1 h-16 mr-8 self-center"></div> 
+      <h1 className="text-4xl pt-10 text-white">
 {blog.name}
 </h1>
-      <span className="text-yellow-500 text-9xl inline-block align-middle relative" style={{top: '-0.1em'}}>.</span>
+       <span className="text-yellow-500 text-9xl  relative" style={{top: '-0.2em'}}>.</span> 
       </div>
        <div className="ml-9">
       {blog && blog.over && blog.over.map((over, index) => (
-          <p className="text-gray-300 mt-2" key={index}  >
+          <p className="text-gray-300 " key={index}  >
      {over}
      </p>
       ))} 
     </div> 
-    </div> 
+  
        {/* Activity Section */}
        {/* Activity Section */}
        <div className="bg-black py-8">
-  <div className="container mx-auto px-16">
+  <div className="container mx-auto px-16 grid grid-cols-2 gap-5">
   {blog && blog.blogs && blog.blogs.map((blogs, index) => (
       <div key={blogs._id} className="mb-6 shadow-lg rounded-lg overflow-hidden border border-white">
-        <div className="relative">
+        <div className="relative h-[200px]">
           <Image
-            src={blogs.imageUrl}
+            src={`http://localhost:4000/uploads/${blogs.image}`}
             alt={blogs.imagealt}
-            width={1920}
-            height={400}
-            layout="responsive"
+            layout="fill"
             objectFit="cover"
           />
         </div>
         <div className="p-6 bg-black">
           <h3 className="text-2xl font-bold mb-3 text-white">{blogs.title}</h3>
-          <p className={`text-white mt-4 ${expandedId !== blogs._id ? 'line-clamp-1' : ''}`}>
+          <p className={`text-white mt-4 ${expandedId !== blogs._id ? 'line-clamp-2' : ''}`}>
             {blogs.para}
           </p>
           <button
@@ -133,7 +133,8 @@ const page = FC<PageProps> = ({ params })=> {
         </div>
       </div>
       {/* BlogSlider Component */}
-      <BlogSlider />
+      <BlogSlider data={blog} />
+      </div> 
     </>
   );
 }
