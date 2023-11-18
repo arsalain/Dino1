@@ -4,6 +4,8 @@ import React from 'react'
 import { motion } from 'framer-motion'
 const Promo = () => {
   return (
+    
+    <div className='mx-auto max-w-screen-2xl'>
     <div className="flex flex-col md:flex-row justify-between items-stretch w-full md:max-w-screen-2xl md:py-10 pb-10 pt-5  sm:px-6 lg:px-8 xl:px-12 2xl:px-16 ">
       {/* Left Section */}
       <motion.div
@@ -50,6 +52,7 @@ const Promo = () => {
           </motion.button>
         </div>
       </motion.div>
+    </div>
     </div>
   )
 }

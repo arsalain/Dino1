@@ -13,6 +13,7 @@ import { faIndianRupeeSign,faCircle, faMountainSun, faPersonHiking, faHotel, faM
 import Booking from '@/Components/Book/Book'
 import { FC } from "react";
 import Footer from '@/Components/Navbar/Footer/Footer';
+import EnquiryForm from '@/Components/Book/EnquiryForm';
 
 interface PageProps {
   params: {
@@ -25,6 +26,7 @@ const page = FC<PageProps> = ({ params })=> {
     const [showPopup, setShowPopup] = useState(false);
     const [data, setData] = useState({});
     const [openSection, setOpenSection] = useState([]);
+    const [showEnquiry, setShowEnquiry] = useState(false);
     const toggleSection = (sectionName) => {
       if (openSection.includes(sectionName)) {
         // If the section is already open, close it
@@ -74,6 +76,7 @@ const page = FC<PageProps> = ({ params })=> {
     if (!data) {
       return <div>Loading...</div>;
   }
+
   return (
     <div >
         <Header />
@@ -167,7 +170,7 @@ const page = FC<PageProps> = ({ params })=> {
 
       <button className="w-full py-4 mb-4 mt-2 bg-yellow-500 hover:bg-black border-2 hover:text-yellow-500 border-yellow-500  rounded"   onClick={() => setShowPopup(true)}>BOOK NOW</button>
       <div className="text-center">Or call <Link href='#' className=' text-yellow-500 font-bold hover:underline'>1-888-966-8687</Link></div>
-      <button className="w-full my-4 mt-4  text-xl text-yellow-500 font-bold hover:underline ">Send Enquiry</button>
+      <button className="w-full my-4 mt-4  text-xl text-yellow-500 font-bold hover:underline " onClick={() => setShowEnquiry(true)}>Send Enquiry</button>
                 {/* Add other links similarly */}
             </div>
             <div className="ml-1/4 md:w-3/4 w-full overflow-y-auto">
@@ -502,6 +505,7 @@ const page = FC<PageProps> = ({ params })=> {
       </div>
     </div>
     {showPopup && <Booking  onClose={() => setShowPopup(false)} Batch={data.batch} reserveamount={data.reserveamount} foramount={data.fromamount} withoutamount={data.withoutamount} Name={data.name} /> }
+    {showEnquiry && <EnquiryForm />}
     </div>
   )
 }

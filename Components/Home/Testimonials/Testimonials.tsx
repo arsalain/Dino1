@@ -125,7 +125,7 @@ const TestimonialSection = () => {
       initial={{ backgroundColor: 'white' }}
       animate={{ backgroundColor: 'black' }}
       transition={{ duration: 1 }}
-      className="text-white  flex flex-col items-center "
+      className="text-white  flex flex-col items-center md:mt-6 "
     >
            <motion.h2
         initial={{ opacity: 0, y: -50 }}

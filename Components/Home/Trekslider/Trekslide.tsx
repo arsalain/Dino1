@@ -15,22 +15,15 @@ const destinations = [
     location: "Singtur Range, Uttarakhand",
     price: 5999,
     img: "/home/kedarkanta.webp",
-    badge: "BREAKFAST INCLUDED",
+    badge: "BEST SELLER",
     url:"kedarkantha-trek"
   },
-  {
-    title: "Hamta Pass Trek",
-    location: "Kullu, Himachal Pradesh",
-    price: 7000,
-    img: "/home/Hampta.webp",
-    url:"hampta-pass-trek"
-  },
+
   {
     title: "Brahmatal Trek",
     location: "Kuling, Uttarakhand",
     price: 6299,
     img: "/home/Brahmatal.webp",
-    badge: "BEST SELLER",
     url:"brahmatal-trek"
   },
   {
@@ -48,6 +41,13 @@ const destinations = [
     img: "/home/kp.webp",
     badge: "TOP RATED",
     url:"kumara-parvatha-trek"
+  },
+  {
+    title: "Hamta Pass Trek",
+    location: "Kullu, Himachal Pradesh",
+    price: 7000,
+    img: "/home/Hampta.webp",
+    url:"hampta-pass-trek"
   },
 ];
 const TrekSlider = () => {

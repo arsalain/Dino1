@@ -44,19 +44,28 @@ const Footer = () => {
       <div className="flex flex-col md:flex-row md:justify-around md:items-center py-6 px-4">
         {/* Logo and Social Media Icons */}
         <div className="flex flex-col items-start md:items-center mb-8 md:mb-0 space-y-4">
-          <div className="flex flex-row space-x-4">
-            <Link href='/'>
-              <Image src="/home/bplogo.jpg" alt="logo image" className="rounded-full" width={40} height={40} />
-            </Link>
-            <div className="flex flex-col">
-              <Link href='/'>
-                <div className="text-2xl font-semibold text-white">BACKPACKERS</div>
-              </Link>
-              <div className="text-sm font-bold text-red-600 relative top-[-0.525rem]">
-                UNITED
-              </div>
-            </div>
-          </div>
+        <div className="flex flex-row items-center space-x-4">
+  <Link href='/'>
+  <motion.div whileHover={{ scale: 1.1 }}>
+        <Image src="/home/bplogo.jpg" alt="logo image" className="rounded-full" width={40} height={40} />
+      </motion.div>
+  </Link>
+    <div className="flex flex-col items-center">
+    <Link href='/'>
+        <motion.div whileHover={{ scale: 1.05 }} className="text-2xl font-semibold text-white">
+          BACKPACKERS
+        </motion.div>
+        </Link>
+        <div className="flex items-center">
+          <div className="border-t border-white flex-grow"></div> {/* Left line */}
+          <motion.div whileHover={{ scale: 1.05 }} className="text-sm font-bold text-red-600 px-2">
+            UNITED
+          </motion.div>
+          <div className="border-t border-red-600 flex-grow"></div> {/* Right line */}
+        </div>
+  </div>
+</div>
+
           {/* Social Media Icons */}
           <div className="hidden md:flex md:space-x-6 md:text-xl md:pt-4">
             <motion.a href="#" className="text-white hover:text-yellow-500" whileHover={{ scale: 1.4 }}>

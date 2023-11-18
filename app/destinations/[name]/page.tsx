@@ -8,6 +8,7 @@ import Footer from '@/Components/Navbar/Footer/Footer';
 import { FC } from "react";
 import { useSpring, animated } from 'react-spring';
 import { useGesture } from 'react-use-gesture';
+import Link from 'next/link';
 
 interface PageProps {
   params: {
@@ -21,7 +22,9 @@ const page = FC<PageProps> = ({ params })=> {
     useEffect(() => {
       const handleScroll = () => {
         const scrolled = window.scrollY;
-        parallaxRef.current.style.backgroundPositionY = -(scrolled * 0.5) + 'px';
+        if (parallaxRef.current) {
+          parallaxRef.current.style.backgroundPositionY = -(scrolled * 0.5) + 'px';
+        }
       };
       window.addEventListener('scroll', handleScroll);
       return () => {
@@ -86,7 +89,7 @@ const page = FC<PageProps> = ({ params })=> {
   <h1 className="text-3xl font-bold mb-6">Getaway to Wayanad</h1>
 </div>
 {destination && destination.products && destination.products.map((products, index) => (
-    <div className="bg-black md:p-10 p-4 text-white">
+    <div className="bg-black md:p-10 p-4 text-white" key={index}>
   <div className="relative flex flex-col  gap-2">
     <div className="relative md:w-[50%] w-[100%] h-[400px]">
       <Image
@@ -122,73 +125,45 @@ const page = FC<PageProps> = ({ params })=> {
 ))}
 
       <div className="bg-black p-10 text-white">
+        <div>
     <div className="text-center mb-8">
         <h1 className="text-3xl font-bold mb-2">Adventurer's Digest</h1>
         <p className="text-gray-400">Curated guides for every traveler's need.</p>
     </div>
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {/* Card 1 */}
-        <div className="rounded-lg overflow-hidden shadow-lg bg-gray-800">
+        {/* Card 1 */}{destination && destination.blogs && destination.blogs.map((blogs, index) => (
+        <div className="rounded-lg overflow-hidden shadow-lg bg-gray-800" key={index}>
   <div className="relative w-full h-64">
+  {blogs.blogs && blogs.blogs[0] && (
     <Image
-      src="/home/blog1.jpg"
-      alt="Backpacking in Asia"
+      src={`http://localhost:4000/uploads/${blogs.blogs[0].image}`}
+      alt={blogs.imagealt}
       layout="fill"
       objectFit="cover"
       className="rounded-t-xl"
     />
+  )}
   </div>
   <div className="px-6 py-4">
-    <h2 className="font-bold text-xl mb-2">Wayanad Unveiled: Serenity Amidst the Wilderness</h2>
-    <p className="text-gray-400 mb-4">Escape to the Heart of Kerala's Enchanted Landscapes.</p>
-    <button className="bg-yellow-400 text-black font-bold py-2 px-6 rounded-full border-2 border-transparent hover:bg-black hover:text-yellow-400 hover:border-yellow-400 transition duration-300">
-    Explore
+    <h2 className="font-bold text-xl mb-2">{blogs.name}</h2>
+    <p className="text-gray-400 mb-4 overflow-hidden overflow-ellipsis line-clamp-3">{blogs.over[0]}</p>
+    <div className="flex justify-end">
+   <Link href={`/blogs/${blogs.urllink}`} > <button className="bg-yellow-400 text-black font-bold py-2 px-6 rounded-full border-2 border-transparent hover:bg-black hover:text-yellow-400 hover:border-yellow-400 transition duration-300 ">
+    Read More
     </button>
+    </Link>
+    </div>
   </div>
 </div>
-<div className="rounded-lg overflow-hidden shadow-lg bg-gray-800">
-  <div className="relative w-full h-64">
-    <Image
-      src="/home/blog1.jpg"
-      alt="Travel Essentials"
-      layout="fill"
-      objectFit="cover"
-      className="rounded-t-xl"
-    />
-  </div>
-  <div className="px-6 py-4">
-    <h2 className="font-bold text-xl mb-2">Wayanad Unveiled: Serenity Amidst the Wilderness</h2>
-    <p className="text-gray-400 mb-4">Escape to the Heart of Kerala's Enchanted Landscapes.</p>
-    <button className="bg-yellow-400 text-black font-bold py-2 px-6 rounded-full border-2 border-transparent hover:bg-black hover:text-yellow-400 hover:border-yellow-400 transition duration-300">
-    Explore
-    </button>
-  </div>
-</div>
-<div className="rounded-lg overflow-hidden shadow-lg bg-gray-800">
-  <div className="relative w-full h-64">
-    <Image
-      src="/home/blog1.jpg"
-      alt="Travel to Jordan"
-      layout="fill"
-      objectFit="cover"
-      className="rounded-t-xl"
-    />
-  </div>
-  <div className="px-6 py-4">
-    <h2 className="font-bold text-xl mb-2">Wayanad Unveiled: Serenity Amidst the Wilderness</h2>
-    <p className="text-gray-400 mb-4">Escape to the Heart of Kerala's Enchanted Landscapes.</p>
-    <button className="bg-yellow-400 text-black font-bold py-2 px-6 rounded-full border-2 border-transparent hover:bg-black hover:text-yellow-400 hover:border-yellow-400 transition duration-300">
-     Explore
-    </button>
-  </div>
-</div>
+        ))}
         
     </div>
-    <a href="/destination-guide" className="block mt-10 text-center text-yellow-500 hover:text-yellow-600 underline">
+    <Link href="/blogs" className="block mt-10 text-center text-yellow-500 hover:text-yellow-600 underline">
     Roam the World Through Our Blogs →
-    </a>
+    </Link>
 </div>
       <Footer />
+    </div>
     </div>
   )
 }

@@ -32,7 +32,7 @@ const Popular = () => {
               className="col-span-2 md:col-span-2 relative overflow-hidden w-full rounded-lg md:h-[500px] h-[155px]"
         >  <Link href="/destinations/wayanad" >   
           <Image
-            src='/home/WAYANAD.jpg'
+            src='/home/Wayanad.webp'
             alt="WAYANAD"
             layout="fill"
             objectFit="cover"
@@ -40,7 +40,12 @@ const Popular = () => {
           {/* Gradient overlay */}
           <div className="absolute inset-0 bg-gradient-to-b  from-black to-transparent opacity-50"></div>
           {/* Text at top left */}
-          <p className="absolute md:top-5 md:left-5 md:text-xl text-lg top-2 left-2 text-white">WAYANAD</p></Link>
+          <div className="absolute md:top-5 md:left-5 md:text-xl text-lg top-2 left-2 text-white">WAYANAD
+        
+          <hr className="border-t-2 border-yellow-500 md:w-[60PX] w-[30px]" />
+          </div>
+          </Link>
+
         </motion.div>
     {/* First set of smaller images (3 images vertically) */}
     {/* Second set of smaller images (2 images vertically) */}
@@ -50,14 +55,15 @@ const Popular = () => {
             className="col-span-1 md:col-span-2 relative overflow-hidden w-full rounded-lg md:h-[240px] h-[155px]"
           > <Link href="/destinations/gokarna" >  
             <Image
-              src='/home/GOKARNA.JPG'
+              src='/home/Gokarna.webp'
               alt="GOKARNA"
               layout="fill"
               objectFit="cover"
             />
              <div className="absolute inset-0 bg-gradient-to-b  from-black to-transparent opacity-50"></div>
           {/* Text at top left */}
-          <p className="absolute md:top-5 md:left-5 md:text-xl text-lg top-2 left-2 text-white">GOKARNA</p>
+          <div className="absolute md:top-5 md:left-5 md:text-xl text-lg top-2 left-2 text-white">GOKARNA
+          <hr className="border-t-2 border-yellow-500 md:w-[60PX] w-[30px]" /></div>
           </Link>
             </motion.div>
             <motion.div
@@ -65,14 +71,15 @@ const Popular = () => {
             className="col-span-1 md:col-span-2 relative overflow-hidden w-full rounded-lg md:h-[240px] h-[155px]"
           > <Link href="/destinations/kashmir" >  
             <Image
-              src='/home/KASHMIR.jpg'
+              src='/home/Kashmir.webp'
               alt="KASHMIR"
               layout="fill"
               objectFit="cover"
             />
            <div className="absolute inset-0 bg-gradient-to-b  from-black to-transparent opacity-50"></div>
           {/* Text at top left */}
-          <p className="absolute md:top-5 md:left-5 md:text-xl text-lg top-2 left-2 text-white">KASHMIR</p>
+          <div className="absolute md:top-5 md:left-5 md:text-xl text-lg top-2 left-2 text-white">KASHMIR
+          <hr className="border-t-2 border-yellow-500 md:w-[60PX] w-[30px]" /></div>
           </Link>
         </motion.div>
     </div>
@@ -82,14 +89,15 @@ const Popular = () => {
             className="row-span-2 md:row-span-1 relative overflow-hidden w-full rounded-lg md:h-[155px] h-[155px]"
           > <Link href="/destinations/kodaikanal" >  
             <Image
-              src='/home/KODAIKANAL.jpg'
+              src='/home/kodaikanal.webp'
               alt="KODAIKANAL"
               layout="fill"
               objectFit="cover"
             />
           <div className="absolute inset-0 bg-gradient-to-b  from-black to-transparent opacity-50"></div>
           {/* Text at top left */}
-          <p className="absolute md:top-5 md:left-5 md:text-xl text-lg top-2 left-2 text-white">KODAIKANAL</p>
+          <div className="absolute md:top-5 md:left-5 md:text-xl text-lg top-2 left-2 text-white">KODAIKANAL
+          <hr className="border-t-2 border-yellow-500 md:w-[60PX] w-[30px]" /></div>
           </Link>
        </motion.div>
        <motion.div
@@ -97,14 +105,15 @@ const Popular = () => {
             className="row-span-2 md:row-span-1  relative overflow-hidden w-full rounded-lg md:h-[155px] h-[155px]"
           > <Link href="/destinations/munnar" >  
             <Image
-              src='/home/MUNAR.jpg'
+              src='/home/Munar.webp'
               alt="MUNAR"
               layout="fill"
               objectFit="cover"
             />
             <div className="absolute inset-0 bg-gradient-to-b  from-black to-transparent opacity-50"></div>
           {/* Text at top left */}
-          <p className="absolute md:top-5 md:left-5 md:text-xl text-lg top-2 left-2 text-white">MUNNAR</p>
+          <div className="absolute md:top-5 md:left-5 md:text-xl text-lg top-2 left-2 text-white">MUNNAR
+          <hr className="border-t-2 border-yellow-500 md:w-[60PX] w-[30px]" /></div>
           </Link>
         </motion.div>
         <motion.div
@@ -112,14 +121,15 @@ const Popular = () => {
             className="relative overflow-hidden w-full rounded-lg md:h-[155px] h-[155px] row-span-1"
           > <Link href="/destinations/chikmagalur" >  
             <Image
-              src='/home/CHIKMANGALUR.jpg'
+              src='/home/Chikmagalur.webp'
               alt="CHIKAMAGALUR"
               layout="fill"
               objectFit="cover"
             />
           <div className="absolute inset-0 bg-gradient-to-b  from-black to-transparent opacity-50"></div>
           {/* Text at top left */}
-          <p className="absolute md:top-5 md:left-5 md:text-xl text-lg top-2 left-2 text-white">CHIKMAGALUR</p>
+          <div className="absolute md:top-5 md:left-5 md:text-xl text-lg top-2 left-2 text-white">CHIKMAGALUR
+          <hr className="border-t-2 border-yellow-500 md:w-[60PX] w-[30px]" /></div>
           </Link>
         </motion.div>
     </div>
@@ -133,14 +143,15 @@ const Popular = () => {
             className="relative overflow-hidden w-full rounded-lg md:h-40 h-52"
           > <Link href="/destinations/goa" >  
             <Image
-              src='/home/GOA.jpg'
+              src='/home/Goa.webp'
               alt="GOA"
               layout="fill"
               objectFit="cover"
             />
        <div className="absolute inset-0 bg-gradient-to-b  from-black to-transparent opacity-50"></div>
           {/* Text at top left */}
-          <p className="absolute md:top-5 md:left-5 md:text-xl text-lg top-2 left-2 text-white">GOA</p>
+          <div className="absolute md:top-5 md:left-5 md:text-xl text-lg top-2 left-2 text-white">GOA
+          <hr className="border-t-2 border-yellow-500 md:w-[60PX] w-[30px]" /></div>
           </Link>
       </motion.div>
       </div>
@@ -158,7 +169,8 @@ const Popular = () => {
             />
         <div className="absolute inset-0 bg-gradient-to-b  from-black to-transparent opacity-50"></div>
           {/* Text at top left */}
-          <p className="absolute md:top-5 md:left-5 md:text-xl text-lg top-2 left-2 text-white">ANDAMAN AND NICOBAR ISLAND</p>
+          <div className="absolute md:top-5 md:left-5 md:text-xl text-lg top-2 left-2 text-white">ANDAMAN AND NICOBAR ISLAND
+          <hr className="border-t-2 border-yellow-500 md:w-[60PX] w-[30px]" /></div>
           </Link>
       </motion.div>
     </div>

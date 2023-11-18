@@ -41,7 +41,7 @@ export default function Home() {
 
 </section> 
 
-<div className='md:mx-10 mx-6'>
+<div className='md:mx-10 mx-6 mt-4'>
 <div className="text-center md:text-center">
           <h2 className="text-xl md:text-3xl font-bold text-yellow-500  ">Adventure Explorations</h2>
           <div className="flex justify-center pt-2 md:pt-5 md:pb-10">

@@ -7,8 +7,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 // Placeholder data for page 2
-
-
 const Page = () => {
   const [blogs, setBlogs] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);

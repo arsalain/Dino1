@@ -48,12 +48,16 @@ const PopularDestinations = () => {
           1200: {
             slidesPerView: 4,
           },
+          1600: {
+            slidesPerView: 5,
+            spaceBetween: 30,
+          }
         }}
       >
         {destinations2.map((item) => (
           <SwiperSlide key={item.id}>
             <Link href={`/destinations/${item.url}`}>
-    <div className="block rounded-lg shadow-lg overflow-hidden  group hover:bg-opacity-100 transition-all ease-out duration-300">
+    <div className="block rounded-lg shadow-lg overflow-hidden  group hover:bg-opacity-100 transition-all ease-out duration-300 w-auto">
       <div className="w-auto h-[250px] md:w-[350px] md:h-[350px] relative ">
               <Image
                 src={item.img}
@@ -69,7 +73,7 @@ const PopularDestinations = () => {
                     {item.city}
                   </h4>
 
-                    <button className="w-full py-3 bg-yellow-500 text-black rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                    <button className="w-full py-3  bg-yellow-500 text-black rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                       Discover
                     </button>
               
