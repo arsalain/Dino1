@@ -115,9 +115,10 @@ const page = FC<PageProps> = ({ params })=> {
           <p>Starting from</p>
           <p className="text-yellow-400 font-bold text-xl">₹{products.fromamount}</p>
         </div>
-        <button className="bg-yellow-400 text-black font-bold py-2 px-6 rounded-full border-2 border-transparent hover:bg-black hover:text-yellow-400 hover:border-yellow-400 transition duration-300">
+        <Link href={`/tour/${products.urllink}`} >   <button className="bg-yellow-400 text-black font-bold py-2 px-6 rounded-full border-2 border-transparent hover:bg-black hover:text-yellow-400 hover:border-yellow-400 transition duration-300">
           BOOK NOW ➔
         </button>
+        </Link>
       </div>
     </motion.div>
   </div>
