@@ -96,23 +96,24 @@ const imageHoverVariants = {
 // AboutUs Component
 const AboutUs = () => {
   return (
-    <>
+    <div >
       <Header />
+      <div className='bg-black '>
       <motion.div initial="initial" animate="animate" transition="transition" className="container mx-auto px-4 py-6 bg-black">
-        <div className="pt-10"></div>
-        <motion.h1 variants={aboutUsVariants} className="text-center text-6xl text-yellow-500 mb-6">Our Story</motion.h1>
+        <div className="pt-16"></div>
+        <motion.h1 variants={aboutUsVariants} className="text-center text-5xl text-yellow-500">Our Story</motion.h1>
+        <div className="flex justify-center  md:pt-5">
+        <hr className="border-t-2 border-white md:w-[60PX] w-[30px] mb-8" />
+      </div>
         <div className="flex flex-row justify-between items-center gap-10">
-          <motion.div variants={aboutUsVariants} className="text-white lg:w-1/2">
+          <motion.div variants={aboutUsVariants} className="text-white lg:w-1/2 text-justify break-words">
             <p>Welcome to Backpackers United – your gateway to extraordinary, life-changing travel experiences! Since our inception in 2017, we've grown rapidly into a vibrant community for adventurous souls seeking the road less traveled. Our enthusiastic team is on a relentless mission to unveil nature's hidden jewels, advocating sustainable and responsible exploration.</p>
             <p>We excel in crafting journeys that resonate with diverse interests. From mesmerizing treks and thrilling cycling adventures to bespoke holiday packages and backpacking escapades, we have it all. Our clients rave about the unforgettable memories and friendships forged on our trips.</p>
             <p>Embark on a journey with Backpackers United. Let's create stories worth telling and memories that last a lifetime. Adventure is out there – let's discover it together!</p>
-            <Link href="/contact">
-              <div className="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded">Join Our Adventures</div>
-            </Link>
           </motion.div>
           {/* <div className='ml-10'> */}
           <div className="lg:w-1/2 relative w-full h-[300px] ">
-            <Image src="/about/about.jpg" alt="Travel Story" layout='fill' objectFit="cover" className="rounded-lg"/>
+            <Image src="/about/about.jpg" alt="Travel Story" layout='fill' objectFit="contain" className="rounded-lg"/>
           </div>
           {/* </div> */}
         </div>
@@ -129,8 +130,9 @@ const AboutUs = () => {
           ))}
         </div>
       </motion.div>
+      </div>
       <Footer />
-    </>
+      </div>
   );
 };
 export default AboutUs;

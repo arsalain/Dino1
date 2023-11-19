@@ -621,7 +621,7 @@ const IncluContent = ({ data }) => (
         <h2 className="mb-4 text-lg font-bold">WHAT'S INCLUDED</h2>
         <div>
            {data && data.included && data.included.map((included, idx) => (
-            <div key={idx} className="mb-2 list-decimal flex flex-row "><FontAwesomeIcon icon={faCircle} className='w-[5px] h-[5px] pr-2 pt-[9px] ' />{included}</div>
+            <div key={idx} className="mb-2 list-decimal flex flex-row "><FontAwesomeIcon icon={faCircle} className='w-[5px] h-[5px] pr-2 pt-[9px] text-yellow-500' />{included}</div>
           ))}
         </div>
       </div>
@@ -630,7 +630,7 @@ const IncluContent = ({ data }) => (
         <h2 className="mb-4 text-lg font-bold">WHAT'S NOT INCLUDED</h2>
         <div>
         {data && data.notincluded && data.notincluded.map((notincluded, idx) => (
-            <div key={idx} className="mb-2 list-decimal flex flex-row "><FontAwesomeIcon icon={faCircle} className='w-[5px] h-[5px] pr-2 pt-[9px] ' />{notincluded}</div>
+            <div key={idx} className="mb-2 list-decimal flex flex-row "><FontAwesomeIcon icon={faCircle} className='w-[5px] h-[5px] pr-2 pt-[9px] text-yellow-500' />{notincluded}</div>
           ))}
         </div>
         </div>
