@@ -110,11 +110,11 @@ const TrekSlider = () => {
            {item.badge}
          </span>
        )}
-       <div className="p-4 text-center">
+       <div className="p-4 pb-0 text-center">
   <h4 className="text-lg mb-1">{item.title}</h4>
   <p className="text-sm mb-2">{item.location}</p>
        </div>
-       <div className="flex flex-col sm:flex-row justify-between items-center mt-4 space-x-0 sm:space-x-4"> {/* Adjusted margin-top and space between price and button */}
+       <div className="flex flex-col sm:flex-row justify-between items-center mt-2 space-x-0 sm:space-x-4"> {/* Adjusted margin-top and space between price and button */}
   <div className="flex flex-col items-start mb-2 sm:mb-0">
     <p className="text-xs text-gray-400">Starting from</p>
     <p className="text-lg font-bold">INR {item.price}</p>

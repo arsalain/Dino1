@@ -5,6 +5,7 @@ import Head from 'next/head';
 import Image from 'next/image';
 import BlogSlider from '@/Components/Blogs/Blogsslider/BlogSlider';
 import Header from '@/Components/Navbar/Header/Header';
+import Footer from '@/Components/Navbar/Footer/Footer';
 interface PageProps {
   params: {
       name: string;
@@ -134,6 +135,7 @@ const page = FC<PageProps> = ({ params })=> {
       </div>
       {/* BlogSlider Component */}
       <BlogSlider data={blog} />
+      <Footer />
       </div> 
     </>
   );

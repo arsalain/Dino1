@@ -50,7 +50,7 @@ const Page = () => {
                         <h2 className="text-2xl text-yellow-500">Sales:-</h2>
                         <p className="text-white">For questions about our products, group bookings, or special requests, please reach out to our sales team.</p>
                         <p className="text-white">
-      Email: <a href="mailto:info@backpackersunited.in" className="hover:text-yellow-500">info@backpackersunited.in</a><br />
+      Email: <Link href="mailto:info@backpackersunited.in" className="hover:text-yellow-500">info@backpackersunited.in</Link><br />
       Phone: <a href="tel:+918310180586" className="hover:text-yellow-500">+91 8310180586</a>
     </p>
                     </div>

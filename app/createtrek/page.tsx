@@ -46,15 +46,7 @@ itinerary: '',
     included: [],
     notincluded: [],
     things: [],
-    related: [{       rday: '', 
-    rname: '',
-    rimage: null,
-    rimagealt: '',
-    ramount: '',
-    rtype: '',
-    rtypename: '',
-    rlevel: '',
-    rlevelname: '' }],
+    relatedtreks:[],
     batch: [{ date: '', amount: '' }],
     // ... initialize other array fields similarly
   });
@@ -144,38 +136,8 @@ console.log(trekData,"trek")
           })
 
   };
-  const handleRelatedChange = (index, e) => {
-    const updatedRelated = [...trekData.related];
-    updatedRelated[index] = { ...updatedRelated[index], [e.target.name]: e.target.value };
-    setTrekData({ ...trekData, related: updatedRelated });
-  };
-  const handleRelatedFileChange = (index, e) => {
-    const updatedRelated = [...trekData.related];
-    updatedRelated[index] = { ...updatedRelated[index], rimage: e.target.files[0] };
-    setTrekData({ ...trekData, related: updatedRelated });
-  };
-
-  const addNewRelated = () => {
-    setTrekData({
-      ...trekData,
-      related: [
-        ...trekData.related,
-        {
-          rday: '',
-          rname: '',
-          rimage: null,
-          rimagealt: '',
-          ramount: '',
-          rtype: '',
-          rtypename: '',
-          rlevel: '',
-          rlevelname: '',
-          rservice: '',
-          rservicename: '',
-        }
-      ],
-    });
-  };
+ 
+  
 
   // Frontend React Code - handleSubmit function
 
@@ -205,20 +167,6 @@ const handleSubmit = async (e) => {
         }
       });
       formData.append('days', JSON.stringify(trekData.days));
-      trekData.related.forEach((related, index) => {
-        for (const [key, value] of Object.entries(related)) {
-            if (related.rimage && related.rimage instanceof File) {
-                formData.append(`relatedImage[${index}]`, related.rimage, related.rimage.name);
-              
-          } else if (typeof value === 'string' || typeof value === 'number') {
-            // All other values that are strings or numbers can be sent as text fields.
-            formData.append(`related[${index}].${key}`, value);
-          }
-          // Note: If there are other types of fields, you may need to handle them accordingly.
-        }
-      });
-      formData.append('related', JSON.stringify(trekData.related));
-
 
     trekData.batch.forEach((batch, index) => {
         formData.append(`batch[${index}].date`, batch.date);
@@ -242,7 +190,9 @@ trekData.notincluded.forEach((item, index) => {
   trekData.over.forEach((item, index) => {
     formData.append(`over[${index}]`, item.trim());
   });
-  
+  trekData.relatedtreks.forEach((item, index) => {
+    formData.append(`relatedtreks[${index}]`, item.trim());
+  });
   // 'days' is an array of objects and might include File objects for images
 
   for (let [key, value] of formData.entries()) {
@@ -803,124 +753,31 @@ trekData.notincluded.forEach((item, index) => {
   </button>
 </div>
 
-<div className="related-section">
-  {trekData.related.map((relatedItem, index) => (
-    <div key={index} className="flex flex-col mb-4 border p-4">
-      <h3 className="font-bold mb-2">Related Item {index + 1}</h3>
-      {/* Existing Fields */}
-      <div className="flex flex-wrap -mx-2">
-        {/* Row 1 */}
-        <div className="px-2 w-1/2">
-      <input
-        type="text"
-        name="rday"
-        placeholder="Enter '2 Days', '3 Days', '7 Days', and so on"
-        value={relatedItem.rday}
-        onChange={(e) => handleRelatedChange(index, e)}
-        className="mb-2 p-2 border border-gray-300 rounded w-full"
+<div className='w-full px-2 py-2'>
+  <h3 className="text-center font-semibold">Add Related Trek/Tour Ids</h3>
+  {trekData.relatedtreks.map((item, index) => (
+    <div key={index} className="flex flex-row gap-2 items-center">
+      <textarea
+        value={item}
+        placeholder={`Trek ids  ${index + 1}`}
+        onChange={(e) => handleChangeArray('relatedtreks', index, e.target.value)}
+        className="p-2 border border-gray-300 rounded w-full"
       />
-      </div>
-      <div className="px-2 w-1/2">
-      <input
-        type="text"
-        name="rname"
-        placeholder="Name: 'Ooty Tour', 'Wayanad Tour', 'Chikmagalur Tour', and so on"
-        value={relatedItem.rname}
-        onChange={(e) => handleRelatedChange(index, e)}
-        className="mb-2 p-2 border border-gray-300 rounded w-full"
-      />
-      </div>
-      <div className="px-2 w-1/2">
-      <div className="file-upload mb-2">
-        <label htmlFor={`rimage-${index}`} className="block mb-2 font-bold">Image:</label>
-        <input
-          type="file"
-          id={`rimage-${index}`}
-          onChange={(e) => handleRelatedFileChange(index, e)}
-          className="mb-2 "
-        />
-      </div>
-      </div>
-      <div className="px-2 w-1/2">
-      <input
-        type="text"
-        name="rimagealt"
-        placeholder="Image Alt Text"
-        value={relatedItem.rimagealt}
-        onChange={(e) => handleRelatedChange(index, e)}
-        className="mb-2 p-2 border border-gray-300 rounded w-full"
-      />
-      </div>
-      <div className="px-2 w-1/2">
-      <input
-        type="number"
-        name="ramount"
-        placeholder="Amount for the tour/trek"
-        value={relatedItem.ramount}
-        onChange={(e) => handleRelatedChange(index, e)}
-        className="mb-2 p-2 border border-gray-300 rounded w-full"
-      />
-      </div>
-      {/* New Fields */}
-      <div className="px-2 w-1/2">
-      <input
-        type="text"
-        name="rtype"
-        placeholder="Enter ''Tour/ Trek' Type'"
-        value={relatedItem.rtype}
-        onChange={(e) => handleRelatedChange(index, e)}
-        className="mb-2 p-2 border border-gray-300 rounded w-full"
-      />
-      </div>
-      <div className="px-2 w-1/2">
-      <input
-        type="text"
-        name="rtypename"
-        placeholder="Enter 'Adventure Tour', 'Hill Tour', and so on"
-        value={relatedItem.rtypename}
-        onChange={(e) => handleRelatedChange(index, e)}
-        className="mb-2 p-2 border border-gray-300 rounded w-full"
-      />
-      </div>
-      <div className="px-2 w-1/2">
-      <input
-        type="text"
-        name="rlevel"
-        placeholder="Enter 'State'"
-        value={relatedItem.rlevel}
-        onChange={(e) => handleRelatedChange(index, e)}
-        className="mb-2 p-2 border border-gray-300 rounded w-full"
-      />
-      </div>
-      <div className="px-2 w-1/2">
-      <input
-        type="text"
-        name="rlevelname"
-        placeholder="Enter name of the State"
-        value={relatedItem.rlevelname}
-        onChange={(e) => handleRelatedChange(index, e)}
-        className="mb-2 p-2 border border-gray-300 rounded w-full"
-      />
-      </div>
-      
-      </div>
-      {/* Remove Item Button */}
       <button
         type="button"
-        onClick={() => handleRemoveArrayItem('related', index)}
-        className="self-end bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600"
+        onClick={() => handleRemoveArrayItem('relatedtreks', index)}
+        className="bg-red-500 text-white px-2 py-1 rounded"
       >
         Remove
       </button>
     </div>
   ))}
-  {/* Add New Related Item Button */}
   <button
     type="button"
-    onClick={addNewRelated}
-    className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 mt-4"
+    onClick={() => handleAddArrayItem('relatedtreks')}
+    className="mt-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700 w-full"
   >
-    Add New Related Item
+    Add Trek/ Tour Id
   </button>
 </div>
 

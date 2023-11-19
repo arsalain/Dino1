@@ -36,6 +36,17 @@ const page = FC<PageProps> = ({ params })=> {
         setOpenSection([...openSection, sectionName]);
       }
     };
+    const [expanded, setExpanded] = useState(false);
+
+    // Function to toggle the expanded state
+    const toggleExpanded = () => {
+      setExpanded(!expanded);
+    };
+  
+    // Determine the number of batches to show
+    const batches = data && data.batch ? data.batch : [];
+
+    const displayedBatches = expanded ? batches : batches.slice(0, 2);
     // const toggleSection = (section) => {
     //     if (openSection === section) {
     //         setOpenSection(null);
@@ -73,10 +84,31 @@ const page = FC<PageProps> = ({ params })=> {
         setOpenDay(day);
       }
     };
+    const faq = [
+      {
+        question: "What is the number of participants on a trip?",
+        answer: "For our tours, we typically host 12-20 travelers in a single batch. If the number of travelers exceeds this range, we organize them into multiple batches for a better experience. For trekking adventures, our groups usually consist of 20-30 travelers per batch, with the possibility of slightly larger groups during long weekends."
+      },
+      {
+        question: "Do your trips have any age limitations?",
+        answer: "Yes, we have an age restriction in place, requiring participants to be 18 years or older. However, if guardians or parents are accompanying the group, they are welcome to bring their children along for the trek or tour."
+      },
+      {
+        question: "How can I reserve my slot?",
+        answer: "You can directly reserve your slots by booking on the website, please ensure proper dates are selected before confirming your booking."
+      },
+      {
+        question: "Is it safe for Women travelers?",
+        answer: " Safety and Security Guidelines are followed at all times, and it is our topmost priority. We have certified trek leads (Male/Female) accompanying the participants at all times and our stay follows well-rounded safety measures."
+      },
+      {
+        question: "What payment options do I have?",
+        answer: "We have multiple payment options on the website that you can refer to."
+      }
+    ];
     if (!data) {
       return <div>Loading...</div>;
   }
-
   return (
     <div >
         <Header />
@@ -85,16 +117,16 @@ const page = FC<PageProps> = ({ params })=> {
       
       <div className=" h-screen w-full relative ">
         <Image src={`http://localhost:4000/uploads/${data.testimage}`}  alt="kudremukha" layout="fill" objectFit="cover" className='absolute' /> 
-           
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div> 
            <div className='absolute left-0 bottom-0 w-full' >
 
            <h1 className='text-3xl md:text-5xl text-white font-bold pl-10 pb-5'>{data.name}</h1>
-            <div className="flex flex-col md:flex-row items-center py-4 md:pl-10 px-4 w-full bg-black mx-auto">
+            <div className="flex flex-col md:flex-row items-center justify-center py-4 md:pl-10 px-4 w-full bg-black mx-auto">
           {/* <div className='flex flex-row pb-4 md:pb-0'> */}
           <div className="text-white md:w-[15rem] w-auto mt-6 md:mt-0 ">
             <div className='flex flex-row md:flex-col' >
             <div className="font-bold md:text-xl text-lg">{data.day}</div>
-            <div className="flex flex-row  items-center md:text-base text-lg md:pl-0 pl-2">{data.for} <FontAwesomeIcon icon={faIndianRupeeSign} className='text-sm w-4 h-4 ' /> {data.fromamount}</div>
+            <div className="flex flex-row  items-center md:text-base text-lg md:pl-0 pl-2 text-yellow-500">{data.for} <FontAwesomeIcon icon={faIndianRupeeSign} className='text-sm w-4 h-4 ' /> {data.fromamount}</div>
             </div>
            <Link href="#date"> <div className="underline">View All Dates & Prices</div></Link>
           </div>
@@ -104,35 +136,35 @@ const page = FC<PageProps> = ({ params })=> {
           <div className="flex flex-row items-center md:w-[13rem] mt-6 md:mt-0">
             <FontAwesomeIcon icon={faMountainSun} className='md:w-8 md:h-8 w-6 h-6' /> 
             <div className='flex flex-col pl-4' >
-              <span>{data.trektype}</span>
+              <span className='text-yellow-500'>{data.trektype}</span>
               <span>{data.trektypename}</span>
               </div>
             </div>
             <div className="flex flex-row items-center md:w-[13rem] mt-6 md:mt-0">
             <FontAwesomeIcon icon={faPersonHiking} className='md:w-8 md:h-8 w-6 h-6'/> 
             <div className='flex flex-col pl-4' >
-              <span>{data.level}</span>
+              <span className='text-yellow-500'>{data.level}</span>
               <span>{data.levelname}</span>
               </div>
             </div>
             <div className="flex flex-row items-center md:w-[13rem] mt-6 md:mt-0">
             <FontAwesomeIcon icon={faHotel} className='md:w-8 md:h-8 w-6 h-6'/> 
             <div className='flex flex-col pl-4' >
-              <span>{data.service}</span>
+              <span className='text-yellow-500'>{data.service}</span>
               <span>{data.servicename}</span>
               </div>
             </div>
             <div className="flex flex-row items-center md:w-[6rem] mt-6 md:mt-0">
             <FontAwesomeIcon icon={faMapLocationDot} className='md:w-8 md:h-8 w-6 h-6' /> 
             <div className='flex flex-col pl-4' >{/* Replace with your icon */}
-              <span>{data.state}</span>
+              <span className='text-yellow-500'>{data.state}</span>
               <span>{data.statename}</span>
               </div>
             </div>
           </div>
-          <div className="hidden  md:flex justify-center items-center ">
+          { data && data.batch && data.batch.length > 1 &&      <div className="hidden  md:flex justify-center items-center ">
           <button className="bg-yellow-500 text-black px-6 py-2 rounded-md"   onClick={() => setShowPopup(true)}> BOOK NOW</button>
-        </div>
+        </div> }
         </div>
       </div>
       </div>
@@ -140,13 +172,10 @@ const page = FC<PageProps> = ({ params })=> {
      
       
       <div className="flex md:h-screen md:sticky md:top-0 ">
-            <div className="hidden md:block md:w-1/4 min-h-screen bg-gray-200 p-4  " >
+            <div className="hidden md:block md:w-1/4 min-h-screen bg-gray text-black p-4  " >
           
                 <Link href="#expedition-overview">
-                    <span className="block  hover:font-bold p-2">Expedition Overview</span>
-                </Link>
-                <Link href="#experts">
-                    <span className="block mb-2 hover:font-bold px-2">Experts on this Trip</span>
+                    <span className="block  hover:font-bold p-2">Overview</span>
                 </Link>
                 <Link href="#iternary">
                     <span className="block mb-2 hover:font-bold px-2">Itinerary</span>
@@ -168,8 +197,8 @@ const page = FC<PageProps> = ({ params })=> {
                 </Link>
                         <div className="border-t-2 border-gray-300 mt-4 mb-1"></div>
 
-      <button className="w-full py-4 mb-4 mt-2 bg-yellow-500 hover:bg-black border-2 hover:text-yellow-500 border-yellow-500  rounded"   onClick={() => setShowPopup(true)}>BOOK NOW</button>
-      <div className="text-center">Or call <Link href='#' className=' text-yellow-500 font-bold hover:underline'>1-888-966-8687</Link></div>
+                        { data && data.batch && data.batch.length > 1 &&     <button className="w-full py-4 bg-yellow-500 hover:bg-black border-2 hover:text-yellow-500 border-yellow-500  rounded"   onClick={() => setShowPopup(true)}>BOOK NOW</button> }
+      <div className="text-center mt-6">Call <a href="tel:+919364099494" className='text-yellow-500 font-bold hover:underline '>+91 93640-99494</a></div>
       <button className="w-full my-4 mt-4  text-xl text-yellow-500 font-bold hover:underline " onClick={() => setShowEnquiry(true)}>Send Enquiry</button>
                 {/* Add other links similarly */}
             </div>
@@ -177,8 +206,9 @@ const page = FC<PageProps> = ({ params })=> {
             <section id="expedition-overview">
                 <div className="bg-white md:p-10 p-4 text-black">
                     <div className="border-b-2 border-gray-300 md:py-8 py-2">
-                        <div className="flex justify-between items-center md:hidden"> {/* hidden on medium and above screens */}
-                            <h1 className="text-2xl font-bold md:mb-6 mb-2">EXPEDITION OVERVIEW</h1>
+                        <div className="flex justify-between items-center md:hidden">
+                           {/* hidden on medium and above screens */}
+                            <h1 className="text-2xl font-bold md:mb-6 mb-2">OVERVIEW</h1>
                             <button onClick={() => toggleSection("expedition")} className='text-xl'>
                             {openSection.includes("expedition")  ? <FontAwesomeIcon icon={faAngleUp} /> : <FontAwesomeIcon icon={faAngleDown} />}
                             </button>
@@ -190,34 +220,16 @@ const page = FC<PageProps> = ({ params })=> {
                             </div>
                         )}
                         <div className="hidden md:block"> {/* shown only on medium and above screens */}
-                            <h1 className="text-3xl font-bold mb-6">EXPEDITION OVERVIEW</h1>
+                        <div className="flex items-left">
+      <div className="bg-yellow-500 w-1 h-6 mr-4 mt-[6px]"></div>
+                            <h1 className="text-3xl font-bold mb-6">OVERVIEW</h1>
+                            </div>
                             <SpecialOffers />
                             <FeatureList data={data} />
                         </div>
                     </div>
                 </div>
                 </section>
-                <section id="experts">
-            <div className="bg-white md:p-10 p-4 pt-0 md:pt-0">
-            <div className="border-b-2 border-gray-300 md:pb-8 py-1">
-                <div className="flex justify-between items-center md:hidden"> {/* hidden on medium and above screens */}
-                    <h2 className="text-2xl font-bold md:mb-6 mb-2">EXPERTS ON THIS TRIP</h2>
-                    <button onClick={() => toggleSection("expert")} className='text-xl'>
-                    {openSection.includes("expert") ? <FontAwesomeIcon icon={faAngleUp} /> : <FontAwesomeIcon icon={faAngleDown} />}
-                    </button>
-                </div>
-                {openSection.includes("expert")  && (
-                    <div className="md:hidden"> {/* hidden on medium and above screens */}
-                        <ExpertContent data={data} />
-                    </div>
-                )}
-                <div className="hidden md:block"> {/* shown only on medium and above screens */}
-                    <h2 className="text-3xl font-bold mb-6">EXPERTS ON THIS TRIP</h2>
-                    <ExpertContent data={data} />
-                </div>
-                </div>
-                </div>
-        </section>
         <section id="itinerary">
     <div className="bg-white md:p-10 p-4 pt-0 md:pt-0 text-black">
         <div className="border-b-2 border-gray-300 md:pb-8 py-1">
@@ -268,8 +280,11 @@ const page = FC<PageProps> = ({ params })=> {
                     </div>
                 </div>
             )}
-            <div className="hidden md:block"> {/* shown only on medium and above screens */}
+            <div className="hidden md:block"> 
+            <div className="flex items-left">
+      <div className="bg-yellow-500 w-1 h-6 mr-4 mt-[6px]"></div>
                 <h1 className="text-3xl font-bold mb-6">ITINERARY</h1>
+                </div>
                 <p className="text-gray-600 mb-10">{data.itinerary}</p>
                 <div className="container mx-auto">
                     {data && data.days && data.days.map((days, index) => (
@@ -330,7 +345,10 @@ const page = FC<PageProps> = ({ params })=> {
             </div>
           )}
           <div className="hidden md:block">
+          <div className="flex items-left">
+      <div className="bg-yellow-500 w-1 h-6 mr-4 mt-[6px]"></div>
             <h1 className="text-3xl font-bold mb-6">WHAT TO EXPECT</h1>
+            </div>
             <ExpectContent data={data} />
           </div>
         </div>
@@ -347,12 +365,15 @@ const page = FC<PageProps> = ({ params })=> {
         </div>
         {openSection.includes("date") && (
             <div className="md:hidden"> {/* hidden on medium and above screens */}
-                <DateContent data={data} />
+                <DateContent data={data} expanded={expanded} toggleExpanded={toggleExpanded} displayedBatches={displayedBatches} />
             </div>
         )}
-        <div className="hidden md:block"> {/* shown only on medium and above screens */}
+        <div className="hidden md:block"> 
+        <div className="flex items-left">
+      <div className="bg-yellow-500 w-1 h-6 mr-4 mt-[6px]"></div>
             <h2 className="text-3xl font-bold mb-6">DATES & PRICES</h2>
-            <DateContent data={data} />
+            </div>
+            <DateContent data={data} expanded={expanded} toggleExpanded={toggleExpanded} displayedBatches={displayedBatches} />
         </div>
     </div>
     </div>
@@ -371,8 +392,11 @@ const page = FC<PageProps> = ({ params })=> {
                 <IncluContent data={data} />
             </div>
         )}
-        <div className="hidden md:block"> {/* shown only on medium and above screens */}
+        <div className="hidden md:block"> 
+        <div className="flex items-left">
+      <div className="bg-yellow-500 w-1 h-6 mr-4 mt-[6px]"></div>
             <h2 className="text-3xl font-bold mb-6">INCLUSIONS AND EXCLUSIONS</h2>
+            </div>
             <IncluContent data={data} />
         </div>
       </div>
@@ -393,8 +417,11 @@ const page = FC<PageProps> = ({ params })=> {
                     <ThingsContent data={data} />
                 </div>
             )}
-            <div className="hidden md:block"> {/* shown only on medium and above screens */}
+            <div className="hidden md:block">
+            <div className="flex items-left">
+      <div className="bg-yellow-500 w-1 h-6 mr-4 mt-[6px]"></div>
                 <h2 className="text-3xl font-bold mb-6">THINGS TO CARRY</h2>
+                </div>
                 <ThingsContent data={data} />
             </div>
         </div>
@@ -404,8 +431,11 @@ const page = FC<PageProps> = ({ params })=> {
  <section id='faq'>
   <div className='md:p-10 md:pt-0 p-4 bg-white '>
   <div className='border-b-2 border-gray-300 md:pb-8 pb-4'>
+  <div className="flex items-left">
+      <div className="bg-yellow-500 w-1 h-6 mr-4 mt-[6px]"></div>
  <h2 className="text-2xl font-semibold mb-6 ">FAQs</h2>
- {data && data.faq && data.faq.map((faq, index) => (
+ </div>
+ {faq.map((faq, index) => (
              <div key={index} className="mb-4 p-4 border rounded-lg shadow-md">
              <div className="flex justify-start items-center cursor-pointer" onClick={() => toggleItem(index)}>
                <div className="w-10 h-10 bg-black rounded-full flex items-center justify-center text-white font-bold text-xl mr-4">
@@ -421,7 +451,10 @@ const page = FC<PageProps> = ({ params })=> {
  </section>
                 <section >
                 <div className="container mx-auto md:p-10 p-4 md:pt-0 bg-white">
-      <h2 className="text-2xl font-semibold mb-6 md:pt-10 pt-0">RELATED TRIPS</h2>
+                <div className="flex items-left">
+      <div className="bg-yellow-500 w-1 h-6 mr-4 mt-[6px]"></div>
+      <h2 className="text-2xl font-semibold mb-6 ">RELATED TRIPS</h2>
+      </div>
       <div className='relative px-6'>
         {/* Trip 1 */}
         <Swiper
@@ -455,26 +488,26 @@ const page = FC<PageProps> = ({ params })=> {
           },
         }}
       >
-        {data && data.related && data.related.map((related, index) => (
+        {data && data.relatedtreks && data.relatedtreks.map((related, index) => (
        
             <SwiperSlide key={index}>
                  <Link href='#' >
-        <div className="border rounded-lg overflow-hidden">
+        <div className="border rounded-lg overflow-hidden ">
           <Image
-            src={`http://localhost:4000/uploads/${related.rimage}`}
-            alt={related.rimagealt}
+            src={`http://localhost:4000/uploads/${related.testimage}`}
+            alt={related.testimagealt}
             style={{ height: '200px' }}
             width={400} 
             height={300} 
           />
           <div className="p-4 bg-white">
-            <div className="mb-4 border-b pb-2">
-              <span className="text-lg font-semibold">{related.rday} <FontAwesomeIcon icon={faIndianRupeeSign} className='text-sm w-4 h-4 pt-1 ' />{related.ramount}</span>
+            <div className="mb-4 border-b pb-2 flex justify-between">
+              <div className="text-lg font-semibold">{related.day}</div> <div><FontAwesomeIcon icon={faIndianRupeeSign} className='text-sm w-4 h-4 pt-1 ' />{related.amount}</div> 
             </div>
-            <h3 className="font-semibold text-xl mb-3">{related.rname}</h3>
-            <p><strong>{related.rtype}</strong> {related.rtypename}</p>
-            <p><strong>{related.rlevel}</strong> {related.rlevelname}</p>
-            <p><strong>{related.rservice}</strong> {related.rservicename}</p>
+            <h3 className="font-semibold text-xl mb-3">{related.name}</h3>
+            {related.service &&   <p><strong>{related.service}</strong> : {related.servicename}</p>}
+            {related.level &&   <p><strong>{related.level}</strong> : {related.levelname}</p>}
+            {related.state &&   <p><strong>{related.state}</strong> : {related.statename}</p>}
           </div>
         </div>
         </Link> 
@@ -487,7 +520,6 @@ const page = FC<PageProps> = ({ params })=> {
 </button>
 <button className="swiper-button-next flex items-center justify-center w-5 h-5 text-white  shadow-md rounded-full bg-black ">
 </button>
-        {/* Trip 2 */}
       </div>
     </div>
     </div>
@@ -523,39 +555,6 @@ const FeatureList = ({ data }) => (
       ))}
   </>
 );
-const ExpertContent = ({ data }) => (
-    <>
-        <p className="text-gray-600 mb-10">{data.expertpara}</p>
-        <div className="flex md:space-x-20 space-y-10 md:space-y-0 flex-col md:flex-row items-center md:items-start">
-            {/* Expert 1 */}
-            <div className="text-center ">
-                <div className="w-40 h-40 relative rounded-full overflow-hidden mb-4">
-                    <Image
-                        src={`http://localhost:4000/uploads/${data.lead1pimg}`}
-                        alt={data.lead1pimgalt}
-                        layout="fill"
-                        objectFit="cover"
-                    />
-                </div>
-                <h3 className="font-semibold text-lg">{data.lead1name}</h3>
-                <p className="text-gray-500">{data.lead1oc}</p>
-            </div>
-            {/* Expert 2 */}
-            <div className="text-center">
-                <div className="w-40 h-40 relative rounded-full overflow-hidden mb-4">
-                    <Image
-                        src={`http://localhost:4000/uploads/${data.lead2pimg}`}
-                        alt={data.lead2pimgalt}
-                        layout="fill"
-                        objectFit="cover"
-                    />
-                </div>
-                <h3 className="font-semibold text-lg">{data.lead2name}</h3>
-                <p className="text-gray-500">{data.lead2oc}</p>
-            </div>
-        </div>
-    </>
-);
 const ExpectContent = ({ data }) => (
   <>
     <p className="text-gray-600 mb-6">{data.expectpara}</p>
@@ -569,35 +568,50 @@ const ExpectContent = ({ data }) => (
     </div>
   </>
 );
-
-const DateContent = ({ data }) => (
+const DateContent = ({ displayedBatches,toggleExpanded,data, expanded }) => (
   <div>
+     { data && data.batch && data.batch.length > 1 && (
+      <div>
       <div className="border-b border-gray-300 mb-4 p-2">
           <h3>Batches</h3>
       </div>
-      {data && data.batch && data.batch.map((batch, idx) => (
-          <div className="flex md:justify-between md:items-center flex-col md:flex-row border-b border-gray-300 bg-gray-200 mb-4 p-4 gap-2">
-              <div>
-                  <p className="text-lg font-bold">{batch.date}</p>
-              </div>
-              <div>
-                  <div className='flex flex-row'>  
-                      <FontAwesomeIcon icon={faIndianRupeeSign} className='text-sm w-4 h-4 pt-1 ' /> 
-                      {batch.amount} /- Per Person
-                  </div>
-              </div>
-              <div className='flex flex-row gap-4'>
-              <div className="cursor-pointer">
-                  <button className='bg-gray-500 py-2 px-10 rounded-lg text-white' >Send Enquiry</button>
-              </div>
-              <div className="cursor-pointer">
-                  <button className='bg-yellow-500 py-2 px-10 rounded-lg' >Reserve Now</button>
-              </div>
-              </div>
+      {displayedBatches.map((batch, idx) => (
+        <div key={idx} className="flex md:justify-between md:items-center flex-col md:flex-row border-b border-gray-300 bg-gray-200 mb-4 p-4 gap-2">
+          <div>
+            <p className="text-lg font-bold">{batch.date}</p>
           </div>
+          <div>
+            <div className='flex flex-row'>  
+              <FontAwesomeIcon icon={faIndianRupeeSign} className='text-sm w-4 h-4 pt-1 ' />
+              {batch.amount} /- Per Person
+            </div>
+          </div>
+          <div className='flex flex-row gap-4'>
+            <div className="cursor-pointer">
+              <button className='bg-gray-500 py-2 px-10 rounded-lg text-white'>Send Enquiry</button>
+            </div>
+            <div className="cursor-pointer">
+              <button className='bg-yellow-500 py-2 px-10 rounded-lg'>Book Now</button>
+            </div>
+          </div>
+        </div>
       ))}
+
+      {data && data.batch && data.batch.length > 2 && (
+        <div className="text-center my-4">
+          <button
+            onClick={toggleExpanded}
+            className="border border-black text-black py-2 px-10 rounded-lg "
+          >
+            {expanded ? 'Read Less' : 'Read More'}
+          </button>
+        </div>
+      )}
+      </div>
+     )
+      }
       <div className="text-sm text-gray-500">
-          <p>All trip prices are per person based on double occupancy, are subject to change without notice and do not include airfare. All prices and fares are quoted in U.S. dollars.</p>
+          <p>For more information, please dont hesitate to give us a call at <a href="tel:+919364099494" className='text-yellow-500 font-bold hover:underline '>+91 93640-99494</a></p>
       </div>
   </div>
 );
@@ -627,7 +641,7 @@ const ThingsContent = ({ data }) => (
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-4">
           {data && data.things && data.things.map((things, idx) => (
               <div key={idx} className="flex flex-row">
-                  <FontAwesomeIcon icon={faCircle} className='w-[5px] h-[5px] pr-2 pt-[9px] text-yellow-400' />{things}
+                  <FontAwesomeIcon icon={faCircle} className='w-[5px] h-[5px] pr-2 pt-[9px] text-yellow-500' />{things}
               </div>
           ))}
       </div>
@@ -635,3 +649,4 @@ const ThingsContent = ({ data }) => (
 );
 
 export default page
+
