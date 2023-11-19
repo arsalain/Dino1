@@ -1,5 +1,5 @@
 'use client'
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,useRef } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Header from '@/Components/Navbar/Header/Header';
@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import Link from 'next/link';
 import { faGift, faPercent, faConciergeBell, faCalendarCheck, faMapMarkedAlt, faBlackTie, faPlaneDeparture, faCreditCard } from '@fortawesome/free-solid-svg-icons';
-import AccordionItem from '@/Components/Member/Accordian/Accordianitem';
+
 
 
 const Page = () => {
@@ -25,7 +25,44 @@ setCurrentBackgroundIndex((prevIndex) => (prevIndex + 1) % backgroundImages.leng
 }, 3000);
 return () => clearInterval(intervalId);
 }, []);
+const [isMobile, setIsMobile] = useState(false);
+const [showAllTreks, setShowAllTreks] = useState(false);
+const [showAllTours, setShowAllTours] = useState(false);
 
+// States and refs for tours
+
+const topOfTreksListRef = useRef(null);
+  const topOfToursListRef = useRef(null);// Create a ref
+
+useEffect(() => {
+  // Update isMobile based on the actual window width
+  const checkIfMobile = () => setIsMobile(window.innerWidth < 768);
+  checkIfMobile();
+
+  // Handle window resize
+  window.addEventListener('resize', checkIfMobile);
+  return () => window.removeEventListener('resize', checkIfMobile);
+}, []);
+
+
+
+ const handleViewChangeTreks = () => {
+    const shouldScroll = showAllTreks;
+    setShowAllTreks(!showAllTreks);
+
+    if (shouldScroll && topOfTreksListRef.current) {
+      topOfTreksListRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const handleViewChangeTours = () => {
+    const shouldScroll = showAllTours;
+    setShowAllTours(!showAllTours);
+
+    if (shouldScroll && topOfToursListRef.current) {
+      topOfToursListRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 const adventures = [
 { src: '/pass/pass1.jpg', alt: 'Adventure 1' },
 { src: '/pass/pass2.jpg', alt: 'Adventure 1' },
@@ -55,6 +92,11 @@ const tours = [
 'Australian Outback Safari', 'Mediterranean Culinary Tour', 'Southeast Asian Culture Trek', 'Alaskan Glacier Hike',
 'Australian Outback Safari', 'Mediterranean Culinary Tour', 'Southeast Asian Culture Trek', 'Alaskan Glacier Hike',
 ];
+const displayLimit = isMobile ? 5 : treks.length;
+  const displayedTreks = showAllTreks ? treks : treks.slice(0, displayLimit);
+  const displayLimita = isMobile ? 5 : tours.length;
+  const displayedTours = showAllTours ? tours : tours.slice(0, displayLimita);
+
 const tabs = ['General', 'Safety', 'Service', 'Policy', 'Booking', 'Payment'];
 const faqContent = {
 General: [
@@ -132,7 +174,7 @@ return (
 style={{ backgroundImage: `url(${backgroundImages[currentBackgroundIndex]})` }}>
 {/* Content for the dynamic background section */}
 <div className="text-center text-white p-12 z-10">
-<h1 className="text-5xl font-bold mb-6"><span className='text-yellow-500'>Explore South India:</span> Your Pass, Backpackers Style</h1>
+<h1 className="md:text-5xl text-4xl font-bold mb-6"><span className='text-yellow-500'>Explore South India:</span> Your Pass, Backpackers Style</h1>
 <p className="text-xl mb-6">Embark on amazing expeditions with our Backpackers United Community with the Travel Pass. One stop shop for amazing experiences and a lifetime of memories.</p>
 <button className="text-yellow-400 border border-yellow-400 font-bold py-2 px-4 rounded-full hover:bg-yellow-400 hover:text-black focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-opacity-50 transition-colors duration-300">
 JOIN NOW
@@ -141,18 +183,18 @@ JOIN NOW
 </div>
 </div>
 <div className="bg-black">
-<div className="py-12 px-4">
+<div className="py-12 px-4 md:px-4">
 {/* Changed text-white to text-black */} {/* Added text-white class */}
-<h2 className="text-4xl font-bold text-center mb-5 text-yellow-500">Exclusive Benefits</h2>
-<div className="flex justify-center  md:pb-10">
+<h2 className="md:text-4xl  text-3xl font-bold text-center mb-5 text-yellow-500">Exclusive Benefits</h2>
+<div className="flex justify-center  md:pb-10 pb-5">
         <hr className="border-t-2 border-white md:w-[60PX] w-[30px]" />
       </div>
-<p className="text-justify mx-6 mb-10 break-words">
+<p className="text-justify md:mx-6 mb-10 break-words">
 Join the Backpackers United Member community once you avail the travel pass!  It offers you a choice of either 20 treks or tours, each promising unforgettable experiences under Trek pass and Tour passes respectively. You'll also get additional benefits like round-the-clock travel concierge, member only trips, fixed discounts on trips other than the ones included in the pass, customised travel plans, and more. Embrace the extraordinary with Backpackers United, where each experience enriches your travel with amazing perks, making every getaway more than just a trip – it's a journey of discovery and a world full of backpacking enthusiasts!
 </p>
-<div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-6 text-black">
+<div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 md:gap-6 gap-3 text-black">
 {/* Welcome Bonus Card */}
-<div className="rounded-lg shadow p-6 flex flex-col items-end" style={{  background: 'linear-gradient(to right, #B2BEC3, #636E72)', color: '#333333' }}>
+<div className="rounded-lg shadow md:p-6 p-4 flex flex-col items-end" style={{ background: 'linear-gradient(to right, #fff59d, #ffeb3b)', color: '#333333' }}>
  
 {/* Image on the right */}
 <div className="mb-4">
@@ -162,11 +204,10 @@ Join the Backpackers United Member community once you avail the travel pass!  It
 <div className="text-left">
 <h3 className="text-lg font-semibold mb-2">Giveaway</h3>
 <p>Unlock your adventure with our exclusive giveaway</p>
-<div className="mb-4">
+
 </div>
 </div>
-</div>
-<div className="rounded-lg shadow p-6 flex flex-col items-end" style={{ background: 'linear-gradient(to right, #fff59d, #ffeb3b)', color: '#333333' }}>
+<div className="rounded-lg shadow md:p-6 p-4  flex flex-col items-end h-[250px] md:h-auto" style={{ background: 'linear-gradient(to right, #fff59d, #ffeb3b)', color: '#333333' }}>
  
 {/* Image on the right */}
 <div className="mb-4">
@@ -178,7 +219,7 @@ Join the Backpackers United Member community once you avail the travel pass!  It
 <p>Save 50% Today: Half Price, Full Value!</p>
 </div>
 </div>
-<div className="rounded-lg shadow p-6 flex flex-col items-end" style={{ background: 'linear-gradient(to right, #4F5D75, #2D3A45)', color: '#333333' }}>
+<div className="rounded-lg shadow md:p-6 p-4  flex flex-col items-end h-[250px] md:h-auto" style={{ background: 'linear-gradient(to right, #fff59d, #ffeb3b)', color: '#333333' }}>
  
 {/* Image on the right */}
 <div className="mb-4">
@@ -190,7 +231,7 @@ Join the Backpackers United Member community once you avail the travel pass!  It
 <p>Journey nonstop with our 24/7 concierge service</p>
 </div>
 </div>
-<div className="rounded-lg shadow p-6 flex flex-col items-end" style={{ background: 'linear-gradient(to right, #fff59d, #ffeb3b)', color: '#333333' }}>
+<div className="rounded-lg shadow md:p-6 p-4 flex flex-col items-end h-[250px] md:h-auto" style={{ background: 'linear-gradient(to right, #fff59d, #ffeb3b)', color: '#333333' }}>
   
 {/* Image on the right */}
 <div className="mb-4">
@@ -203,7 +244,7 @@ Join the Backpackers United Member community once you avail the travel pass!  It
 <p>Exclusive Access: Member-Only Minutes.</p>
 </div>
 </div>
-<div className="rounded-lg shadow p-6 flex flex-col items-end" style={{ background: 'linear-gradient(to right, #fff59d, #ffeb3b)', color: '#333333' }}>
+<div className="rounded-lg shadow md:p-6 p-4 flex flex-col items-end h-[250px] md:h-auto" style={{ background: 'linear-gradient(to right, #fff59d, #ffeb3b)', color: '#333333' }}>
   {/* Image on the right */}
 <div className="mb-4">
 <FontAwesomeIcon icon={faMapMarkedAlt} className="text-black text-3xl" />
@@ -215,7 +256,7 @@ Join the Backpackers United Member community once you avail the travel pass!  It
 <p>Fixed Discounts on Extended Trips, Beyond 2D/1N </p>
 </div>
 </div>
-<div className="rounded-lg shadow p-6 flex flex-col items-end" style={{ background: 'linear-gradient(to right, #fff59d, #ffeb3b)', color: '#333333' }}>
+<div className="rounded-lg shadow md:p-6 p-4 flex flex-col items-end h-[250px] md:h-auto" style={{ background: 'linear-gradient(to right, #fff59d, #ffeb3b)', color: '#333333' }}>
  
 {/* Image on the right */}
 <div className="mb-4">
@@ -228,7 +269,7 @@ Join the Backpackers United Member community once you avail the travel pass!  It
 <p>Your journey, your way: Customized Travel Plans.</p>
 </div>
 </div>
-<div className="rounded-lg shadow p-6 flex flex-col items-end" style={{ background: 'linear-gradient(to right, #fff59d, #ffeb3b)', color: '#333333' }}>
+<div className="rounded-lg shadow md:p-6 p-4 flex flex-col items-end h-[250px] md:h-auto" style={{ background: 'linear-gradient(to right, #fff59d, #ffeb3b)', color: '#333333' }}>
  
 {/* Image on the right */}
 <div className="mb-4">
@@ -241,7 +282,7 @@ Join the Backpackers United Member community once you avail the travel pass!  It
 <p>Travel when you want: No Blackout Dates, no restrictions.</p>
 </div>
 </div>
-<div className="rounded-lg shadow p-6 flex flex-col items-end" style={{ background: 'linear-gradient(to right, #fff59d, #ffeb3b)', color: '#333333' }}>
+<div className="rounded-lg shadow md:p-6 p-4  flex flex-col items-end h-[250px] md:h-auto" style={{ background: 'linear-gradient(to right, #fff59d, #ffeb3b)', color: '#333333' }}>
  
 {/* Image on the right */}
 <div className="mb-4">
@@ -256,13 +297,13 @@ Join the Backpackers United Member community once you avail the travel pass!  It
 </div>
 </div>
 <div className="bg-black text-white pl-auto pr-auto ">
-<div className="container mx-auto my-12 p-6 relative">
+<div className="container mx-auto md:my-12 mt-12 md:p-6 relative">
 {/* Overlay Title */}
 <div className="relative">
 {/* Image Grid */}
-<div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2">
-{adventures.map((adventure, index) => (
-<div key={index} className="relative w-full h-[150px] ">
+<div className="grid grid-cols-3 sm:grid-cols-3 lg:grid-cols-6 md:gap-2 gap-1">
+{adventures.slice(0, isMobile ? 6 : adventures.length).map((adventure, index) => (
+<div key={index} className="relative w-full md:h-[150px] h-[100px] ">
 {/* Ensure your images are square by providing the same width and height, or by using aspect-ratio classes */}
 <Image
 src={adventure.src}
@@ -276,7 +317,7 @@ className="rounded-lg"
 </div>
 
 <div className="absolute top-0 left-0 right-0 bottom-0 flex flex-col justify-center items-center">
-<div className="text-white text-4xl font-bold p-4 bg-black bg-opacity-50 rounded-lg">
+<div className="text-white md:text-4xl text-2xl font-bold p-4 bg-black bg-opacity-50 rounded-lg">
 150+ DESTINATIONS
 </div>
 </div>
@@ -284,21 +325,21 @@ className="rounded-lg"
 
 
 {/* Stats Section */}
-<div className="flex justify-around mt-12">
+<div className="flex justify-around md:mt-12 mt-6">
 <div className="text-center">
-<span className="text-6xl font-bold text-yellow-500">20</span>
-<p className="text-xl font-semibold">TREKS TO </p>
-<p className="text-xl font-semibold"> CHOOSE FROM</p>
+<span className="md:text-6xl text-4xl font-bold text-yellow-500">20</span>
+<p className="md:text-xl text-sm font-semibold">TREKS TO </p>
+<p className="md:text-xl text-sm font-semibold"> CHOOSE FROM</p>
 </div>
 <div className="text-center">
-<span className="text-6xl font-bold text-yellow-500">20</span>
-<p className="text-xl font-semibold">TOURS TO </p>
-<p className="text-xl font-semibold"> CHOOSE FROM</p>
+<span className="md:text-6xl text-4xl font-bold text-yellow-500">20</span>
+<p className="md:text-xl text-sm font-semibold">TOURS TO </p>
+<p className="md:text-xl text-sm font-semibold"> CHOOSE FROM</p>
 </div>
 <div className="text-center">
-<span className="text-6xl font-bold text-yellow-500">50%</span>
-<p className="text-xl font-semibold">DISCOUNTED  </p>
-<p className="text-xl font-semibold"> RATES</p>
+<span className="md:text-6xl text-4xl font-bold text-yellow-500">50%</span>
+<p className="md:text-xl text-sm font-semibold">DISCOUNTED  </p>
+<p className="md:text-xl text-sm font-semibold"> RATES</p>
 </div>
 </div>
 </div>
@@ -306,20 +347,20 @@ className="rounded-lg"
 </div>
 </div>
 <div className="bg-white py-12">
-<div className="container mx-auto px-4">
-<div className="text-center mb-10 text-black">
+<div className="container mx-auto md:px-4">
+<div className="text-center md:mb-10 mb-5 text-black">
 <h2 className="text-2xl font-semibold ">Unlock a World of Adventure with Backpackers United Travel Pass</h2>
-<div className="flex justify-center  md:pt-3">
+<div className="flex justify-center  pt-3">
         <hr className="border-t-2 border-yellow-500 md:w-[60PX] w-[30px]" />
       </div>
-<p className="mt-4 text-gray-600 text-justify break-words mx-6">
+<p className="mt-4 text-gray-600 text-justify break-words md:mx-6 mx-4">
 Embark on an extraordinary journey with our exclusive Travel Pass. Gain access to over 150 + unique travel experiences worldwide, designed for adventurous souls seeking exploration, connection, and unforgettable moments. Whether you're yearning for a thrilling trek through breathtaking landscapes or a cultural tour that unveils hidden gems, our Trek and Tour Pass is your key to a seamless backpacking adventure tailored to your wanderlust. More than just a pass, it's your ticket to a world of discovery.</p>
 </div>
 
-<div className="grid grid-cols-1 md:grid-cols-3 gap-8 px-6">
+<div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:px-6 px-4" >
 <div className="flex flex-col items-center text-center">
-<h3 className="text-xl font-semibold text-black">All in one platform</h3>
-<div className="flex justify-center  md:pt-3">
+<h3 className="text-xl font-semibold text-black">Exclusive Travel Deals for Pass holders</h3>
+<div className="flex justify-center  pt-3">
         <hr className="border-t-2 border-yellow-500 md:w-[60PX] w-[30px]" />
       </div>
 <p className="mt-2 text-gray-500 text-justify break-words">
@@ -330,7 +371,7 @@ there's something for everyone.
 
 <div className="flex flex-col items-center text-center">
 <h3 className="text-xl font-semibold text-black">Never Settle for Average</h3>
-<div className="flex justify-center  md:pt-3">
+<div className="flex justify-center  pt-3">
         <hr className="border-t-2 border-yellow-500 md:w-[60PX] w-[30px]" />
       </div>
 <p className="mt-2 text-gray-500 text-justify break-words">
@@ -341,7 +382,7 @@ quality operator for your plans.
 
 <div className="flex flex-col items-center text-center">
 <h3 className="text-xl font-semibold text-black">Truly Unique Experiences</h3>
-<div className="flex justify-center  md:pt-3">
+<div className="flex justify-center  pt-3">
         <hr className="border-t-2 border-yellow-500 md:w-[60PX] w-[30px]" />
       </div>
 <p className="mt-2 text-gray-500 text-justify break-words">
@@ -358,52 +399,81 @@ memorable.
 {/* ... */}
 {/* Make sure to replace < /> with the actual Faq component call and pass the necessary props */}
 {/* <Faq faqItems={faqItems} /> */}
+<div ref={topOfTreksListRef} className="treks-section">
 <div className="relative text-white text-center py-12" style={{ background: 'linear-gradient(to right, #7b4397, #dc2430)' }}>
 {/* Title */}
-<h1 className="text-4xl font-bold mb-6">TREK PASS 2023</h1>
-<h2 className="text-2xl font-semibold mb-8">20 FREE TREKS</h2>
+<h1 className="md:text-4xl text-3xl font-bold mb-6">TREK PASS</h1>
+<h2 className="md:text-2xl text-xl font-semibold mb-8">20 TREKS TO CHOOSE FROM </h2>
 
 {/* Treks grid */}
-<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 p-4">
-{treks.map((trek, index) => (
-<div key={index} className="bg-white bg-opacity-20 rounded-full px-6 py-2">
-<Link href={`/treks/${trek.replace(/\s+/g, '-').toLowerCase()}`}>
-<div className="hover:text-gray-300">{trek}</div>
-</Link>
+
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 p-4">
+        {displayedTreks.map((trek, index) => (
+          <div key={index} className="bg-white bg-opacity-20 rounded-full px-6 py-2">
+            <Link href={`/treks/${trek.replace(/\s+/g, '-').toLowerCase()}`}>
+              <div className="hover:text-gray-300">{trek}</div>
+            </Link>
+          </div>
+        ))}
+      </div>
+      {isMobile && treks.length > 5 && (
+        <div className="text-center mt-4">
+          <button
+            onClick={handleViewChangeTreks}
+            className="text-yellow-500  font-bold py-2 px-4 rounded"
+          >
+            {showAllTreks ? 'View Less' : 'View All'}
+          </button>
+        </div>
+      )}
 </div>
-))}
 </div>
-</div>
+{/* Title */}
+
+{/* Tours grid */}
+<div ref={topOfToursListRef} className="tours-section">
 <div className="relative text-white text-center py-12"
 style={{ background: 'linear-gradient(to right, #0000FF, #00FF00)' }}>
 {/* Title */}
 
-{/* Tours grid */}
-<div className="relative text-white text-center "
-style={{ background: 'linear-gradient(to right, #0000FF, #00FF00)' }}>
-{/* Title */}
-<h1 className="text-4xl font-bold mb-6">BIKAT PASS 2023</h1>
-<h2 className="text-2xl font-semibold mb-8">Explore Exciting Destinations</h2>
+<h1 className="md:text-4xl text-3xl font-bold mb-6">TOUR PASS </h1>
+<h2 className="md:text-2xl text-xl font-semibold mb-8">20 TOURS TO CHOOSE FROM</h2>
 
 {/* Tours grid */}
+
 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 p-4">
-{tours.map((tour, index) => (
-<div key={index} className="bg-white bg-opacity-20 rounded-full px-6 py-2">
-<Link href={`/tours/${tour.replace(/\s+/g, '-').toLowerCase()}`}>
-<div className="hover:text-gray-300">{tour}</div>
-</Link>
-</div>
-))}
-</div>
+        {displayedTours.map((tour, index) => (
+          <div key={index} className="bg-white bg-opacity-20 rounded-full px-6 py-2">
+            <Link href={`/tours/${tour.replace(/\s+/g, '-').toLowerCase()}`}>
+              <div className="hover:text-gray-300">{tour}</div>
+            </Link>
+          </div>
+        ))}
+      </div>
+      {isMobile && tours.length > 5 && (
+        <div className="text-center mt-4">
+          <button
+           onClick={handleViewChangeTours }
+            className=" text-yellow-500 font-bold py-2 px-4 rounded"
+          >
+            {showAllTours ? 'View Less' : 'View All'}
+          </button>
+        </div>
+      )}
 </div>
 </div>
 <div className="bg-black py-12">
 <div className="container mx-auto">
-<div className="flex justify-center mb-6 border-b border-yellow-500">
+<h2 className="md:text-4xl  text-3xl font-bold text-center mb-5 text-yellow-500">FAQ's</h2>
+<div className="flex justify-center  md:pb-10 pb-5">
+        <hr className="border-t-2 border-white md:w-[60PX] w-[30px]" />
+      </div>
+<div className="flex justify-center mb-6 w-auto border-b border-yellow-500">
 {tabs.map((tab, index) => (
 <button
 key={index}
-className={`px-4 py-2 text-sm sm:text-base md:text-lg border-b-2 ${activeTab === tab ? 'text-yellow-500 border-yellow-500' : 'text-gray-400 border-gray-700'}`}
+className={`md:px-4 px-2 py-2 text-sm sm:text-base md:text-lg border-b-2 ${activeTab === tab ? 'text-yellow-500 border-yellow-500' : 'text-gray-400 border-gray-700'}`}
 onClick={() => setActiveTab(tab)}
 >
 {tab}
