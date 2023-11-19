@@ -21,11 +21,30 @@ const Header = () => {
       >
         <div className="container mx-auto flex justify-between items-center py-2">
           <div className="flex-grow-4 flex flex-row float-left md:pl-10 pl-1 ">
-            <div className="">
-              <Link href='/'>
-                <Image src="/home/logo-bpu.png" alt='Backpackers United logo' className="rounded-full" width={200} height={200} />
-              </Link>
-            </div>
+          <div className="flex flex-row items-center space-x-4">
+  <Link href='/'>
+  <motion.div whileHover={{ scale: 1.1 }}>
+        <Image src="/home/bplogo.jpg" alt="logo image" className="rounded-full mt-3" width={40} height={40} />
+      </motion.div>
+  </Link>
+    <div className="flex flex-col items-center relative">
+    <Link href='/'>
+        <motion.div whileHover={{ scale: 1.05 }} className="text-[22px] font-semibold text-white">
+          BACKPACKERS
+        </motion.div>
+      
+  
+      <div className="flex items-center absolute inset-x-0 bottom-[-10px] ">
+            <div className="flex-1 h-0.5 bg-white"></div> {/* Left line */}
+            <motion.div whileHover={{ scale: 1.05 }} className="text-[12px] font-semibold uppercase tracking-widest text-red-600 mx-[2px]">
+              United
+            </motion.div>
+            <div className="flex-1 h-0.5 bg-white"></div> {/* Right line */}
+          </div>
+      </Link>
+     
+  </div>
+</div>
           </div>
           <div className="hidden md:flex items-center space-x-4 mr-8 sm:space-x-6 md:space-x-8">
             {['Home', 'Destinations', 'Treks', 'Tours', 'Contact Us'].map((link, index) => (

@@ -47,25 +47,35 @@ const Footer = () => {
         <div className="flex flex-row items-center space-x-4">
   <Link href='/'>
   <motion.div whileHover={{ scale: 1.1 }}>
-        <Image src="/home/bplogo.jpg" alt="logo image" className="rounded-full" width={40} height={40} />
+        <Image src="/home/bplogo.jpg" alt="logo image" className="rounded-full mt-3" width={40} height={40} />
       </motion.div>
   </Link>
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center relative">
     <Link href='/'>
-        <motion.div whileHover={{ scale: 1.05 }} className="text-2xl font-semibold text-white">
+        <motion.div whileHover={{ scale: 1.05 }} className="text-[22px] font-semibold text-white">
           BACKPACKERS
         </motion.div>
-        </Link>
-        <div className="flex items-center">
-          <div className="border-t border-white flex-grow"></div> {/* Left line */}
+      
+  
+      <div className="flex items-center absolute inset-x-0 bottom-[-10px] ">
+            <div className="flex-1 h-0.5 bg-white"></div> {/* Left line */}
+            <motion.div whileHover={{ scale: 1.05 }} className="text-[12px] font-semibold uppercase tracking-widest text-red-600 mx-[2px]">
+              United
+            </motion.div>
+            <div className="flex-1 h-0.5 bg-white"></div> {/* Right line */}
+          </div>
+      </Link>
+     
+  </div>
+</div>
+       
+   {/* <div className="flex items-center">
+          <div className="border-t border-white flex-grow"></div> 
           <motion.div whileHover={{ scale: 1.05 }} className="text-sm font-bold text-red-600 px-2">
             UNITED
           </motion.div>
-          <div className="border-t border-red-600 flex-grow"></div> {/* Right line */}
-        </div>
-  </div>
-</div>
-
+          <div className="border-t border-red-600 flex-grow"></div>
+        </div> */}
           {/* Social Media Icons */}
           <div className="hidden md:flex md:space-x-6 md:text-xl md:pt-4">
             <motion.a href="https://www.facebook.com/backpackersunited1/" className="text-white hover:text-yellow-500" whileHover={{ scale: 1.4 }}>

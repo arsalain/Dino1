@@ -71,7 +71,6 @@ const page = FC<PageProps> = ({ params })=> {
   {/* Main content */}
   <div className="pt-10 pb-10"> {/* Reduced top padding */}
   <div className="text-center mb-4"></div>
-  <div className="border-t border-gray-400 w-full mt-4 mb-4"></div>
   <div className='h-[200px] md:h-[400px]'>
   <div
     ref={parallaxRef}
@@ -86,7 +85,7 @@ const page = FC<PageProps> = ({ params })=> {
 </div>
       {/* Updated Hostels Section */}
       <div className="  text-center">
-  <h1 className="text-3xl font-bold mb-6">Getaway to Wayanad</h1>
+  <h1 className="text-3xl font-bold mb-6">Getaway to  {destination.name} </h1>
 </div>
 {destination && destination.products && destination.products.map((products, index) => (
     <div className="bg-black md:p-10 p-4 text-white" key={index}>

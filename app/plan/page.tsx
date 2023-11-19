@@ -236,13 +236,13 @@ console.log("hey charlie")
           {/* Guest Details Section  onSubmit={initiateAndPayMembership} */}
           <form onSubmit={handleSubmit} className="flex flex-col md:flex-row">
           <div className="md:w-2/3 p-4">
-  <div className="bg-gray-800 p-6 shadow rounded-lg mb-4">
-    <h2 className="text-xl font-bold text-white mb-4">Guest Details</h2>
+  <div className="bg-gray-400 p-6 shadow rounded-lg mb-4">
+    <h2 className="text-xl font-bold text-black mb-4">Guest Details</h2>
 
   
       {/* Title Field */}
-      <div className="mb-4 md:mb-0 md:col-span-1">
-  <label htmlFor="title" className="block mb-2 text-sm font-medium text-gray-300">
+      <div className="mb-4 md:mb-0 md:col-span-2">
+  <label htmlFor="title" className="block  mt-2 text-sm font-medium text-gray-800">
     Title
   </label>
   <select
@@ -250,7 +250,7 @@ console.log("hey charlie")
     name="title"
     value={formData.title}
     onChange={handleChange}
-    className="bg-gray-700 border border-gray-600 text-white sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2"
+    className="bg-white border border-gray-600 text-black sm:text-sm rounded-lg  focus:ring-yellow-500 focus:border-yellow-500 block w-full p-2 mr-2"
     required
   >
     <option value="">Select...</option>
@@ -263,8 +263,9 @@ console.log("hey charlie")
 </div>
 
       {/* First Name Field */}
-      <div className="mb-4 md:mb-0 md:col-span-1">
-        <label htmlFor="firstName" className="block mb-2 text-sm font-medium text-gray-300">
+      <div className='flex flex-row gap-4'>
+      <div className="mb-4 md:mb-0 w-1/2 ">
+        <label htmlFor="firstName" className="block mt-2 text-sm font-medium text-gray-800">
           First Name
         </label>
         <input
@@ -273,14 +274,14 @@ console.log("hey charlie")
           name="firstName"
           value={formData.firstName}
           onChange={handleChange}
-          className="bg-gray-700 border border-gray-600 text-white sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3"
+          className="bg-white border border-gray-600 text-black sm:text-sm rounded-lg focus:ring-yellow-500 focus:border-yellow-500 block w-full p-3"
           required
         />
       </div>
 
       {/* Last Name Field */}
-      <div className="mb-4 md:mb-0 md:col-span-1">
-        <label htmlFor="lastName" className="block mb-2 text-sm font-medium text-gray-300">
+      <div className="mb-4 md:mb-0 w-1/2 ">
+        <label htmlFor="lastName" className="block  mt-2text-sm font-medium text-gray-800">
           Last Name
         </label>
         <input
@@ -289,16 +290,17 @@ console.log("hey charlie")
           name="lastName"
           value={formData.lastName}
           onChange={handleChange}
-          className="bg-gray-700 border border-gray-600 text-white sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3"
+          className="bg-white border border-gray-600 text-white sm:text-sm rounded-lg focus:ring-yellow-500 focus:border-yellow-500 block w-full p-3"
           required
         />
+      </div>
       </div>
       {/* Email Field */}
       {/* Email Field */}
       <div className="flex flex-col md:flex-row gap-4">
         {/* Email Field */}
         <div className="flex-1">
-          <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-300">
+          <label htmlFor="email" className="block  mt-2 text-sm font-medium text-gray-800">
             Email
           </label>
           <input
@@ -307,14 +309,14 @@ console.log("hey charlie")
             name="email"
             value={formData.email}
             onChange={handleChange}
-            className="bg-gray-700 border border-gray-600 text-white sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3"
+            className="bg-white border border-gray-600 text-black sm:text-sm rounded-lg focus:ring-yellow-500 focus:border-yellow-500 block w-full p-3"
             required
           />
         </div>
 
         {/* Phone Number Field */}
         <div className="flex-1">
-          <label htmlFor="phonenumber" className="block mb-2 text-sm font-medium text-gray-300">
+          <label htmlFor="phonenumber" className="block  mt-2 text-sm font-medium text-gray-800">
             Phone Number
           </label>
           <input
@@ -323,7 +325,7 @@ console.log("hey charlie")
             name="phonenumber"
             value={formData.phonenumber}
             onChange={handleChange}
-            className="bg-gray-700 border border-gray-600 text-white sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3"
+            className="bg-white border border-gray-600 text-black sm:text-sm rounded-lg focus:ring-yellow-500 focus:border-yellow-500 block w-full p-3"
             required
           />
         </div>
@@ -337,35 +339,33 @@ console.log("hey charlie")
            
           {/* Membership Cards Section */}
         {/* Membership Cards Section */}
-            <div className="bg-gray-900 p-8">
-              <h2 className="text-white text-3xl font-bold mb-4">THE HOSTELLER COMMUNE</h2>
+            <div className="bg-white p-8">
+            <div className='flex flex-col items-center justify-center'>
+    <h2 className="text-3xl font-bold mb-4 text-center">THE UNITED TRAVEL PASS</h2>
+    <hr className="border-t-2 border-yellow-500 w-16 mb-10" /> {/* Fixed width for all viewports */}
+</div>
               <div className="flex gap-4">
-                <div className="w-full md:w-1/2">
-                  <MembershipCard
-                    plan="EXPLORER"
-                    price="₹4999"
-                    perks={[
-                      'A travel package worth ₹4999.',
-                      '₹4999 coins funded instantly.',
-                      'Affiliate vouchers from top brands worth ₹3000+.',
-                    ]}
-                    bgClass="bg-gray-700"
-                    lists={twentyItems}
-                  />
+                <div className="w-full md:w-1/2 pr-2">
+                  <div className='font-bold text-lg mb-2 text-center'>TREK PASS</div>
+              <div className='text-justify words-break'> Unlock the world of adventure with our exclusive Trek Pass. Embark on thrilling journeys through breathtaking landscapes, conquer challenging trails, and immerse yourself in the beauty of nature. The Trek Pass is your ticket to unforgettable trekking experiences, connecting you with the essence of exploration. Plus, enjoy the flexibility to choose 6 treks worth RS 24,000 from a selection of 20 treks, all at a 50% discount, ensuring you get the most out of your adventure-packed journey.
+              </div> 
+              <div className="text-center">
+    <button className="bg-yellow-500  text-white font-bold py-2 px-4 mt-4 rounded">
+      AVAIL PASS
+    </button>
+  </div>
                 </div>
                 <div className="w-full md:w-1/2">
-                  <MembershipCard
-                    plan="VOYAGER"
-                    price="₹9999"
-                    perks={[
-                      'A travel package worth ₹9999.',
-                      '₹9999 coins funded instantly.',
-                      'Affiliate vouchers from top brands worth ₹5000+.',
-                      'Exclusive access to premium events.',
-                    ]}
-                    bgClass="bg-gray-700"
-                    lists={twentyItems}
-                  />
+                <div className="w-full  pr-2">
+                  <div className='font-bold text-lg mb-2 text-center'>TOUR PASS</div>
+              <div className='text-justify words-break'> Embark on a journey with our exclusive Tour Pass. Immerse yourself in extraordinary travel experiences, from uncovering hidden gems in various destinations to savoring the flavors of diverse cuisines. The Tour Pass opens up a world of exploration, giving you the chance to create memories and connections with our community. Customize your adventure by selecting 6 tours worth RS 42,000 from a diverse array of 20 destinations, all available at flat 50% discounted rate. Make your travels amazing friends as you explore with us, one exciting adventure at a time.
+              </div> 
+              <div className="text-center">
+    <button className="bg-yellow-500  text-white font-bold py-2 px-4 mt-4 rounded">
+      AVAIL PASS
+    </button>
+  </div>
+                </div>
                 </div>
               </div>
             {/* ... (other sections) */}
@@ -467,30 +467,20 @@ console.log("hey charlie")
 </span>
       </li>
       <li className="mb-2">
-        <span className="block font-medium">Global Community Connection:</span>
+        <span className="block font-medium">Pass Details:
+The  United Travel Pass 2023 offers a semi-annual trekking and backpacking experience priced at ₹12,000 and ₹21,000, respectively, plus a 5% GST.
+The Pass grants exclusive access to 6 free treks or 6 free tours within a span of 6 months.
+Purchasing the Pass implies acceptance of these terms and conditions.
+Pass Cost:
+The cost of the  United Trek Pass is ₹12,000 plus a 5% tax.
+The cost of the  United Tour Pass is ₹21,000 plus a 5% tax.
+Our commitment is to make adventure accessible, ensuring exceptional value for your investment.
+Pass Benefits:
+Access to a variety of treks across different regions.
+Exclusive discounts on specified treks.
+Convenient and hassle-free booking process.</span>
       </li>
-      <li className="mb-2">
-        <span className="block font-medium">Affordable Luxury Adventures:</span>
-      </li>
-      <li className="mb-2">
-        <span className="block font-medium">Tailored for Your Wanderlust:</span>
-      </li>
-      <li className="mb-2">
-        <span className="block font-medium"> No Third-Party Services, No Outsourcing:</span>
-      </li>
-      <li className="mb-2">
-        <span className="block font-medium"> Safety and Security Assurance:</span>
-      </li>
-      <li className="mb-2">
-        <span className="block font-medium"> Exclusive Traveler Benefits:</span>
-      </li>
-      <li className="mb-2">
-        <span className="block font-medium">Global Responsibility:</span>
-      </li>
-      <li className="mb-2">
-        <span className="block font-medium">Ready to Begin Your Adventure?
-</span>
-      </li>
+    
       <li className="mb-2">
         <span className="block font-medium">Backpackers United invites you to step into a world where every journey is a story waiting to be told. Trust us to turn your travel dreams into reality – because your adventure begins with Backpackers United.
 
