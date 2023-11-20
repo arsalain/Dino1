@@ -1,7 +1,9 @@
+"use client"
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React from 'react';
-const EnquiryForm = ({ toggleFormVisibility, handleSubmit, onClose}) => {
+import React ,{ useState } from 'react';
+
+const EnquiryForm = ({  onClose}) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -21,7 +23,7 @@ const EnquiryForm = ({ toggleFormVisibility, handleSubmit, onClose}) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('/api/enquiries', {
+      const response = await fetch('http://localhost:4000/enquiry/save', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -34,8 +36,10 @@ const EnquiryForm = ({ toggleFormVisibility, handleSubmit, onClose}) => {
       }
 
       const responseData = await response.json();
+      alert("Thank you for contacting Backpackers United, We will reach out to you soon")
       console.log(responseData); // Handle the response as needed
-      onClose(); // Close the form on successful submission
+      onClose();
+       // Close the form on successful submission
     } catch (error) {
       console.error('Error submitting form:', error);
     }

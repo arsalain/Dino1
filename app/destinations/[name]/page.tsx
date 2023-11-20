@@ -106,11 +106,11 @@ const page = FC<PageProps> = ({ params })=> {
       transition={{ delay: 0.5 }}
     >
       <h2 className="text-2xl font-bold mb-4">{products.name}</h2>
-      <p className="text-gray-600 mb-4">
+      <p className="text-gray-400 mb-4 line-clamp-4">
         {products.over[0]}
       </p>
       <div className="flex justify-between items-center mb-4">
-        <div className="text-gray-600 font-medium">
+        <div className="text-gray-400 font-medium">
           <p>Starting from</p>
           <p className="text-yellow-400 font-bold text-xl">₹{products.fromamount}</p>
         </div>
