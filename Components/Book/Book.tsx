@@ -5,6 +5,7 @@ import {MdOutlineKeyboardArrowRight} from 'react-icons/md'
 import {FaRupeeSign} from 'react-icons/fa'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlay } from '@fortawesome/free-solid-svg-icons'
+import Link from 'next/link'
 const Booking = ({ onClose, Batch, reserveamount, foramount, withoutamount ,Name}) => {
     const ticketPrice = 2;
     const firstTicketPrice = 1;
@@ -218,7 +219,7 @@ const Booking = ({ onClose, Batch, reserveamount, foramount, withoutamount ,Name
     // }, []);
     return (
         <div className="fixed top-0 left-0 w-full h-full   flex items-center justify-center bg-black bg-opacity-50 overflow-y-auto z-10">
-            <div className="bg-black text-white rounded shadow-lg mt-40 mb-2">
+            <div className="bg-black text-white rounded shadow-lg mt-32 mb-2">
 
                 {isTabOneActive ? (
                     <div className='w-auto' >
@@ -327,11 +328,7 @@ const Booking = ({ onClose, Batch, reserveamount, foramount, withoutamount ,Name
   <span>INR {getGst().toFixed(2)}/-</span>
 </div>
 
-<div className="mb-2 flex flex-row">
-  
-  <div className="w-[200px]">Payment Gateway Charges:</div>
-  <span>INR 0.00/-</span>
-</div>
+
 
 <div className="mb-2 flex flex-row">
   <div className="w-[200px] font-bold">Final Payable Amount:</div>
@@ -346,6 +343,8 @@ const Booking = ({ onClose, Batch, reserveamount, foramount, withoutamount ,Name
     <div>INR {getTotal().toFixed(2)}/-</div>
   )}</span>
 </div>
+<div>The remaining amount should be paid before one day departure
+  </div>
                  </div>
 </div>
                     <div className={isShow ? 'hidden' : 'block'}>
@@ -376,7 +375,7 @@ const Booking = ({ onClose, Batch, reserveamount, foramount, withoutamount ,Name
                     <div className="flex items-center justify-between mt-2 px-6 text-sm">
                     <label>
                       <input type="checkbox" className="mr-2" onChange={handleCheckboxChange} />
-                      I have read and accept the Refunds, Cancellation Policy & Terms & Conditions
+                      I have read and accept the Refunds, <Link href='/condition' className='text-yellow-500 hover:underline'>Cancellation Policy & Terms & Conditions</Link>
                     </label>
                   </div>
                   </div>

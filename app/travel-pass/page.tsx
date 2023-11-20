@@ -364,30 +364,27 @@ Embark on an extraordinary journey with our exclusive Travel Pass. Gain access t
         <hr className="border-t-2 border-yellow-500 md:w-[60PX] w-[30px]" />
       </div>
 <p className="mt-2 text-gray-500 text-justify break-words">
-Discover experiences from around the world that excite you. At BanBanjara,
-there's something for everyone.
+Unlock savings with our Travel Pass! As a valued member, access exclusive deals on flights, hotels, and vacation packages tailored for memorable and affordable journeys. Our commitment to unbeatable value ensures your membership pays for itself with each incredible adventure.
 </p>
 </div>
 
 <div className="flex flex-col items-center text-center">
-<h3 className="text-xl font-semibold text-black">Never Settle for Average</h3>
+<h3 className="text-xl font-semibold text-black">Personalized Travel Concierge Services</h3>
 <div className="flex justify-center  pt-3">
         <hr className="border-t-2 border-yellow-500 md:w-[60PX] w-[30px]" />
       </div>
 <p className="mt-2 text-gray-500 text-justify break-words">
-Verified Suppliers ensuring that you don't have to do the tedious work of finding a
-quality operator for your plans.
+Elevate your travel with our concierge! Our dedicated team curates bespoke itineraries, offers insider tips, and assists with queries, ensuring a seamless, stress-free experience for romantic getaways, family vacations, or solo adventures.
 </p>
 </div>
 
 <div className="flex flex-col items-center text-center">
-<h3 className="text-xl font-semibold text-black">Truly Unique Experiences</h3>
+<h3 className="text-xl font-semibold text-black">Priority Access and Invite only Trips</h3>
 <div className="flex justify-center  pt-3">
         <hr className="border-t-2 border-yellow-500 md:w-[60PX] w-[30px]" />
       </div>
 <p className="mt-2 text-gray-500 text-justify break-words">
-We're always on the lookout for new and unique experiences to make your trip truly
-memorable.
+Skip lines with our Travel Pass! Gain privileges like early booking, priority boarding, and fast-track services. Members enjoy special perks, including freebies, exclusive invite-only trips, and merchandise, making your travels extraordinary and exclusive.
 </p>
 </div>
 </div>

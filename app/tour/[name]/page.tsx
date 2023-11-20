@@ -365,7 +365,7 @@ const page = FC<PageProps> = ({ params })=> {
         </div>
         {openSection.includes("date") && (
             <div className="md:hidden"> {/* hidden on medium and above screens */}
-                <DateContent data={data} expanded={expanded} toggleExpanded={toggleExpanded} displayedBatches={displayedBatches} />
+                <DateContent data={data} expanded={expanded} toggleExpanded={toggleExpanded} displayedBatches={displayedBatches} setShowEnquiry={setShowEnquiry} setShowPopup={setShowPopup} />
             </div>
         )}
         <div className="hidden md:block"> 
@@ -373,7 +373,7 @@ const page = FC<PageProps> = ({ params })=> {
       <div className="bg-yellow-500 w-1 h-6 mr-4 mt-[6px]"></div>
             <h2 className="text-3xl font-bold mb-6">DATES & PRICES</h2>
             </div>
-            <DateContent data={data} expanded={expanded} toggleExpanded={toggleExpanded} displayedBatches={displayedBatches} />
+            <DateContent data={data} expanded={expanded} toggleExpanded={toggleExpanded} displayedBatches={displayedBatches} setShowEnquiry={setShowEnquiry} setShowPopup={setShowPopup} />
         </div>
     </div>
     </div>
@@ -532,12 +532,12 @@ const page = FC<PageProps> = ({ params })=> {
     <Footer />
     <div className="fixed bottom-0 left-0 w-full bg-yellow-500 p-4 md:hidden z-10">
       <div className="flex justify-center space-x-4">
-        <button className="bg-gray-500 text-white px-4 py-2 rounded-lg">Send Enquiry</button>
+        <button className="bg-gray-500 text-white px-4 py-2 rounded-lg" onClick={() => setShowEnquiry(true)}>Send Enquiry</button>
         <button className="bg-black text-white px-4 py-2 rounded-lg" onClick={() => setShowPopup(true)}>Book Now</button>
       </div>
     </div>
     {showPopup && <Booking  onClose={() => setShowPopup(false)} Batch={data.batch} reserveamount={data.reserveamount} foramount={data.fromamount} withoutamount={data.withoutamount} Name={data.name} /> }
-    {showEnquiry && <EnquiryForm />}
+    {showEnquiry && <EnquiryForm onClose={() => setShowEnquiry(false)}/>}
     </div>
   )
 }
@@ -568,7 +568,7 @@ const ExpectContent = ({ data }) => (
     </div>
   </>
 );
-const DateContent = ({ displayedBatches,toggleExpanded,data, expanded }) => (
+const DateContent = ({ displayedBatches,toggleExpanded,data, expanded ,setShowEnquiry, setShowPopup }) => (
   <div>
      { data && data.batch && data.batch.length > 1 && (
       <div>
@@ -588,10 +588,10 @@ const DateContent = ({ displayedBatches,toggleExpanded,data, expanded }) => (
           </div>
           <div className='flex flex-row gap-4'>
             <div className="cursor-pointer">
-              <button className='bg-gray-500 py-2 px-10 rounded-lg text-white'>Send Enquiry</button>
+              <button className='bg-gray-500 py-2 px-10 rounded-lg text-white' onClick={() => setShowEnquiry(true)}>Send Enquiry</button>
             </div>
             <div className="cursor-pointer">
-              <button className='bg-yellow-500 py-2 px-10 rounded-lg'>Book Now</button>
+              <button className='bg-yellow-500 py-2 px-10 rounded-lg' onClick={() => setShowPopup(true)}>Book Now</button>
             </div>
           </div>
         </div>

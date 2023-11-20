@@ -1,77 +1,98 @@
+import { faXmark } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
-const EnquiryForm = ({ toggleFormVisibility, handleSubmit }) => {
+const EnquiryForm = ({ toggleFormVisibility, handleSubmit, onClose}) => {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    message: '',
+    callback: 'Expecting Callback'
+  });
+
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setFormData(prevFormData => ({
+      ...prevFormData,
+      [name]: type === 'checkbox' ? (checked ? 'Expecting Callback' : 'Not Expecting Callback') : value
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch('/api/enquiries', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
+      const responseData = await response.json();
+      console.log(responseData); // Handle the response as needed
+      onClose(); // Close the form on successful submission
+    } catch (error) {
+      console.error('Error submitting form:', error);
+    }
+  };
   return (
-    <div className="fixed inset-0 bg-gray-800 bg-opacity-90 flex justify-center items-center">
-      <div className="bg-gray-900 p-8 rounded-lg shadow-xl w-full max-w-lg relative">
+    <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50 overflow-y-auto z-10">
+      <div className="bg-black text-white rounded shadow-lg mt-20 mb-2 p-4">
         <form onSubmit={handleSubmit}>
-          <h2 className="text-3xl font-bold mb-8 text-yellow-400 text-center" id="enquiryFormTitle">
-            Who Is Booking?
-          </h2>
-          {/* Close Button */}
-          <button
-            type="button"
-            onClick={toggleFormVisibility}
-            className="absolute top-0 right-0 mt-4 mr-4 text-yellow-400 hover:text-yellow-500 focus:outline-none"
-            aria-label="Close"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              className="h-6 w-6"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          </button>
+          <div className='flex justify-between'>
+            <h2 className="text-3xl font-bold mb-8 " id="enquiryFormTitle">Enquiry</h2>
+            <button onClick={onClose} className='flex justify-center'>
+              <FontAwesomeIcon icon={faXmark} className='mt-2'/>
+            </button>
+          </div>
           {/* Form Fields */}
           <div className="mb-6">
-            <label htmlFor="name" className="block text-sm font-medium text-gray-300">
-              Full Name
-            </label>
+            <label htmlFor="name" className="block text-sm font-medium text-yellow-500">Full Name</label>
             <input
               type="text"
               id="name"
               name="name"
-              className="mt-1 p-2 w-full border-2 border-gray-700 bg-gray-800 text-white rounded-md focus:border-yellow-500"
+              onChange={handleChange}
+              className="mt-1 p-2 w-full border-2 border-gray-700 bg-white text-black rounded-md focus:border-yellow-500"
               required
             />
           </div>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 mb-6">
             <div>
-              <label htmlFor="phoneNumber" className="block text-sm font-medium text-gray-300">
-                Phone Number
-              </label>
+              <label htmlFor="phoneNumber" className="block text-sm font-medium text-yellow-500">Phone Number</label>
               <input
                 type="tel"
                 id="phoneNumber"
-                name="phoneNumber"
-                className="mt-1 p-2 w-full border-2 border-gray-700 bg-gray-800 text-white rounded-md focus:border-yellow-500"
+                name="phone"
+                onChange={handleChange}
+                className="mt-1 p-2 w-full border-2 border-gray-700 bg-white text-black rounded-md focus:border-yellow-500"
                 required
               />
             </div>
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-300">
-                Email Address
-              </label>
+              <label htmlFor="email" className="block text-sm font-medium text-yellow-500">Email Address</label>
               <input
                 type="email"
                 id="email"
                 name="email"
-                className="mt-1 p-2 w-full border-2 border-gray-700 bg-gray-800 text-white rounded-md focus:border-yellow-500"
+                onChange={handleChange}
+                className="mt-1 p-2 w-full border-2 border-gray-700 bg-white text-black rounded-md focus:border-yellow-500"
                 required
               />
             </div>
           </div>
           <div className="mb-6">
-            <label htmlFor="message" className="block text-sm font-medium text-gray-300">
-              Message
-            </label>
+            <label htmlFor="message" className="block text-sm font-medium text-yellow-500">Message</label>
             <textarea
               id="message"
               name="message"
-              rows="4"
-              className="mt-1 p-2 w-full border-2 border-gray-700 bg-gray-800 text-white rounded-md focus:border-yellow-500"
+              onChange={handleChange}
+              className="mt-1 p-1 w-full border-2 border-gray-700 bg-white text-black rounded-md focus:border-yellow-500"
               required
             ></textarea>
           </div>
@@ -79,16 +100,14 @@ const EnquiryForm = ({ toggleFormVisibility, handleSubmit }) => {
             <input
               type="checkbox"
               id="callbackCheckbox"
-              name="callbackCheckbox"
+              name="callback"
+              onChange={handleChange}
+              checked={formData.callback === 'Expecting Callback'}
               className="h-4 w-4 text-yellow-600 border-gray-300 rounded focus:ring-yellow-500"
             />
-            <label htmlFor="callbackCheckbox" className="ml-2 block text-sm text-gray-300">
-              Expecting a Callback
-            </label>
+            <label htmlFor="callbackCheckbox" className="ml-2 block text-sm text-yellow-500">Expecting a Callback</label>
           </div>
-          <button type="submit" className="bg-yellow-400 text-gray-900 py-2 px-4 rounded-md w-full hover:bg-yellow-500 transition-colors duration-300">
-            Next
-          </button>
+          <button type="submit" className="bg-yellow-400 text-gray-900 py-2 px-4 rounded-md w-full hover:bg-yellow-500 transition-colors duration-300">Send</button>
         </form>
       </div>
     </div>
