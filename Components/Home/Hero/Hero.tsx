@@ -85,6 +85,7 @@ const Hero = () => {
     const fullname = item.name.toLowerCase();
     return fullname.includes(searchTerm);
   })
+  .slice(0, 5)
   .map((product, index) => (
     <div 
       className="text-black cursor-pointer" // Added cursor-pointer for better UX

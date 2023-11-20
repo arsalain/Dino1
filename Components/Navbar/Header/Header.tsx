@@ -47,7 +47,7 @@ const Header = () => {
 </div>
           </div>
           <div className="hidden md:flex items-center space-x-4 mr-8 sm:space-x-6 md:space-x-8">
-            {['Home', 'Destinations', 'Treks', 'Tours', 'Contact Us'].map((link, index) => (
+            {['Home', 'Destinations', 'Treks', 'Tours', 'Travel Pass','Contact Us'].map((link, index) => (
               <motion.div
                 key={link}
                 initial={{ opacity: 0, y: 20 }}
@@ -55,7 +55,7 @@ const Header = () => {
                 transition={{ duration: 0.3, delay: index * 0.1 + 0.2 }}
                 className="hover-effect"
               >
-                <Link href={link === 'Home' ? '/' : link === 'Contact Us' ? '/contact'  : `/${link.toLowerCase()}`}>{ link}</Link>
+                <Link href={link === 'Home' ? '/' : link === 'Contact Us' ? '/contact'  : link === 'Travel Pass' ? '/travel-pass'  : `/${link.toLowerCase()}`}>{ link}</Link>
               </motion.div>
             ))}
             <Link href='/signup'>

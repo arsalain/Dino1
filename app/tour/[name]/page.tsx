@@ -491,7 +491,7 @@ const page = FC<PageProps> = ({ params })=> {
         {data && data.relatedtreks && data.relatedtreks.map((related, index) => (
        
             <SwiperSlide key={index}>
-                 <Link href='#' >
+                 <Link  href={`/tour/${related.urllink}`} >
         <div className="border rounded-lg overflow-hidden ">
           <Image
             src={`http://localhost:4000/uploads/${related.testimage}`}
@@ -536,7 +536,7 @@ const page = FC<PageProps> = ({ params })=> {
         <button className="bg-black text-white px-4 py-2 rounded-lg" onClick={() => setShowPopup(true)}>Book Now</button>
       </div>
     </div>
-    {showPopup && <Booking  onClose={() => setShowPopup(false)} Batch={data.batch} reserveamount={data.reserveamount} foramount={data.fromamount} withoutamount={data.withoutamount} Name={data.name} /> }
+    {showPopup && <Booking  onClose={() => setShowPopup(false)} Batch={data.batch} reserveamount={data.reserveamount} foramount={data.amount} withoutamount={data.withoutamount} Name={data.name} /> }
     {showEnquiry && <EnquiryForm onClose={() => setShowEnquiry(false)}/>}
     </div>
   )

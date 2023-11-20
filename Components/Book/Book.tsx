@@ -7,9 +7,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlay } from '@fortawesome/free-solid-svg-icons'
 import Link from 'next/link'
 const Booking = ({ onClose, Batch, reserveamount, foramount, withoutamount ,Name}) => {
-    const ticketPrice = 2;
-    const firstTicketPrice = 1;
-    const transportPrice = 1;
+    const ticketPrice = foramount;
+    const firstTicketPrice = reserveamount;
+    const transportPrice = withoutamount;
     const [isTabOneActive, setIsTabOneActive] = useState(true);
     const [ticketCount, setTicketCount] = useState(1);
     const [ticketCount1, setTicketCount1] = useState(0);
@@ -36,7 +36,7 @@ const Booking = ({ onClose, Batch, reserveamount, foramount, withoutamount ,Name
       
       return subtotal;
     };
-    
+
     const getGst = () => {
       const gstValue = getSubtotal(ticketPrice, ticketCount, transportPrice, ticketCount1) * 0.05;
       return gstValue;
@@ -176,14 +176,15 @@ const Booking = ({ onClose, Batch, reserveamount, foramount, withoutamount ,Name
                 username: inputValue.name,  // Replace with actual data
                 phonenumber: inputValue.number,  // Replace with actual data
                 email: inputValue.email, 
-                totalamount: foramount,
+                amount: foramount,
+                tickets: ticketCount + ticketCount1,
                 payableamount: getTotalFirst().toFixed(2),
                 pendingamount: subtractedAmount,
                 source: 'Razorpay',
                 gst:  isCheckboxTicked ? getGstFirst().toFixed(2) : getGst().toFixed(2) ,
                 withtransport: ticketCount,
                 withouttransport : ticketCount1,
-                amount:    isCheckboxTicked ? getTotalFirst().toFixed(2) : getTotal().toFixed(2) ,
+                totalamount:    isCheckboxTicked ? getTotalFirst().toFixed(2) : getTotal().toFixed(2) ,
                 razorpayOrderId: response.razorpay_order_id,
                 razorpayPaymentId: response.razorpay_payment_id
               })
@@ -192,6 +193,7 @@ const Booking = ({ onClose, Batch, reserveamount, foramount, withoutamount ,Name
             const dataSave = await resSave.json();
             if(dataSave.success) {
               alert('Payment successful and saved!');
+              onClose()
             } else {
               alert('Error saving payment details.');
             }
@@ -320,7 +322,8 @@ const Booking = ({ onClose, Batch, reserveamount, foramount, withoutamount ,Name
 
 <div className="mb-2 flex flex-row">
   <div className="w-[200px]">Total Price:</div>
-  <span>INR {getSubtotal().toFixed(2)}/-</span>
+  {/* <span>INR {getSubtotal().toFixed(2)}/-</span> */}
+<span> INR { getSubtotal(ticketPrice, ticketCount, transportPrice, ticketCount1).toFixed(2) }</span>
 </div>
 
 <div className="mb-2 flex flex-row">

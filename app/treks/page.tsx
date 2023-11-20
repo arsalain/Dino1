@@ -7,6 +7,7 @@ import Link from 'next/link'
 import React, { useState,useEffect } from 'react'
 import {faMagnifyingGlass} from '@fortawesome/free-solid-svg-icons';
 import Trek from '@/Components/Treks/Trek'
+import Image from 'next/image'
 const page = () => {
   const [searchInput, setSearchInput] = useState("")
   const [northIndiaTrekTreks, setNorthIndiaTrekTreks] = useState([]);
@@ -116,21 +117,34 @@ useEffect(() => {
       <Header />
       <div className='h-[60px] '>
       </div>
-      <div className='h-[50vh] text-white font-bold text-center flex flex-col justify-center items-center  border-t-2 border-b-2 border-gray-700'>
+      <div className='relative h-[50vh] w-full text-white font-bold text-center flex flex-col justify-center items-center border-t-2 border-b-2 border-gray-700'>
+      {/* Background Image */}
+      <div className='absolute top-0 left-0 w-full h-full z-0'>
+        <Image
+          src="/destination/Trek.webp"
+          alt="Background"
+          layout="fill"
+          objectFit="cover"  // This will cover the entire div area
+          quality={100}
+        />
+      </div>
+      {/* <div className='relative h-[50vh] text-white font-bold text-center flex flex-col justify-center items-center  border-t-2 border-b-2 border-gray-700'> */}
+      <div className='relative z-10 w-[80%] flex flex-col justify-center items-center'>
      <div className='text-xl md:text-4xl'>Treks</div> 
-      <div className="flex items-center bg-white md:w-1/3 w-3/4 rounded-lg p-1 border-2 border-gray-200 mt-4">
+      <div className="flex items-center bg-white  md:w-1/2 rounded-xl p-1 border-2 border-gray-200 mt-4">
                 <input
                     type="text"
-                    placeholder="Search for amazing treks"
+                    placeholder="Search for amazing destations"
                     className="flex-grow p-2 outline-none text-black"
                     onChange={(e) => setSearchInput(e.target.value)}
                     value={searchInput}
                 />
                 <button className="text-black p-2">
-                    <FontAwesomeIcon icon={faMagnifyingGlass} className="text-lg" />
+                    <FontAwesomeIcon icon={faMagnifyingGlass} className="text-xl" />
                 </button>
             </div>
       </div>
+</div>
 
 
             {/* {searchResult.filter(item => {

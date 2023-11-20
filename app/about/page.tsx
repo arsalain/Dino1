@@ -44,7 +44,9 @@ const AboutUs = () => {
             {teamMembers.map((member, index) => (
               <motion.div key={index} variants={teamMemberVariants} className="w-full  sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 p-4">
                 <motion.div whileHover="hover" variants={imageHoverVariants} className="bg-gray-800 h-[300px] rounded-lg p-6 text-center hover:shadow-lg transition-shadow duration-300 ease-in-out">
-                  <Image src={member.photoUrl || "/default-avatar.jpg"} alt={member.name} width={128} height={128} className="rounded-full mx-auto border-4 border-yellow-500"/>
+                  <div className='h-[128px] w-[128px] relative'>
+                  <Image src={member.photoUrl || "/default-avatar.jpg"} alt={member.name} layout='fill' objectFit='cover' className="rounded-full mx-auto border-4 border-yellow-500"/>
+                  </div>
                   <h3 className="text-xl mt-4">{member.name}</h3>
                   <p className="text-yellow-500">{member.designation}</p>
                 </motion.div>

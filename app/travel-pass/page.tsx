@@ -7,7 +7,7 @@ import Footer from '@/Components/Navbar/Footer/Footer';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import Link from 'next/link';
-import { faGift, faPercent, faConciergeBell, faCalendarCheck, faMapMarkedAlt, faBlackTie, faPlaneDeparture, faCreditCard } from '@fortawesome/free-solid-svg-icons';
+import { faGift, faPercent, faConciergeBell, faCalendarCheck, faMapMarkedAlt, faBlackTie, faPlaneDeparture, faCreditCard, faUserClock, faLock, faTag, faSuitcase } from '@fortawesome/free-solid-svg-icons';
 
 
 
@@ -78,20 +78,20 @@ const adventures = [
 { src: '/destination/inter.jpg', alt: 'Adventure 1' },
 ];
 const treks = [
-'Ali Bedni Bugyal Trek', 'Bali Pass Trek', 'Beas Kund Trek', 'Bhrigu Lake Trek',
-'Brahmatal Trek', 'Dayara Bugyal Trek', 'Deo Tibba Base Camp', 'Chopta Chandrashila',
-'Brahmatal Trek', 'Dayara Bugyal Trek', 'Deo Tibba Base Camp', 'Chopta Chandrashila',
-'Brahmatal Trek', 'Dayara Bugyal Trek', 'Deo Tibba Base Camp', 'Chopta Chandrashila',
-'Brahmatal Trek', 'Dayara Bugyal Trek', 'Deo Tibba Base Camp', 'Chopta Chandrashila',
-];
-
-const tours = [
-'European Backpacking Tour', 'Amazon Rainforest Adventure', 'Sahara Desert Expedition', 'Nordic Fjords Cruise',
-'Australian Outback Safari', 'Mediterranean Culinary Tour', 'Southeast Asian Culture Trek', 'Alaskan Glacier Hike',
-'Australian Outback Safari', 'Mediterranean Culinary Tour', 'Southeast Asian Culture Trek', 'Alaskan Glacier Hike',
-'Australian Outback Safari', 'Mediterranean Culinary Tour', 'Southeast Asian Culture Trek', 'Alaskan Glacier Hike',
-'Australian Outback Safari', 'Mediterranean Culinary Tour', 'Southeast Asian Culture Trek', 'Alaskan Glacier Hike',
-];
+  'Kudremukh Trek', 'Nethravathi Trek', 'Bandaje Falls Trek', 'Gangadikal Trek',
+  'Gokarna Beach Trek', 'Kumara Parvatha Coorg Trek', 'Tadiandamol Trek', 'Ethina Bhuja Trek',
+  'Ombattu Gudda Trek', 'Ermayi and Didupe Falls Trek', 'Karwar Beach Trek', 'Kurinjal Trek',
+  'Nishani Motte Trek ', 'Kumara Parvatha Kukke Trek', 'Narasimha Parvatha Trek', 'Kodachadri Trek',
+  'Galibeedu Trek', 'Meruthi Hill Trek', 'Belkal Theertha Falls Trek', 'Pandavara Betta Trek' ,
+  ];
+  
+  const tours = [
+  'Wayanad Weekend Getaway', 'Chikmagalur Weekend Getaway', 'Hampi Weekend Getaway', 'Kodaikanal Weekend Getaway',
+  'Munnar Weekend Getaway', 'Coorg Weekend Getaway', 'Ooty Weekend Getaway', 'Pondicherry Weekend Getaway'  ,
+  'Sakleshpur Weekend Getaway', 'Gokarna-Murudeshwar Weekend Getaway', 'Kannur Weekend Getaway', 'Udupi-Mangalore Weekend Getaway',
+  'Chikmagalur Backpacking Tour', 'Kodaikanal Backpacking Tour', 'Ooty Backpacking Tour', 'Valparai Weekend Getaway',
+  'Thekkady Weekend Getaway', 'BR Hills Weekend Getaway', 'Badami Weekend Getaway', 'Dandeli Weekend Getaway',
+  ];
 const displayLimit = isMobile ? 5 : treks.length;
   const displayedTreks = showAllTreks ? treks : treks.slice(0, displayLimit);
   const displayLimita = isMobile ? 5 : tours.length;
@@ -99,67 +99,56 @@ const displayLimit = isMobile ? 5 : treks.length;
 
 const tabs = ['General', 'Safety', 'Service', 'Policy', 'Booking', 'Payment'];
 const faqContent = {
-General: [
-{ question: 'What is the purpose of this platform?', answer: 'This platform serves as a central hub for adventure seekers to discover and book experiences.' },
-{ question: 'How do I create an account?', answer: 'You can create an account by clicking on the sign-up button and following the instructions.' },
-{
-question: 'Are the listed adventures suitable for beginners?',
-answer: 'Absolutely! We cater to all levels of experience and provide detailed information on the difficulty level for each adventure.'
-},
-{
-question: 'Can I book adventures for a large group?',
-answer: 'Yes, group bookings are available, and we can accommodate a variety of group sizes. Please contact us for more details.'
-},
-{
-question: 'What support is available if I encounter issues during my adventure?',
-answer: 'We provide 24/7 support for any issues or emergencies that may arise during your adventure. Your safety and satisfaction are our top priorities.'
-}
-],
-Safety: [
-{ question: 'What safety measures are in place for the adventures?', answer: 'We ensure all adventures meet strict safety standards and are led by qualified professionals.' },
-{ question: 'Are there any specific health requirements?', answer: 'Participants should be in good health and may be required to sign a waiver before embarking on an adventure.' },
-{
-question: 'How are emergencies handled during an adventure?',
-answer: 'Our guides are trained in emergency response, and we have protocols in place to handle situations swiftly, including evacuation if necessary.'
-},
-{
-question: 'Is travel insurance required for participants?',
-answer: 'While not mandatory, we highly recommend travel insurance for all participants to cover unexpected events.'
-},
-{
-question: 'Do you provide safety gear for high-risk activities?',
-answer: 'Yes, all necessary safety equipment is provided and is required to be used for high-risk activities to ensure participant safety.'
-}
-],
-Service: [
-{ question: 'What types of services are offered?', answer: 'We offer a variety of services including guided tours, equipment rentals, and personalized adventure planning.' },
-{ question: 'How can I give feedback on a service?', answer: 'Feedback can be provided directly through your account dashboard after completing an adventure.' },
-{
-question: 'Can services be customized for private groups?',
-answer: 'Absolutely, we offer customizable services to cater to the unique needs of private groups and corporate teams.'
-},
-{
-question: 'Are there guides available for all adventures?',
-answer: 'Yes, every adventure includes access to experienced guides who ensure a safe and enjoyable experience.'
-},
-{
-question: 'What languages do your services support?',
-answer: 'Our services are offered in multiple languages to accommodate a diverse range of adventurers from around the world.'
-}
-],
-Policy: [
-{ question: 'What is your cancellation policy?', answer: 'Cancellations made more than 48 hours before the adventure start will receive a full refund.' },
-{ question: 'Do you have a loyalty program?', answer: 'Yes, we offer a loyalty program for frequent adventurers that provides discounts and special offers.' },
-],
-Booking: [
-{ question: 'How do I book an adventure?', answer: 'You can book an adventure by browsing our offerings and selecting the book now option for your chosen experience.' },
-{ question: 'Can I change my booking?', answer: 'Bookings can be modified up to 24 hours before the scheduled start time, subject to availability.' },
-],
-Payment: [
-{ question: 'What payment methods are accepted?', answer: 'We accept all major credit cards, PayPal, and select cryptocurrency payments.' },
-{ question: 'Is my payment information secure?', answer: 'We use state-of-the-art security measures to ensure your payment information is always protected.' },
-],
-};
+  General: [
+  { question: ' How many participants are there on a trip?', answer: 'We typically host 12-20 travelers in a single batch for our tours, and for trekking adventures, groups usually consist of 20-30 travelers per batch. Larger groups are possible during long weekends, ensuring a better experience for all.' },
+  { question: 'Do your trips have any age limitations?', answer: 'Yes, participants must be 18 years or older. However, guardians or parents accompanying the group are welcome to bring their children along for the trek or tour.' },
+  {
+  question: ' Is it possible to make last-minute modifications to the trek or trip?',
+  answer: 'No, changes cannot be made within 7 days of the travel date. Please confirm your travel plans at least 7 days before your scheduled departure to avoid the trek or tour being considered as lapsed.'
+  },
+  {
+  question: 'How frequently am I allowed to travel within a month using the travel pass?',
+  answer: 'With our travel pass, you are entitled to travel once per month. Additional treks or tours within the same month require payment of the specified price for that particular journey.'
+  },
+  {
+  question: 'Are the listed Treks suitable for beginners?',
+  answer: 'Absolutely! We cater to all levels of experience and provide detailed information on the difficulty level for each Trek.'
+  }
+  ],
+  Safety: [
+  { question: ' What support is available if I encounter issues during my adventure?', answer: 'We provide 24/7 support for any issues or emergencies that may arise during your Trip/Tour. Your safety and satisfaction are our top priorities.' },
+  { question: 'Are there any specific health requirements?', answer: 'Participants should be in good health and may be required to sign a waiver before embarking on an adventure.' },
+  {
+  question: ' What safety measures are in place for the adventures?',
+  answer: 'We ensure all adventures meet strict safety standards and are led by qualified professionals.'
+  },
+  {
+  question: ' How are emergencies handled during an adventure?',
+  answer: 'Our guides are trained in emergency response, and we have protocols in place to handle situations swiftly, including evacuation if necessary.'
+  },
+  {
+  question: 'Are there any specific health requirements before we embark on a Trek?',
+  answer: 'Participants should be in good health and may be required to sign a waiver before embarking on a Trek.'
+  }
+  ],
+  Service: [
+  { question: 'What types of meals can I expect during the tour/trek?', answer: 'On tours, the package includes two meals: one dinner and one breakfast. Vegetarian options are available everywhere, and non-vegetarian choices are offered at select places. For trekking adventures, the package covers four meals: two breakfasts, one packed lunch, and one dinner. Both vegetarian and non-vegetarian options are provided, with the latter available at specific locations.' },
+  { question: 'Are there guides available for all adventures?', answer: 'Yes, every adventure includes access to experienced guides who ensure a safe and enjoyable experience.' },
+  ],
+  Policy: [
+  { question: 'What is the procedure if a trip or trek gets canceled?', answer: 'In case of cancellation, we follow specific policies for rescheduling due to circumstances like natural disasters, governmental actions, conflicts, public disturbances, national crises, rebellions, epidemics, strikes, transportation challenges, or delays.' },
+  { question: ' Will I get a refund if I cancel my Travel pass?', answer: 'No, the Travel pass is non-refundable.' },
+  { question: ' Are there Travel pass exclusive trips/treks?', answer: 'Yes, there are invite-only trips/treks exclusively for Travel pass owners.' },
+  ],
+  Booking: [
+  { question: 'Can I gift my Travel Pass?', answer: 'You can gift a new pass to someone, but a registered pass cannot be transferred.' },
+  { question: 'Can I pause my Travel Pass?', answer: 'No, the Travel pass cannot be paused.' },
+  ],
+  Payment: [
+  { question: 'Are installment options like EMI available for payment?', answer: 'Yes, we offer EMI (Equated Monthly Installment) options on credit cards and select debit cards.' },
+  { question: 'What payment methods are accepted?', answer: 'We accept all credit cards, Debit cards, and UPI payments' },
+  ],
+  };
 
 // State for the active tab
 const [activeTab, setActiveTab] = useState(tabs[0]);
@@ -223,7 +212,7 @@ Join the Backpackers United Member community once you avail the travel pass!  It
  
 {/* Image on the right */}
 <div className="mb-4">
-<FontAwesomeIcon icon={ faConciergeBell} className="text-black text-3xl" />
+<FontAwesomeIcon icon={faUserClock} className="text-black text-3xl" />
 </div>
 {/* Text on the left */}
 <div className="text-left text-black">
@@ -235,7 +224,7 @@ Join the Backpackers United Member community once you avail the travel pass!  It
   
 {/* Image on the right */}
 <div className="mb-4">
-<FontAwesomeIcon icon={faCalendarCheck} className="text-black text-3xl" />
+<FontAwesomeIcon icon={faLock} className="text-black text-3xl" />
 </div>
 {/* Text on the left */}
 <div className="text-left text-black">
@@ -247,7 +236,7 @@ Join the Backpackers United Member community once you avail the travel pass!  It
 <div className="rounded-lg shadow md:p-6 p-4 flex flex-col items-end h-[250px] md:h-auto" style={{ background: 'linear-gradient(to right, #fff59d, #ffeb3b)', color: '#333333' }}>
   {/* Image on the right */}
 <div className="mb-4">
-<FontAwesomeIcon icon={faMapMarkedAlt} className="text-black text-3xl" />
+<FontAwesomeIcon icon={faTag} className="text-black text-3xl" />
 </div>
 {/* Text on the left */}
 <div className="text-left text-black">
@@ -260,7 +249,7 @@ Join the Backpackers United Member community once you avail the travel pass!  It
  
 {/* Image on the right */}
 <div className="mb-4">
-<FontAwesomeIcon icon={faMapMarkedAlt} className="text-black text-3xl" />
+<FontAwesomeIcon icon={faSuitcase} className="text-black text-3xl" />
 </div>
 {/* Text on the left */}
 <div className="text-left text-black">
@@ -273,7 +262,7 @@ Join the Backpackers United Member community once you avail the travel pass!  It
  
 {/* Image on the right */}
 <div className="mb-4">
-<FontAwesomeIcon icon={faPlaneDeparture} className="text-black text-3xl" />
+<FontAwesomeIcon icon={faCalendarCheck} className="text-black text-3xl" />
 </div>
 {/* Text on the left */}
 <div className="text-left text-black">
@@ -407,7 +396,7 @@ Skip lines with our Travel Pass! Gain privileges like early booking, priority bo
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 p-4">
         {displayedTreks.map((trek, index) => (
-          <div key={index} className="bg-white bg-opacity-20 rounded-full px-6 py-2">
+          <div key={index} className="bg-white bg-opacity-20 rounded-full px-6 h-[60px] flex justify-center items-center">
             <Link href={`/treks/${trek.replace(/\s+/g, '-').toLowerCase()}`}>
               <div className="hover:text-gray-300">{trek}</div>
             </Link>
@@ -441,7 +430,7 @@ style={{ background: 'linear-gradient(to right, #0000FF, #00FF00)' }}>
 
 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 p-4">
         {displayedTours.map((tour, index) => (
-          <div key={index} className="bg-white bg-opacity-20 rounded-full px-6 py-2">
+          <div key={index} className="bg-white bg-opacity-20 rounded-full px-6 h-[60px] flex justify-center items-center">
             <Link href={`/tours/${tour.replace(/\s+/g, '-').toLowerCase()}`}>
               <div className="hover:text-gray-300">{tour}</div>
             </Link>
